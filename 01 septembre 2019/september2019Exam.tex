@@ -1,0 +1,477 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{problem}{Задача}%[section]
+\newtheorem{remark}{{Забележка}}%[section]
+\newtheorem{example}{Пример}%[section]
+\newtheorem{lemma}{{Лема}}%[section]
+\newtheorem{proposition}{Твърдение}%[section]
+\def\proof{\textbf {Доказателство: }}%[section]
+\newtheorem{corollary}{Следствие}%[section]
+\newtheorem{fact}{Факт}%[
+\newtheorem{definition}{Дефиниция}%[section]
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{01 септември 2019}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\tableofcontents
+\pagenumbering{arabic} % Turns on page numbering
+\newpage % Starts a new page
+\section{Първа задача на пролог}
+\paragraph{}
+\textit{Домино} ще наричаме двойка $(H,\,V)$ от списъци, всеки елемент на които е списък от две естествени числа.
+\textit{Правилно покритие на квадрата $N\, \times \, N$ с доминото} $(H,\,V)$, където \textit{N} е естествено число, ще неричаме такава матрица 
+$(a_{i\,j})_{0 \leq i \leq N,\, 0\leq j \leq N}$, че за всяко $l\,, 0 \leq l \leq N$ и за всяко $m$, $0 \leq m < N$, списъкът $[a_{m\,l},a_{m+1\,l}]$ е елемент на \textit{H}, а списъкът $[a_{l\,m},a_{l\,m+1}]$ е елемент на \textit{V}.\\
+Да се дефинира на пролог 4-местен предикат $cover(H\,,V\,,N\,,K)$, който по дадени домино  $(H,\,V)$ и естествени числа \textit{N} и \textit{K} разпознава дали квадратът $N\, \times \, N$ може да се покрие правилно с домино $(H,\,V)$ така, че:\\ 
+\begin{itemize}
+    \item в долния му ляв ъгъл да е числото \textit{K} (т.е. $a_{00}\,=\,K$).
+    \item в горния му десен ъгъл да е числото \textit{K} (т.е. $a_{NN}\,=\,K$).
+\end{itemize}
+\subsection{Примерно решение}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+% Helpers: append, member, between, flatten, length, reverse.
+elementAt(X, 0, [X|_]).
+elementAt(X, N, [_|T]) :-
+    elementAt(X, M, T),
+    N is M+1.
+
+last([Last], Last).
+last([_|T], R) :-
+    last(T, R).
+
+selectElement(M, L, N, AML, Matrix) :-
+    Search is M*N+L,
+    elementAt(AML, Search, Matrix).
+
+select(X, L, R) :-
+    append(A, [X|B], L),
+    append(A, B, R).
+
+permute([], []).
+permute(L, [X|R]) :-
+    select(X, L, Q),
+    permute(Q, R).
+
+prefix(P, L) :-
+    append(P, _, L).
+
+permutatedSubsequence(L, PSL) :-
+    permute(L, PL),
+    prefix(PSL, PL).
+
+conditionByGroup(Matrix, K, 1) :-
+    Matrix=[K|_].
+conditionByGroup(Matrix, K, 2) :-
+    last(Matrix, K).
+
+
+condition(H, V, Matrix, N) :-
+    N1 is N-1,
+    not(( between(0, N, L),
+          between(0, N1, M),
+          M1 is M+1,
+          selectElement(M, L, N, AML, Matrix),
+          selectElement(M1, L, N, AM1L, Matrix),
+          selectElement(L, M, N, ALM, Matrix),
+          selectElement(L, M1, N, ALM1, Matrix),
+          not(( member([AML, AM1L], H),
+                member([ALM, ALM1], V)
+              ))
+        )).
+
+tryCover(H, V, N, K, Group) :-
+    flatten(H, FH),
+    flatten(V, FV),
+    append(FH, FV, M),
+    permutatedSubsequence(M, Matrix),
+    N1 is N+1,
+    NxN is N1*N1,
+    length(Matrix, NxN),
+    conditionByGroup(Matrix, K, Group),
+    condition(H, V, Matrix, N),
+    prettyWriteMatrix(Matrix, N, N).
+
+cover(H, V, N, K, Group) :-
+    tryCover(H, V, N, K, Group).
+
+prettyWriteMatrix(L, N, N) :-
+    reverse(L, R),
+    prettyWrite(R, N, N).
+
+prettyWrite([], _, _) :-
+    nl.
+prettyWrite([H|T], N, 0) :-
+    write(H),
+    nl,
+    prettyWrite(T, N, N).
+prettyWrite([H|T], N, M) :-
+    M>0,
+    M1 is M-1,
+    write(H),
+    write(" "),
+    prettyWrite(T, N, M1).
+\end{minted}
+\end{longlisting}
+
+
+\newpage
+\section{Втора задача на пролог}
+
+\paragraph{} 
+Нека $L_{1}$ и $L_{2}$ са съответно списъците $[a_1,...,a_n]$ и $[b_1,...,b_k]$. 
+С $L_{1} \bullet L_{2}$ означаваме списъка $[a_1,...,a_n,b_1,...,b_k]$, а за цели положителни числа \textit{k} дефинираме $L_1^k$ така: $L_1^1\,=\,L_1,\, L_1^{k+1}=L_1^k\bullet L_1$. 
+За един сиссък \textit{L} казваме, че е \textit{цикличен}, ако съществуват непразен списък \textit{U}, положително цяло число \textit{l} и сисъци \textit{V} и \textit{W}, за които са в сила равенствата $L\,=\, U^l\bullet V$ и $V \,=\,V\bullet W$.\\
+Да се дефинира на пролог двуместен предикат $cycl(A,L)$, който при преудовлетворяване генерира в \textit{L} всички циклични списъци с елементи от \textit{A}.
+
+\subsection{Примерно решение} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+% Helper predicates: member, append, length.
+insert(X, L, R) :-
+    append(A, B, L),
+    append(A, [X|B], R).
+
+permute([], []).
+permute([H|T], R) :-
+    permute(T, Q),
+    insert(H, Q, R).
+
+isCyclic(L) :-
+    append(UL, V, L),
+    cyclicConcatenations(UL, U),
+    U\=[],
+    append(V, W, U),
+    writeThem(L, UL, U, V, W).
+
+writeThem(L, UL, U, V, W) :-
+    write("L: "),
+    write(L),
+    write(". UL: "),
+    write(UL),
+    write(". V: "),
+    write(V),
+    write(". U: "),
+    write(U),
+    write(". W: "),
+    write(W).
+
+cyclicConcatenations(UL, U) :-
+    length(UL, N),
+    tryMultiConcat(N, N, UL, U).
+
+removeDuplicates([], []).
+removeDuplicates([H|T], [H|R]) :-
+    not(member(H, R)),
+    removeDuplicates(T, R).
+removeDuplicates([H|T], R) :-
+    member(H, R),
+    removeDuplicates(T, R).
+
+tryMultiConcat(M, N, UL, U) :-
+    M>0,
+    N mod M=:=0,
+    divideInEqualListSizes(UL, M, M, DivUL),
+    removeDuplicates(DivUL, [U]).
+tryMultiConcat(M, N, UL, U) :-
+    M>0,
+    M1 is M-1,
+    tryMultiConcat(M1, N, UL, U).
+
+divideInEqualListSizes([], 0, _, []).
+divideInEqualListSizes([H|T], Cnt, M, [Curr|R]) :-
+    Cnt>0,
+    Cnt1 is Cnt-1,
+    getMElementList([H|T], M, Curr, Rest),
+    divideInEqualListSizes(Rest, Cnt1, M, R).
+
+getMElementList(Rest, 0, [], Rest).
+getMElementList([H|T], N, [H|R], Rest) :-
+    N>0,
+    N1 is N-1,
+    getMElementList(T, N1, R, Rest).
+
+prefix(P, L) :-
+    append(P, _, L).
+
+cycl(A, L) :-
+    permute(A, PA),
+    prefix(L, PA),
+    isCyclic(L).
+\end{minted}
+\end{longlisting}
+
+\newpage
+\section{Задача за определимост}
+\paragraph{}
+Отъждествяваме точките в равнината с наредена двойка от реални числа.
+За едно множество от точки \textit{l} ще казваме, че е лъч с начало (0,0), ако съществуват такива реални числа \textit{a} и \textit{b}, че \textit{l} = $\{(\lambda a,\lambda b)\,|\,\ \lambda \in [0,+\infty)\}$.\\
+За един лъч с начало (0,0), ако е различен от $\{(0,0)\}$, ще казваме, че е \textit{нетривиален лъч с начало} $\{(0,0)\}$, ако е различен от $\{(0,0)\}$.\\
+\emph{Конус} наричаме непразно множество от точки $C$ в равнината, което заедно с всяка своя точка $P$ 
+съдържа целия лъч $OP^{\rightarrow}$, тоест:
+\begin{equation*}
+\forall (a,b) \in \mathbb{R}^2 ((a,b)\in C \Rightarrow \forall \lambda\ge 0((\lambda a,\lambda b)\in C)).
+\end{equation*}
+ ${\cal L}=\langle cone,cut\rangle$ е език с един едноместен и един двуместен предикатен символ.
+ ${\cal S}=\langle 2^{\mathbb{R}^2}; cone^{S},cut^{S}\rangle$ е структура за ${\cal L}$ с носител множества
+ от точки в равнината, в която:
+ \begin{eqnarray*}
+    cone^{S}(X) &\iff & X \text{ е конус}\\
+    cut^{S}(X,Y) &\iff & (X\cap Y)\setminus\{(0,0)\} \neq \emptyset.
+ \end{eqnarray*}
+ Да се докаже, че:
+ \begin{enumerate}
+    \item $\{(0,0)\}$, $\emptyset$ и $\mathbb{R}^2$ са определими.
+    \item множеството от лъчи с начало $O=(0,0)$ е определимо.
+    \item равенството на конуси, тоест релацията:
+    \begin{equation*}
+    R =\{(X,X) \,|\, X\text{ е конус}\}
+    \end{equation*}
+    е определима.
+    \item никой нетривиален лъч с начало $O=(0,0)$ не е определим.
+    \item  Определимо ли е множеството от прави през точката $O=(0,0)$? 
+ \end{enumerate}
+ За вариант 2 разлики:
+ \begin{itemize}
+     \item \emph{Конус} наричаме множество (може и да е празно) от точки $C$ в равнината, което заедно с всяка своя точка $P$...
+     \item $cat^{S}(X,Y) \, \iff \, (X\cap Y)=\{(0,0)\}$.
+ \end{itemize}
+ 
+\newpage
+\subsection{Примерно решение}
+\paragraph{\hspace{0.5em} Л.1}
+\begin{addmargin}[1em]{2em}
+\begin{align*}
+    &\varphi_{=}(A, B) \leftrightharpoons \forall C (cut(A,C) \iff cut(B, C)).&\\
+    &\varphi_{\subseteq}(A, B) \leftrightharpoons \forall C (cut(A,C) \Longrightarrow cut(B, C)).&\\
+    &\varphi_{cone\subseteq}(A, B) \leftrightharpoons cone(A) \,\&\, cone(B) \,\&\, \varphi_{\subseteq}(A, B).&\\
+    &\varphi_{cone=}(A, B) \leftrightharpoons \varphi_{cone\subseteq}(A, B) \,\&\, \varphi_{cone\subseteq}(B, A).&\\
+    &\varphi_{\emptyset}(A) \leftrightharpoons \neg cone(A) \,\&\, \forall B \varphi_{\subseteq}(A, B).&\\
+    &\varphi_{\{(0,0)\}}(A) \leftrightharpoons cone(A) \,\&\, \forall B \neg cut(A, B).&\\
+    &\varphi_{\mathbb{R}^2}(A) \leftrightharpoons \forall B \varphi_{\subseteq}(B, A).&
+\end{align*}
+\end{addmargin}
+
+\paragraph{\hspace{0.5em} Л.2}
+\begin{addmargin}[1em]{2em}
+\begin{align*}
+    &\varphi_{=}(A, B) \leftrightharpoons \forall C (cat(A,C) \iff cat(B, C)).&\\
+    &\varphi_{\subseteq}(A, B) \leftrightharpoons \forall C (cat(A,C) \Longrightarrow cat(B, C)).&\\
+    &\varphi_{cone\subseteq}(A, B) \leftrightharpoons cone(A) \,\&\, cone(B) \,\&\, \varphi_{\subseteq}(A, B).&\\
+    &\varphi_{cone=}(A, B) \leftrightharpoons \varphi_{cone\subseteq}(A, B) \,\&\, \varphi_{cone\subseteq}(B, A).&\\
+    &\varphi_{\emptyset}(A) \leftrightharpoons \forall B \varphi_{\subseteq}(A, B).&\\
+    &\varphi_{\{(0,0)\}}(A) \leftrightharpoons \neg\varphi_{\emptyset}(A) \,\&\,  cone(A) \,\&\, \forall B (cone(B) \,\&\, \neg \varphi_{\emptyset}(B) \Longrightarrow cat(A, B)).&\\
+    &\varphi_{\mathbb{R}^2}(A) \leftrightharpoons \forall B \varphi_{\subseteq}(B, A).&
+\end{align*}
+\end{addmargin}
+
+\paragraph{\hspace{0.5em} Общ и за двата варианта}
+\begin{addmargin}[1em]{2em}
+$\varphi_{vector\_with\_origin\_(0,0)}(A) \leftrightharpoons \forall B (\varphi_{cone\subseteq}(B, A)\,\&\neg \varphi_{\{(0,0)\}}(B) \Longrightarrow \\\indent\varphi_{cone=}(A, B)).$\\\\
+Никой нетривиален лъч през (0,0) не е определим (за вариант 1, вариант 2 е аналогичен).\\
+Нека $h:\mathbb{R}^2 \rightarrow \mathbb{R}^2$ и 
+$h((a,b)) = (-a,-b),\, (a,b) \in \mathbb{R}^2$.\\
+Лесно се показва, че е биекция и $h=h^{-1}$.\\
+Нека $H:\mathcal{P}(\mathbb{R}^2)\rightarrow \mathcal{P}(\mathbb{R}^2)$ като $H(A) = \{h((a,b))\,|\,(a,b) \in A\},\,A \in \mathcal{P}(\mathbb{R}^2),\, H = H^{-1}$.\\
+Сега дали е изпълнено,че:\\
+$A\in cone^S \iff H(A) \in cone^S$ и \\
+$(A,B) \in cut^S \iff (H(A), H(B)) \in cut^S$?\\
+
+\begin{eqnarray*}
+    (A,B) \in cut^S \iff (A\cap B)\setminus\{(0,0)\} \neq \emptyset \iff \\
+    \{(a_{1},a_{2})\,|\,(a_{1},a_{2}) \in A\} \cap \{(b_{1},b_{2})\,|\,(b_{1},b_{2}) \in B\}\setminus\{(0,0)\} \neq \emptyset \iff \\
+    \{(a_{1}',a_{2}')\,|\,(a_{1}',a_{2}') \in H(A)\} \cap \{(b_{1}',b_{2}')\,|\,(b_{1}',b_{2}') \in H(B)\}\setminus\{(0,0)\} \neq \emptyset \iff \\
+    H(A) \cap H(B) \setminus\{(0,0)\}\neq \emptyset \iff (H(A),H(B)) \in cut^S.
+\end{eqnarray*}
+
+\begin{eqnarray*}
+    A \in cone^S \iff \forall (a,b) \in \mathbb{R}^2 ((a,b)\in A \Rightarrow \forall \lambda\ge 0((\lambda a,\lambda b)\in A)) \iff \\ \forall (a,b) \in \mathbb{R}^2 ((a,b)\in H(A) \Rightarrow \forall \lambda\ge 0((\lambda a,\lambda b)\in H(A))) \iff H(A) \in  cone^S.
+\end{eqnarray*}
+\end{addmargin}
+Множеството от прави през точката $O=(0,0)$ не е определимо (за вариант 1, вариант 2 е аналогичен).\\
+Нека $h:\mathbb{R}^2 \rightarrow \mathbb{R}^2$ и 
+$h((a,b)) = (a,b*(-1)),\, (a,b) \in \mathbb{R}^2\,\&\, b \ge 0$ (осева симетрия спрямо оста Ox).\\ 
+Лесно се показва, че е биекция и обратната е $h^{-1}((a,b)) = (a,b*(-1)),\, (a,b) \in \mathbb{R}^2\,\&\, b \le 0$.\\
+Нека $H:\mathcal{P}(\mathbb{R}^2)\rightarrow \mathcal{P}(\mathbb{R}^2)$ като $H(A) = \{h((a,b))\,|\,(a,b) \in A\},\,A \in \mathcal{P}(\mathbb{R}^2),\,  H^{-1} = \{h^{-1}((a,b))\,|\,(a,b) \in A\},\,A \in \mathcal{P}(\mathbb{R}^2)$.\\
+Аналогично на предната подточка се доказва, че са изпълнени:\\
+$A\in cone^S \iff H(A) \in cone^S$ и \\
+$(A,B) \in cut^S \iff (H(A), H(B)) \in cut^S$.\\
+
+\newpage
+\section{Задача за изпълнимост}
+\paragraph{}
+Нека:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \forall y(p(x,y)\lor p(y,x)\lor (x=y)),\\
+        \varphi_2 \leftrightharpoons \neg \exists x\exists y\exists z(p(x,y)\,\&\,p(y,z)\,\&\,p(z,x)),\\
+        \varphi_3 \leftrightharpoons \exists x\exists y\exists z\exists t (p(x,y)\,\&\,p(y,z)\,\&\,p(z,t)\,\&\,p(t,x)),\\
+        \varphi_4 \leftrightharpoons \forall x \forall y \exists z (p(x,z)\,\&\,p(z,y)).\\
+    \end{gather*}
+\end{addmargin}
+където \textit{p} е двуместен предикатен символ, а = е формално равенство.\\
+Нека:
+\begin{equation*}
+    \varPhi_1\leftrightharpoons \{\varphi_1,\varphi_2\},\\
+    \varPhi_2\leftrightharpoons \varPhi_1 \cup \{\varphi_3\}, \\
+    \varPhi_3\leftrightharpoons \varPhi_1 \cup \{\varphi_4\},\\
+    \varPhi_4\leftrightharpoons \varPhi_1 \cup \varPhi_2 \cup\varPhi_3.
+\end{equation*}
+Докажете кои от множествата $\varPhi_1, \varPhi_2, \varPhi_3, \varPhi_4$ са изпълними и кои не са изпълними.
+
+\subsection{Примерно решение}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!20}]
+  \node[main node] (0) {0};
+\end{tikzpicture} \\
+За $\varPhi_1$: $ S = (\{0\}, p^S)$ \\
+$p^S \rightleftharpoons \emptyset$\\
+\end{center}
+\end{addmargin}
+
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!20}]
+    \node[main node] (0) {0};
+    \node[main node] (1) [left of=0] {1};
+    \path
+    (0) edge[blue] [bend right] node {} (1)
+    (1) edge[blue] [bend right] node {} (0);
+\end{tikzpicture} \\
+За $\varPhi_2$: $ S = (\{0, 1\}, p^S)$ \\
+$p^S \rightleftharpoons \{(0,1), (1,0)\}$\\
+\end{center}
+\end{addmargin}
+
+\vskip 0.2in
+$\varPhi_3$ е неизпълнимо и съответно и $\varPhi_4$, т.к. $\varPhi_3 \subset \varPhi_4$.\\
+Нека допуснем, че $\varPhi_3$ е изпълнимо и нека \textit{S} е негов модел. Заради $\varphi_4$ няма как $p^S$ да е $\emptyset$. Няма как в носителя на \textit{S} да има само един елемент (в носителя има винаги поне един), защото тогава ще нарушим $\varphi_2$ (тя забранява като цяло рефлексивността). Тогава в \textit{S} има поне два елемента. Нека си вземем два $a_0$ и $b_0$. Тогава по $\varphi_1$, то или $p^S(a_0, b_0)$ или $p^S(b_0, a_0)$ е в сила. Нека за определеност е в сила $p^S(a_0, b_0)$. Тогава по $\varphi_4$ то има трети връх, през който достигаме от $a_0$ $b_0$. Нека $c_0$ е свидетел. Имаме следната картинка засега:
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!20}]
+    \node[main node] (0) {$a_0$};
+    \node[main node] (2) [above right of=0] {$c_0$};
+    \node[main node] (1) [below right of=2] {$b_0$};
+    \path
+    (0) edge[red] [bend right] node {} (1)
+        edge[red] [bend left] node {} (2)
+    (2) edge[red] [bend left] node {} (1);
+\end{tikzpicture} 
+\end{center}
+Но ние имаме от $\varphi_4$, че и между $b_0$ $a_0$ има връх с прекачване (няма как да е $c_0$, защото стига до противоречие с $\varphi_2$). Нека $d_0$ е свидетел. И картинката става:
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!20}]
+    \node[main node] (0) {$a_0$};
+    \node[main node] (3) [below right of=0] {$d_0$};
+    \node[main node] (2) [above right of=0] {$c_0$};
+    \node[main node] (1) [below right of=2] {$b_0$};
+    \path
+    (0) edge[red]  node {} (1)
+        edge[red] [bend left] node {} (2)
+    (1) edge[blue] [bend left] node {} (3)
+    (2) edge[red] [bend left] node {} (1)
+    (3) edge[blue] [bend left] node {} (0);
+\end{tikzpicture} 
+\end{center}
+Стига до противоречие с $\varphi_2$ и т.к. $a_0$, $b_0$ са произволни елементи от универсиума, то стигаме до заключението, че $\varPhi_3$ е неудовлетворимо.
+
+\newpage
+\section{Задача за резолюция}
+\paragraph{}
+С метода на резолюцията да се докаже, че $\varphi_1\,,\,\varphi_2\,,\,\varphi_3\models\varphi_4$, където:
+\paragraph{\hspace{0.5em} Л.1} 
+\begin{addmargin}[1em]{2em}
+\begin{gather*}
+\varphi_1 \leftrightharpoons \forall y(\forall x\neg p(f(x), y)\lor \forall x \neg p(y,x)),\\
+\varphi_2 \leftrightharpoons \exists z \forall y(\exists y \exists x\neg p(x,y) \Longrightarrow (q(y,f(f(y))) \Longrightarrow \forall x p(x,f(z)))),\\
+\varphi_3 \leftrightharpoons \forall x\forall y (p(x, f(y)) \Longrightarrow p(f(y),x)),\\
+\varphi_4 \leftrightharpoons \forall z\exists x \neg (\exists y \neg p(f(x),y)\Longrightarrow q(z,f(x))).\\
+\end{gather*}
+\end{addmargin}
+
+\paragraph{\hspace{0.5em} Л.2} 
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \exists z \forall x (\forall y p(f(x), y) \lor q(z,f(x))),\\
+        \varphi_2 \leftrightharpoons \exists z \forall y(q(y,f(f(y)))\Longrightarrow \forall x p(x,f(z))),\\
+        \varphi_3 \leftrightharpoons \forall x\forall y (p(x, f(y)) \Longrightarrow (p(f(y),x) \lor \neg \exists y \exists x p(x,y))),\\
+        \varphi_4 \leftrightharpoons \exists y(\exists x p(f(x),y)\,\&\,\exists x p(y,x)).\\
+    \end{gather*}
+\end{addmargin}
+(Тук \textit{p} и \textit{q} са двуметсни предикатни символи, \textit{f} е едноместен функционален символ, а \textit{x}, \textit{y} и \textit{z} са различни индивидни променливи.)
+\newpage
+
+\subsection{Примерно решение}
+\paragraph{\hspace{0.5em} Л.1}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ: \\
+\begin{align*}
+    &\varphi_1^S \rightleftharpoons \forall y \forall x \forall z (\neg p(f(x),y)\lor \neg p(y,z)).  \\
+    &\varphi_2^S \rightleftharpoons \forall y \forall v \forall x \forall t(p(x, v) \lor \neg q(y, f(f(y))) \lor p(t,f(a))).  \\
+    &\varphi_3^S \rightleftharpoons \forall x \forall y (\neg p(x, f(y))\lor p(f(y), x)).  \\
+    &\psi^S \rightleftharpoons \forall x \forall y (p(f(x), y), \lor q(b, f(x))). \\
+\end{align*}
+
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт): \\
+$D_1 = \{ \neg p(f(x_1),y_1),\neg p(y_1, z_1)\};$ \\
+$D_2 = \{ p(x_2,v_2), \neg q(y_2, f(f(y_2))), p(t_2, f(a))\};$ \\
+$D_3 = \{ \neg p(x_3, f(y_3)), p(f(y_3), x_3)\};$ \\
+$D_4 = \{ p(f(x_4),y_4), q(b, f(x_4))\};$ \\
+
+За вариант 1 един примерен резолютивен извод на $ \blacksquare $ е: \\
+$ D_5 = Res(D_2\{y_2/b\}, D_5\{x_4/f(b)\}) = $\\$ \indent \indent \indent \indent \indent \indent \{ p(x_2, v_2), p(t_2, f(a)), p(f(f(b)), y_4) \}$; \\
+$ D_6 = Collapse(D_5\{x_2/f(f(b)), t_2/f(f(b)), v_2/f(a), y_4/f(a)\}) = $\\$ \indent \indent \indent \indent \indent \indent \{p(f(f(b)),f(a))\}$; \\
+$ D_7 = Res(D_1\{x_1/f(b), y_1/f(a)\}, D_6) =  \{ \neg p(f(a), z_1)\}$;\\
+$ D_8 = Res(D_3\{x_3/z_1, y_3/a\}, D_7) = \{\neg p(z_1, f(a))\}$;\\
+$ Res(D_8\{x_1/f(f(b))\}, D_6) = \blacksquare. $ \\
+\end{addmargin}
+\newpage
+
+\paragraph{\hspace{0.5em} Л.2}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ: \\
+\begin{align*}
+    &\varphi_1^S \rightleftharpoons \forall x \forall y (p(f(x),y)\lor q(a,f(x))).  \\
+    &\varphi_2^S \rightleftharpoons \forall y \forall x(\neg q(y,f(f(y)))\lor p(x,f(z))).  \\
+    &\varphi_3^S \rightleftharpoons \forall x \forall y \forall v \forall t(\neg p(x,f(y))\lor p(f(y),x) \lor \neg p(t, v) ).  \\
+    &\psi^S \rightleftharpoons \forall y \forall x \forall z (\neg p(f(x), y), \lor \neg p(y,z). \\
+\end{align*}
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт): \\
+$D_1 = \{ p(f(x_1),y_1),q(a, f(x_1))\};$ \\
+$D_2 = \{\neg q(y_2, f(f(y_2))), p(t_2, f(b))\};$ \\
+$D_3 = \{ \neg p(x_3, f(y_3)), p(f(y_3), x_3), \neg p(t_3, v_3)\};$ \\
+$D_4 = \{ \neg p(f(x_4),y_4), \neg p(y_4, z_4)\};$ \\
+\vskip 0.1in
+За вариант 2 един примерен резолютивен извод на $ \blacksquare $ е: \\
+$ D_5 = Res(D_1\{x_1/f(a)\}, D_2\{y_2/f(a)\}) = $\\$ \indent \indent \indent \indent \indent \indent \{ p(f(f(a)), y_1), p(x_2, f(b)) \}$; \\
+$ D_6 = Collapse(D_5\{x_2/f(f(a)), y_1/f(b)\}) = \{p(f(f(a)),f(b))\}$; \\
+$ D_7 = Res(D_4\{x_4/f(a), y_4/f(b)\}, D_6) =  \{ \neg p(f(b), z_4)\}$;\\
+$ D_8 = Res(D_3\{x_3/z_4, y_3/b\}, D_7) = \{\neg p(z_4, f(b)), \neg p(t_3, v_3)\}$;\\
+$ Res(D_8\{z_4/f(f(a)), t_3/f(f(a)), v_3/f(b)\}, D_6) = \blacksquare. $ \\
+\end{addmargin}
+
+\end{document} % The document ends her
