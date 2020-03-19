@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{e2g}\PYG{p}{([]).}
+\PYG{n+nf}{e2g}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{generateList}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{),}
+            \PYG{o}{not}\PYG{p}{(}\PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{))}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{do}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{di}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{N}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{M}\PYG{p}{)}\PYG{o}{=\PYGZlt{}}\PYG{l+m+mf}{2.}
+\end{Verbatim}

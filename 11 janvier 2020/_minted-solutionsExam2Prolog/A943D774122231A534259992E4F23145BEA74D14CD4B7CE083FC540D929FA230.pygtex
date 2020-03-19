@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZpc{} Helper predicates: member, length, permutation}
+\PYG{n+nf}{subsequence}\PYG{p}{([],} \PYG{p}{[]).}
+\PYG{n+nf}{subsequence}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+\PYG{n+nf}{subsequence}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{R}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{anagrams}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+          \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+          \PYG{o}{not}\PYG{p}{(}\PYG{n+nf}{permutation}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{))}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{condition21}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{anagrams}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nv}{S}\PYG{o}{=}\PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{],}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M1}\PYG{p}{),}
+    \PYG{n+nv}{M1}\PYG{o}{\PYGZgt{}=}\PYG{n+nv}{M}\PYG{p}{.}
+
+\PYG{n+nf}{condition22}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{anagrams}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nv}{S}\PYG{o}{=}\PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{],}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M1}\PYG{p}{),}
+    \PYG{n+nv}{M1}\PYG{o}{\PYGZgt{}=}\PYG{n+nv}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.}
+
+\PYG{n+nf}{maxAnagrams}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nf}{condition21}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S1}\PYG{p}{),}
+          \PYG{n+nf}{condition21}\PYG{p}{(}\PYG{n+nv}{S1}\PYG{p}{,} \PYG{n+nv}{M1}\PYG{p}{),}
+          \PYG{n+nv}{M1}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{M}
+        \PYG{p}{)).}
+\end{Verbatim}

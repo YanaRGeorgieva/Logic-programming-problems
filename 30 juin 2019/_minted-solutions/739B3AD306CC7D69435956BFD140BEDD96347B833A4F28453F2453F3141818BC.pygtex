@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{nat}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{nat}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{):\PYGZhy{}} \PYG{n+nf}{nat}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{),} \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M} \PYG{o}{+} \PYG{l+m+mf}{1.}
+
+\PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{A} \PYG{o}{=\PYGZlt{}} \PYG{n+nv}{B}\PYG{p}{.}
+\PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{C}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{A} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A1} \PYG{o}{is} \PYG{n+nv}{A} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A1}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{C}\PYG{p}{).}
+
+\PYG{n+nf}{genKS}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{S}\PYG{p}{]).}
+\PYG{n+nf}{genKS}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{XI}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{]):\PYGZhy{}} \PYG{n+nv}{K} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{K1} \PYG{o}{is} \PYG{n+nv}{K} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+	\PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{XI}\PYG{p}{),} \PYG{n+nv}{S1} \PYG{o}{is} \PYG{n+nv}{S} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{XI}\PYG{p}{,} \PYG{n+nf}{genKS}\PYG{p}{(}\PYG{n+nv}{K1}\PYG{p}{,} \PYG{n+nv}{S1}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+\PYG{l+s+sAtom}{\PYGZbs{}end}\PYG{p}{\PYGZob{}}\PYG{l+s+sAtom}{lstlisting}\PYG{p}{\PYGZcb{}}
+\PYG{l+s+sAtom}{\PYGZbs{}end}\PYG{p}{\PYGZob{}}\PYG{l+s+sAtom}{addmargin}\PYG{p}{\PYGZcb{}}
+
+\PYG{l+s+sAtom}{\PYGZbs{}vskip} \PYG{l+m+mf}{0.2}\PYG{l+s+sAtom}{in}
+
+\PYG{l+s+sAtom}{\PYGZbs{}subsection}\PYG{p}{\PYGZob{}}\PYG{l+s+sAtom}{Примерно} \PYG{l+s+sAtom}{решение} \PYG{l+s+sAtom}{на} \PYG{l+s+sAtom}{\PYGZbs{}}\PYG{n+nv}{Romannum}\PYG{p}{\PYGZob{}}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}\PYG{l+m+mf}{.1}\PYG{p}{\PYGZcb{}}
+\PYG{l+s+sAtom}{\PYGZbs{}begin}\PYG{p}{\PYGZob{}}\PYG{l+s+sAtom}{longlisting}\PYG{p}{\PYGZcb{}}
+    \PYG{l+s+sAtom}{\PYGZbs{}begin}\PYG{p}{\PYGZob{}}\PYG{l+s+sAtom}{minted}\PYG{p}{\PYGZcb{}[}\PYG{l+s+sAtom}{breaklines}\PYG{p}{,} \PYG{l+s+sAtom}{breakbefore}\PYG{o}{=}\PYG{n+nv}{A}\PYG{p}{]\PYGZob{}}\PYG{l+s+sAtom}{prolog}\PYG{p}{\PYGZcb{}}
+\PYG{n+nf}{genArithProg}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[]).}
+\PYG{n+nf}{genArithProg}\PYG{p}{(}\PYG{n+nv}{Current}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{Diff}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Current}\PYG{p}{|}\PYG{n+nv}{Result}\PYG{p}{]):\PYGZhy{}}
+	\PYG{n+nv}{N} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{Next} \PYG{o}{is} \PYG{n+nv}{Current} \PYG{o}{+} \PYG{n+nv}{Diff}\PYG{p}{,}
+	\PYG{n+nf}{genArithProg}\PYG{p}{(}\PYG{n+nv}{Next}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{Diff}\PYG{p}{,} \PYG{n+nv}{Result}\PYG{p}{).}
+
+\PYG{n+nf}{isPrime}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{X} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1} \PYG{p}{,} \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{X} \PYG{o}{//} \PYG{l+m+mi}{2}\PYG{p}{,}
+	\PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{),} \PYG{n+nv}{X} \PYG{o}{mod} \PYG{n+nv}{Y} \PYG{o}{=:=} \PYG{l+m+mi}{0}\PYG{p}{)).}
+
+\PYG{n+nf}{main}\PYG{p}{([]).}
+\PYG{n+nf}{main}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{):\PYGZhy{}} \PYG{n+nf}{nat}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{),} \PYG{n+nf}{genKS}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Start}\PYG{p}{,} \PYG{n+nv}{NumOfElem}\PYG{p}{,} \PYG{n+nv}{Diff}\PYG{p}{]),}
+	\PYG{n+nv}{Diff} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{NumOfElem} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,}
+	\PYG{n+nf}{genArithProg}\PYG{p}{(}\PYG{n+nv}{Start}\PYG{p}{,} \PYG{n+nv}{NumOfElem}\PYG{p}{,} \PYG{n+nv}{Diff}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+    	\PYG{o}{not}\PYG{p}{((}\PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),} \PYG{n+nf}{isPrime}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{))).}
+\end{Verbatim}

@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{PK} \PYG{o}{is} \PYG{l+m+mi}{6}\PYG{o}{*}\PYG{n+nv}{K}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{PK}\PYG{o}{\PYGZgt{}=}\PYG{n+nv}{I}\PYG{p}{.}
+\PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{PK} \PYG{o}{is} \PYG{l+m+mi}{6}\PYG{o}{*}\PYG{n+nv}{K}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{PK}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{I}\PYG{p}{,}
+    \PYG{n+nf}{isPrime}\PYG{p}{(}\PYG{n+nv}{PK}\PYG{p}{),}
+    \PYG{n+nv}{K1} \PYG{o}{is} \PYG{n+nv}{K}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{K1}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+\PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{PK} \PYG{o}{is} \PYG{l+m+mi}{6}\PYG{o}{*}\PYG{n+nv}{K}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{PK}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{I}\PYG{p}{,}
+    \PYG{o}{not}\PYG{p}{(}\PYG{n+nf}{isPrime}\PYG{p}{(}\PYG{n+nv}{PK}\PYG{p}{)),}
+    \PYG{n+nv}{K1} \PYG{o}{is} \PYG{n+nv}{K}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{K1}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{su}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{),}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{I}\PYG{p}{,} \PYG{n+nv}{XiI}\PYG{p}{),}
+    \PYG{n+nv}{X}\PYG{o}{=:=}\PYG{n+nv}{I}\PYG{o}{+}\PYG{n+nv}{XiI}\PYG{p}{.}
+\end{Verbatim}

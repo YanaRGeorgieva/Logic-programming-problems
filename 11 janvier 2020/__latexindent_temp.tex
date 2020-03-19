@@ -1,0 +1,228 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{problem}{Задача}%[section]
+\newtheorem{remark}{{Забележка}}%[section]
+\newtheorem{example}{Пример}%[section]
+\newtheorem{lemma}{{Лема}}%[section]
+\newtheorem{proposition}{Твърдение}%[section]
+\def\proof{\textbf {Доказателство: }}%[section]
+\newtheorem{corollary}{Следствие}%[section]
+\newtheorem{fact}{Факт}%[
+\newtheorem{definition}{Дефиниция}%[section]
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+
+\title{Решения на задачи от второ контролно по Логическо програмиране}
+\date{11 януари 2020}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\tableofcontents
+\newpage % Starts a new page
+\pagenumbering{arabic} % Turns on page numbering
+\section{Първа задача на пролог}
+\begin{problem}
+    За естествено число $n$ с представяне в 8-ична бройна система $n=\sum_{i=0}^{\infty} a_i 8^i$, където $a_i\in \{0,1,2,3,4,5,6,7\}$, ще казваме, че
+    е \emph{байт-дървовидно} тогава и само тогава, когато ако:
+    \begin{itemize}
+        \item $v=\lfloor{u/8}\rfloor$ и $a_u\not\equiv 0 \pmod 7$, то $a_{u}\equiv a_v+1\pmod 6$.
+     \item $v=\lfloor{u/8}\rfloor$ и $a_u\not\equiv 0\pmod 6$, то $a_{v}\equiv a_u+1\pmod 7$.
+    \end{itemize}
+     
+    
+    Да се дефинира на предикат на пролог $byteTreeNum(N)$, който по дадено естествено число $N$ проверява дали то е байт-дървовидно.
+
+    \end{problem}
+\subsection{Общи предикати}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+isPrime(P) :-
+    not(P=<1),
+    P1 is P div 2,
+    not(( between(2, P1, Try),
+          not(P mod Try=\=0)
+        )).
+
+between(A, B, A) :-
+    A=<B.
+between(A, B, C) :- 
+    A<B,
+    A1 is A+1,
+    between(A1, B, C).
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.1} 
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+count(K, I, 0) :-
+    PK is 6*K+1,
+    PK>=I.
+count(K, I, N) :-
+    PK is 6*K+1,
+    PK<I,
+    isPrime(PK),
+    K1 is K+1,
+    count(K1, I, M),
+    N is M+1.
+count(K, I, N) :-
+    PK is 6*K+1,
+    PK<I,
+    not(isPrime(PK)),
+    K1 is K+1,
+    count(K1, I, N).
+
+su(X) :-
+    between(0, X, I),
+    count(2, I, XiI),
+    X=:=I+XiI.
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.2} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+count(K, I, 0) :-
+    PK is 6*K+5,
+    PK>=I.
+count(K, I, N) :-
+    PK is 6*K+5,
+    PK<I,
+    isPrime(PK),
+    K1 is K+1,
+    count(K1, I, M),
+    N is M+1.
+count(K, I, N) :-
+    PK is 6*K+5,
+    PK<I,
+    not(isPrime(PK)),
+    K1 is K+1,
+    count(K1, I, N).
+
+mu(X) :-
+    XX is X*X,
+    between(X, XX, I),
+    count(2, I, EtaI),
+    X=:=I-EtaI.
+\end{minted}
+\end{longlisting}
+
+\newpage
+\section{Втора задача на пролог}
+
+\paragraph{} 
+$G$\emph{-списък} ще наричаме списък, всички елементи, на който са двуместни списъци от естествени числа. Нека $L$ е $G$\emph{-списък}. За всяко естествено число $k$ с $do(L, K)$ да означим броя на онези елементи на $L$, чийто първи елемент $k$ ,а с $di(L,k)$  да означим броя на онези елемнти от $L$, чийто втори елемент е $k$.\\
+Да се дефинират на пролог еднометсни предикати $e1g(L)$ и $e2g(L)$, които при преудовлетворяване генерират в $L$ всички $G$\emph{-списъци}, такива че за всяко естествено число $k$ е в сила неравенството:
+\begin{equation*}
+    |do(L,k) - di(L, k)| \leq j, j \in \{1 \rightarrow e1g,2 \rightarrow e2g\}
+\end{equation*}
+
+\subsection{Общи предикати}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+
+nat(0).
+nat(N) :-
+    nat(M),
+    N is M+1.
+
+do([], _, 0).
+do([[K, _]|T], K, N) :-
+    do(T, K, M),
+    N is M+1.
+do([[K1, _]|T], K, N) :-
+    K1\=K,
+    do(T, K, N).
+
+di([], _, 0).
+di([[_, K]|T], K, N) :-
+    di(T, K, M),
+    N is M+1.
+di([[_, K1]|T], K, N) :-
+    K1\=K,
+    di(T, K, N).
+
+pairs(A, B) :-
+    nat(N),
+    between(1, N, A),
+    B is N-A.
+
+genKS(1, S, [S]).
+genKS(K, S, [XI|R]) :-
+    K>1,
+    K1 is K-1,
+    between(0, S, XI),
+    S1 is S-XI,
+    genKS(K1, S1, R). 
+
+generateList(L, S) :-
+    pairs(K, S),
+    K mod 2=:=0,
+    genKS(K, S, L1),
+    packTuples(L1, L).
+
+packTuples([], []).
+packTuples([Do, Di|T], [[Do, Di]|R]) :-
+    packTuples(T, R).
+
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.1} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+e1g([]).
+e1g(L) :-
+    generateList(L, S),
+    not(( between(0, S, K),
+            not(condition(L, K))
+        )).
+
+condition(L, K) :-
+    do(L, K, N),
+    di(L, K, M),
+        abs(N-M)=<1.
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.2} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+e2g([]).
+e2g(L) :-
+    generateList(L, S),
+    not(( between(0, S, K),
+            not(condition(L, K))
+        )).
+
+condition(L, K) :-
+    do(L, K, N),
+    di(L, K, M),
+    abs(N-M)=<2.
+\end{minted}
+\end{longlisting}
+\end{document} % The document ends her

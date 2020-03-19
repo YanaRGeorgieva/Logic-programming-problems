@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{natural}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{natural}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{natural}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+
+\PYG{n+nf}{pairs}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{natural}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{),}
+    \PYG{n+nv}{B} \PYG{o}{is} \PYG{n+nv}{N}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{A}\PYG{p}{.}
+\end{Verbatim}

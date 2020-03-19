@@ -1,0 +1,177 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{scrextend}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{siunitx}
+\usepackage[T2A]{fontenc}
+\usepackage[english]{babel}
+\def\frak#1{\cal #1}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumitem}
+\setcounter{secnumdepth}{1}
+\title{Решения на задачите от контролно 1 по Логическо програмиране}
+\date{23 март 2019}
+
+\begin{document}
+\maketitle
+
+\section{Определелимост}
+Нека ${\cal A}$ е структура с универсиум естествените числа и е за език без символи за константи и функционални
+символи и единствен предикатен символ $p$, който е двуместен и се интерпретира така:
+\subsection{Вариант 1}
+За всеки два елемента n и m на $\mathbb{N}$:
+\begin{center}
+$p^A(n, m) \iff m-n>2$
+\end{center}
+
+\begin{enumerate}[label=(\roman*)]
+\item Определете равенство $\{\langle n,m \rangle |\ n=m\}$
+\item Определете множествата $\{0\}$ и $\{1\}$
+\item Да се докаже, че всяко множество от вида $\{n\}$ е определимо.
+\end{enumerate}
+
+\subsection{Вариант 2}
+За всеки два елемента n и m на $\mathbb{N}$:
+\begin{center}
+$p^A(n, m) \iff m \leq 3 + n$
+\end{center}
+
+\begin{enumerate}[label=(\roman*)]
+\item Определете равенство $\{\langle n,m \rangle |\ n=m\}$
+\item Определете множествата $\{0\}$ и $\{1\}$
+\item Да се докаже, че всяко множество от вида $\{n\}$ е определимо.
+\end{enumerate}
+
+\newpage
+
+\subsection{Примерно решение на вариант 1}
+$ \varphi_{=}(x, y) \rightleftharpoons \forall z (p(z, x) \Leftrightarrow p(z, y)). $\\
+$ \varphi_{\{0,1,2\}}(x) \rightleftharpoons \lnot \exists y p(x, y).$\\
+$ \varphi_{\langle 0, 3 \rangle}(x, y) \rightleftharpoons \varphi_{\{0,1,2\}}(x)\&p(y, x)\& \forall z ( \varphi_{\{0,1,2\}}(z)\&\lnot \varphi_{=}(x, z) \implies \lnot p(y, z)). $\\
+$ \varphi_{0}(x) \rightleftharpoons \exists y \varphi_{\langle 0, 3 \rangle}(x, y) . $\\
+$ \varphi_{3}(x) \rightleftharpoons \exists y \varphi_{\langle 0, 3 \rangle}(y, x) . $\\
+$ \varphi_{\langle 1, 4 \rangle}(x, y) \rightleftharpoons \varphi_{\{0,1,2\}}(x)\&\lnot \varphi_{0}(x)\&p(y, x)\& \\ \indent \forall z ( \varphi_{\{0,1,2\}}(z)\&\lnot \varphi_{0}(z)\&\lnot \varphi_{=}(x, z) \implies \lnot p(y, z)). $\\
+$ \varphi_{1}(x) \rightleftharpoons \exists y \varphi_{\langle 1, 4 \rangle}(x, y) . $\\
+$ \varphi_{4}(x) \rightleftharpoons \exists y \varphi_{\langle 1, 4 \rangle}(y, x) . $\\
+$ \varphi_{2}(x) \rightleftharpoons \lnot \varphi_{\{0,1,2\}}(x)\&\varphi_{0}(x)\&\varphi_{1}(x). $\\
+
+За да докажем, че за $n \in \mathbb{N}$,  $\{n\}$ е изпълнимо, ще използваме пълна математическа индукция. \\
+База: $\varphi_{0}(x)$, $\varphi_{1}(x)$, $\varphi_{2}(x)$, $\varphi_{3}(x)$, $\varphi_{4}(x)$. \\
+Индукционна хипотеза: Нека за $m <n $, $\{m\}$ е определима с формула $\varphi_{m}$. \\
+Индукционна стъпка: $ \varphi_{n}(x) \rightleftharpoons \exists y \exists z (\varphi_{n-3}(y)\&\varphi_{n-2}(z)\&p(y, x)\&\lnot p(y, z)). $\\
+
+\subsection{Примерно решение на вариант 2}
+$ \varphi_{=}(x, y) \rightleftharpoons \forall z (p(z, x) \Leftrightarrow p(z, y)). $\\
+$ \varphi_{\{0,1,2,3\}}(x) \rightleftharpoons \lnot \exists \lnot y p(x, y).$\\
+$ \varphi_{\langle 0, 4 \rangle}(x, y) \rightleftharpoons \varphi_{\{0,1,2,3\}}(x)\&\lnot p(y, x)\& \forall z ( \varphi_{\{0,1,2,3\}}(z)\&\lnot \varphi_{=}(x, z) \implies p(y, z)). $\\
+$ \varphi_{0}(x) \rightleftharpoons \exists y \varphi_{\langle 0, 4 \rangle}(x, y) . $\\
+$ \varphi_{4}(x) \rightleftharpoons \exists y \varphi_{\langle 0, 4 \rangle}(y, x) . $\\
+$ \varphi_{\langle 1, 5 \rangle}(x, y) \rightleftharpoons \varphi_{\{0,1,2,3\}}(x)\&\lnot \varphi_{0}(x)\&\lnot p(y, x)\& \\ \indent \forall z ( \varphi_{\{0,1,2,3\}}(z)\&\lnot \varphi_{0}(z)\&\lnot \varphi_{=}(x, z) \implies p(y, z)). $\\
+$ \varphi_{1}(x) \rightleftharpoons \exists y \varphi_{\langle 1, 5 \rangle}(x, y) . $\\
+$ \varphi_{5}(x) \rightleftharpoons \exists y \varphi_{\langle 1, 5 \rangle}(y, x) . $\\
+$ \varphi_{\langle 2, 6 \rangle}(x, y) \rightleftharpoons \varphi_{\{0,1,2,3\}}(x)\&\lnot \varphi_{0}(x)\&\lnot \varphi_{1}(x)\&\lnot p(y, x)\& \\ \indent \forall z ( \varphi_{\{0,1,2,3\}}(z)\&\lnot \varphi_{0}(z)\&\lnot \varphi_{1}(z)\&\lnot \varphi_{=}(x, z) \implies  p(y, z)). $\\
+$ \varphi_{2}(x) \rightleftharpoons \exists y \varphi_{\langle 2, 6 \rangle}(x, y) . $\\
+$ \varphi_{6}(x) \rightleftharpoons \exists y \varphi_{\langle 2, 6 \rangle}(y, x) . $\\
+$ \varphi_{3}(x) \rightleftharpoons \lnot \varphi_{\{0,1,2,3\}}(x)\&\varphi_{0}(x)\&\varphi_{1}(x)\&\varphi_{2}(x). $\\
+
+За да докажем, че за $n \in \mathbb{N}$,  $\{n\}$ е изпълнимо, ще използваме пълна математическа индукция. \\
+База: $\varphi_{0}(x)$, $\varphi_{1}(x)$, $\varphi_{2}(x)$, $\varphi_{3}(x)$, $\varphi_{4}(x)$, $\varphi_{5}(x)$, $\varphi_{6}(x)$. \\
+Индукционна хипотеза: Нека за $m <n $, $\{m\}$ е определима с формула $\varphi_{m}$. \\
+Индукционна стъпка: $ \varphi_{n}(x) \rightleftharpoons \exists y \exists z (\varphi_{n-3}(y)\&\varphi_{n-2}(z)\&\lnot p(y, x)\&p(y, z)). $\\
+
+\subsection{Още едно примерно решение}
+$ \varphi_{=}(x, y) \rightleftharpoons \forall z (p(z, x) \Leftrightarrow p(z, y)). $\\
+$ \varphi_{\leq}(x, y) \rightleftharpoons \forall z (p(z, y) \implies p(z, x)).$\\
+$ \varphi_{<}(x, y) \rightleftharpoons \varphi_{\leq}(x, y) \& \lnot \varphi_{=}(x, y).$\\
+$ \varphi_{0}(x) \rightleftharpoons \forall y  \varphi_{\leq}(x, y). $\\
+$ \varphi_{1}(x) \rightleftharpoons \lnot \varphi_{0}(x) \& \forall y  (\varphi_{<}(y, x) \implies \varphi_{0}(y)). $\\
+$ \varphi_{2}(x) \rightleftharpoons  \lnot \varphi_{0}(x) \& \lnot \varphi_{1}(x) \& \forall y  (\varphi_{<}(y, x) \implies (\varphi_{0}(y) \lor \varphi_{1}(y))). $\\
+
+За да докажем, че за $n \in \mathbb{N}$,  $\{n\}$ е изпълнимо, ще използваме пълна математическа индукция. \\
+База: $\varphi_{0}(x)$, $\varphi_{1}(x)$. \\
+Индукционна хипотеза: Нека за $m <n $, $\{m\}$ е определима с формула $\varphi_{m}$. \\
+Индукционна стъпка: $ \varphi_{n}(x) \rightleftharpoons \lnot \varphi_{0}(x) \& \lnot \varphi_{1}(x) \&\ ... \ \lnot \varphi_{n-1}(x) \\ \indent \& \forall y  (\varphi_{<}(y, x) \implies (\varphi_{0}(y) \lor \varphi_{1}(y) \&\ ... \ \lnot \varphi_{n-1}(y) )). $\\
+
+
+\newpage
+\section{Изпълнимост}
+Да се докаже, че е изпълнимо множеството, съставено от следните формули:
+
+\subsection{Вариант 1}
+
+$\forall x\forall y\forall z (f(f(x,y),z) \doteq  f(x,f(y,z)))\\$
+$\exists x \forall y ((f(x,y) \doteq y)\, \& \,(f(y,x) \doteq y))\\$
+$\forall x(f(f(x,x),x) \doteq x) \\$
+$\exists x \lnot(f(x,x)\doteq x)$
+
+\subsection{Вариант 2}
+
+$\forall x\forall y\forall z (f(f(x,y),z) \doteq  f(x,f(y,z)))\\$
+$\exists x \forall y ((f(x,y) \doteq y)\, \& \,(f(y,x) \doteq y))\\$
+$\forall x(f(x,x) \doteq x) \\$
+$\exists x \exists y \lnot( x \doteq y)$
+
+\subsection{Примерни решения на вариант 1}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{0, 1\}, f^S)$ \\
+$f^S(x,y)\rightleftharpoons x\ xor\ y ,\ x,y \in \{0, 1\}$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{0, 1\}, f^S)$ \\
+$f^S(x,y)\rightleftharpoons x+y\ mod\ 2 ,\ x,y \in \{0, 1\}$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{-1, 1\}, f^S)$ \\
+$f^S(x,y)\rightleftharpoons x*y ,\ x,y \in \{-1, 1\}$
+\end{center}
+\end{addmargin}
+
+\subsection{Примерни решения на вариант 2}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \mathbb{N}, f^S)$ \\
+$f^S(x, y)\rightleftharpoons max(x,y),\ x,y \in \mathbb{N}$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{0, 1\}, f^S)$ \\
+$f^S(x,y)\rightleftharpoons min(x,y) ,\ x,y \in \{0, 1\}$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \mathcal{P}(\mathbb{N}), f^S)$ \\
+$f^S(x,y)\rightleftharpoons x \cup y ,\ x,y \in \mathcal{P}(\mathbb{N})$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{0, 1\}, f^S)$ \\
+$f^S(x,y)\rightleftharpoons x \lor y ,\ x,y \in \{0, 1\}$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{0, 1\}, f^S)$ \\
+$f^S(x,y)\rightleftharpoons x \& y ,\ x,y \in \{0, 1\}$
+\end{center}
+\end{addmargin}
+
+\end{document}
+

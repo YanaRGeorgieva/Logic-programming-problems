@@ -1,0 +1,351 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\def\Land{\,\&\,}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\usepackage[margin=1.3in]{geometry}
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{22 януари 2020}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\pagenumbering{arabic} % Turns on page numbering
+\newpage % Starts a new page
+\section{Първа задача на пролог}
+\paragraph{}
+Ще казвам, че списък от естествени числа е:
+\begin{enumerate}
+    \item\emph{квадратичен}, ако както дължината му, 
+    така и сумата на елементите му са квадрати на естествени числа.
+    \item\emph{кубичен}, ако както дължината му, 
+    така и сумата на елементите му са точни трети степени на естествени числа.
+\end{enumerate}
+
+Да се дефинира предикат на пролог:
+\begin{enumerate}
+    \item$squareList(L)$, който проверява дали списък от естествени числа $L$ е квадратичен.
+    \item$cubeList(L)$, който проверява дали списък от естествени числа $L$ е кубичен.
+\end{enumerate}
+\subsection{Примерно решение}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+% Helper predicates: length, between.
+sum([], 0).
+sum([H|T], N) :-
+    sum(T, M),
+    N is M+H.
+
+isSquare(X) :-
+    between(0, X, X1),
+    X1*X1=:=X.
+
+squareList(L) :-
+    length(L, N),
+    sum(L, S),
+    isSquare(N),
+    isSquare(S).
+
+isCube(X) :-
+    between(0, X, X1),
+    X1*X1*X1=:=X.
+
+cubeList(L) :-
+    length(L, N),
+    sum(L, S),
+    isCube(N),
+    isCube(S).
+\end{minted}
+\end{longlisting}
+
+
+\newpage
+\section{Втора задача на пролог}
+\paragraph{}
+\emph{Представяне} на точка $(p,q)\in \mathbb{Q}\times \mathbb{Q}$ с рационални координати в равнината наричаме всяка
+четворка $(a_p,b_p,a_q,b_q)\in \mathbb{Z}^4$, за която $\frac{a_p}{b_p}=p$ и $\frac{a_q}{b_q}=q$. (в частност $b_p\neq 0\neq b_q$.) \\
+\indent Да се дефинира на пролог предикат: 
+\begin{enumerate}
+    \item$max\_independent(S,M)$, който по даден краен списък $S$ от представяния на точки с рационални
+    координати в равнината генерира в $M$ максимално по размер подмножество на $S$, така че никои две различни окръжности с центрове 
+    в точки, представени от елементи на $M$, и радиуси $1$ нямат общи точки. 
+    \item$min\_cover(S,M)$, който по даден краен списък $S$ от представяния на точки с рационални
+    координати в равнината генерира в $M$ минимално по размер подмножество на $S$, така че всяка точка от $S$ попада в поне един
+    кръг с център в точка, представена от елемент на $M$, и радиус $1$. 
+\end{enumerate}
+
+
+\subsection{Примерно решение} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+% Helper predicates: length, member.
+subsequence([], []).
+subsequence([H|T], [H|R]) :-
+    subsequence(T, R).
+subsequence([_|T], R) :-
+    subsequence(T, R).
+
+condition1(M) :-
+    not(( member([APX, BPX, AQX, BQX], M),
+            member([APY, BPY, AQY, BQY], M),
+            (APX/BPX-APY/BPY)^2+(AQX/BQX-AQY/BQY)^2=<2
+        )).
+
+max_independent(S, M) :-
+    subsequence(M, S),
+    condition1(M),
+    length(M, N),
+    not(( subsequence(M1, S),
+            condition1(M1),
+            length(M1, N1),
+            N1>N
+        )).
+
+condition2(S, M) :-
+    not(( member([APX, BPX, AQX, BQX], S),
+            member([APY, BPY, AQY, BQY], M),
+            (APX/BPX-APY/BPY)^2+(AQX/BQX-AQY/BQY)^2>1
+        )).
+
+min_cover(S, M) :-
+    subsequence(M, S),
+    condition2(S, M),
+    length(M, N),
+    not(( subsequence(M1, S),
+            condition2(S, M1),
+            length(M1, N1),
+            N>N1
+        )).
+\end{minted}
+\end{longlisting}
+
+\newpage
+\section{Задача за определимост}
+\paragraph{}
+Нека $\mathcal{L}$ е предикатен език с формално равенство точно един предикатен символ $p$. Да означим с $\mathcal{A}$ структурата за $\mathcal{L}$ с универсиум $\{a, b\}^{*}$ (т.е. всички думи над двубуквената азбука $\{a, b\}$), в която: 
+\begin{enumerate}
+    \item $\left\langle w_{1}, w_{2}\right\rangle \in p^{A} \quad \longleftrightarrow  \text{думите } w_{1} \text{ и } w_{2} \text{ имат равни дължини и}$\\ се различават най-много в една позиция.
+    \item $\left\langle w_{1}, w_{2}\right\rangle \in p^{A} \quad \longleftrightarrow  \text{думите } w_{1} \text{ и } w_{2} \text{ имат дължини различаващи}$\\ се с точно 1.
+\end{enumerate}
+1. В $\mathcal{A}$ да се определят:
+\begin{itemize}
+    \item $\varepsilon$ (празната дума);
+    \item $\{w|\,| w |=2\}$ и (iii) $\{w|\,| w |=3\}(|w| \text { е дължината на думите } w$).
+\end{itemize}
+2. Да се докаже, че еднобуквената дума $bb$ за вариант 1 и $b$ за вариант 2 е неопределима в $\mathcal{A}$.
+
+\subsection{Примерно решение}
+\paragraph{\hspace{0.5em} Вариант 1}:
+Идеята е примерно за думата $aba$ тя е в релация с точно 4 думи (дължината на думата + 1) от нивото ѝ:
+
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+    \begin{tikzpicture}[->,,auto,node distance=1.75cm,
+        thick,main node/.style={draw, circle, fill=green!30}]
+        \node[main node] (0) {$aba$};
+        \node[main node] (3) [below right of=0] {$abb$};
+        \node[main node] (2) [above right of=0] {$bba$};
+        \node[main node] (1) [below right of=2] {$aaa$};
+        \path
+        (0) edge[blue] node {} (1)
+            edge[blue] [loop left] node {} (0)
+            edge[blue] [bend left] node {} (2)
+            edge[blue] [bend right] node {} (3);
+    \end{tikzpicture} 
+\end{center}
+\end{addmargin}
+
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_{\varepsilon}(x) \leftrightharpoons \forall y(p(x,y) \Rightarrow x \doteq y).\\
+        \varphi_{\neg\doteq\Land p }(x,y)\leftrightharpoons \neg(x\doteq y) \Land p(x,y).\\
+        \varphi_{\{w|\,| w |=1\}}(x) \leftrightharpoons \exists y (\varphi_{\neg\doteq\Land p }(x,y) \Land \forall z (\varphi_{\neg\doteq\Land p }(x,z) \Rightarrow z \doteq y)).\\
+        \varphi_{\{w|\,| w |=2\}}(x) \leftrightharpoons \exists y_1 \exists y_2 (\varphi_{\neg\doteq\Land p }(x,y_1) \Land \varphi_{\neg\doteq\Land p }(x,y_2) \Land \\\neg(y_1 \doteq y_2) \Land \forall z (\varphi_{\neg\doteq\Land p }(x,z) \Rightarrow z \doteq y_1 \lor z \doteq y_2)).\\
+        \varphi_{\{w|\,| w |=3\}}(x) \leftrightharpoons \exists y_1 \exists y_2 \exists y_3 (\varphi_{\neg\doteq\Land p }(x,y_1) \Land \varphi_{\neg\doteq\Land p }(x,y_2) \Land \varphi_{\neg\doteq\Land p }(x,y_3) \Land \\\neg(y_1 \doteq y_2) \Land \neg(y_1 \doteq y_3) \Land \neg(y_2 \doteq y_3) \Land  \\ \forall z (\varphi_{\neg\doteq\Land p }(x,z) \Rightarrow z \doteq y_1 \lor z \doteq y_2 \lor z \doteq y_3)).
+    \end{gather*}
+\end{addmargin}
+
+\paragraph{\hspace{0.5em} Вариант 2}:
+Идеята е примерно за думата $ab$ тя е в релация с всички думи от нивото непосредствено под нея и не е дума от ниво 0 т.е. $\varepsilon$:
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+    \begin{tikzpicture}[->,,auto,node distance=1.75cm,
+        thick,main node/.style={draw, circle, fill=green!30}]
+        \node[main node] (0) {$ab$};
+        \node[main node] (1) [below right of=0] {$a$};
+        \node[main node] (2) [below left of=0] {$b$};
+        \path
+        (0) edge[blue] [bend left] node {} (1)
+            edge[blue] [bend right] node {} (2);
+    \end{tikzpicture} 
+\end{center}
+\end{addmargin}
+
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \psi_{\varepsilon}(x) \leftrightharpoons \exists y_1 \exists y_2 (\neg(y_1 \doteq y_2) \Land p(x, y_1) \Land p(x, y_2) \Land \\\forall z(p(x, z) \Rightarrow z \doteq y_1 \lor z \doteq y_2)).\\
+        \psi_{\{w|\,| w |=1\}}(x) \leftrightharpoons \exists t (\psi_{\varepsilon}(t) \Land p(x, t)).\\
+        \psi_{\{w|\,| w |=2\}}(x) \leftrightharpoons \neg \psi_{\varepsilon}(x) \Land \forall t (\psi_{\{w|\,| w |=1\}}(t) \Rightarrow p(x, t)).\\
+        \psi_{\{w|\,| w |=3\}}(x) \leftrightharpoons \neg \psi_{\{w|\,| w |=1\}}(x) \Land \forall t (\psi_{\{w|\,| w |=2\}}(t) \Rightarrow p(x, t)).
+    \end{gather*}
+\end{addmargin}
+
+\paragraph{\hspace{0.5em} И за двата варианта}: Нека $h: \{a,b\} \rightarrow \{a,b\}$ е функция с дефиниция $h(a)=b$ и $h(b)=a$. Тогава $h \circ h^{-1} = Id_{\{a,b\}} = h^{-1} \circ h$, т.е. $h$ е биекция.\\ Нека  $H: \{a,b\}^{*} \rightarrow \{a,b\}^{*}$ е функция с дефиниция $H(w)=H(a_1a_2...a_n)=h(a_1)\cdot h(a_2)\cdot...\cdot h(a_n)$ за дума $w=a_1a_2...a_n$ и $\cdot$ значещо конкатенация на думи. С аналогични разсъждения стигаме до заключенеито, че и $H$ е биекция. Остава да проверим, че е хомоморфизъм т.е.:
+\begin{equation*}
+    \langle u,v\rangle \in p^{\mathcal{A}} \leftrightarrow \langle H(u),H(v)\rangle \in p^{\mathcal{A}}
+\end{equation*}
+И в двата варинат имаме, че функцията $H$ нито променя дължината на думата, нито променя отношенията межу думите спрямо релацията $p^{\mathcal{A}}$. Ако $\langle u,v\rangle \in p^{\mathcal{A}}$ спрямо дефиницията на $p$ във вариант 1, то т.к. и в двете думи все едно ''инвертираме едновременно всички битове'', то $\langle H(u),H(v)\rangle \in p^{\mathcal{A}}$. И обратното е в сила като приложим $H$ върху $H(u),H(v)$, т.к. $H=H^{-1}$ ще помучим първообразите преди ''инвертираното'', които имат същите отношения както и образите. Съответно $H$ е хомоморфизъм и значи $H$ е автомнорфизъм. Съответно $\{b\}$ и съответно $\{bb\}$ са неопределими, защото $H(b) = a \not\in \{b\}$ и $H(bb) = aa \not\in \{bb\}$.
+
+\newpage
+\section{Задача за изпълнимост}
+\paragraph{}
+Нека:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_{1}\leftrightharpoons\forall x \forall y \forall z(p(x, y)\Land p(y, z) \Rightarrow p(x, z))\\
+        \varphi_{2}\leftrightharpoons\exists x \forall y(p(x, y)\Land p(y, y))\\
+        \varphi_{3}\leftrightharpoons\exists y \forall x(p(x, y)\Land \exists z(\neg(z \doteq y)\Land p(y, z)))\\
+        \varphi_{4}\leftrightharpoons\forall x \exists y \exists z(p(y, x)\Land p(z, x)\Land \neg(y \doteq z))\\
+        \varphi_{5}\leftrightharpoons\exists x \exists y(\neg p(x, y)\Land \neg p(y, x)),
+    \end{gather*}
+\end{addmargin}
+където \textit{p} е двуместен предикатен символ, а $\doteq$ е формално равенство.\\
+\indent Кои от множествата:
+\begin{gather*}
+    \varPhi_1 \leftrightharpoons \left\{\varphi_{1}, \varphi_{2}, \varphi_{3}\right\},\\
+    \varPhi_2 \leftrightharpoons \left\{\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4}\right\},\\
+    \varPhi_3 \leftrightharpoons \left\{\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4}, \varphi_{5}\right\},\\
+    \varPhi_4 \leftrightharpoons\left\{\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4}, \neg \varphi_{5}\right\}
+\end{gather*}
+сa изпълними? На вариант 2 формулите са еквивалентни на тези.
+
+\subsection{Примерно решение}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!30}]
+    \node[main node] (0) {0};
+    \node[main node] (1) [right of=0] {1};
+    \path
+    (0) edge[blue] [loop left] node {} (0)
+        edge[blue] [bend right] node {} (1)
+    (1) edge[red] [loop right] node {} (1)
+        edge[red] [bend right] node {} (0);
+\end{tikzpicture} \\
+За $\varPhi_1, \varPhi_2, \varPhi_4$: $ S = (\{0,1\}, p^S)$ \\
+$p^S \leftrightharpoons \{\langle0,0\rangle, \langle0,1\rangle, \langle1,0\rangle, \langle1,1\rangle\}$\\
+\end{center}
+\end{addmargin}
+
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!20}]
+    \node[main node] (0) {0};
+    \node[main node] (1) [right of=0] {$0'$};
+    \node[main node] (2) [above left of=0] {$\frac{1}{2}$};
+    \node[main node] (3) [above right of=1] {$\frac{1}{2}'$};
+    \node[main node] (4) [above right of=2] {1};
+    \node[main node] (5) [above left of=3] {$1'$};
+    \path
+    (4) edge[blue] [loop above] node {} (4)
+        edge[blue] [bend right] node {} (0)
+        edge[blue] [bend right] node {} (1)
+        edge[blue] [bend right] node {} (2)
+        edge[blue] [bend right] node {} (3)
+        edge[blue] [bend left] node {} (5)
+    (5) edge[red] [loop above] node {} (5)
+        edge[red] [bend left] node {} (0)
+        edge[red] [bend left] node {} (1)
+        edge[red] [bend left] node {} (2)
+        edge[red] [bend left] node {} (3)
+        edge[red] [bend left] node {} (4)
+    (2) edge[olive] [loop left] node {} (2)
+        edge[olive] [bend right] node {} (0)
+        edge[olive]  node {} (1)
+    (3) edge[orange] [loop right] node {} (3)
+        edge[orange] [bend left] node {} (1)
+        edge[orange]  node {} (0)
+    (0) edge[green] [loop below] node {} (0)
+        edge[green] [bend right] node {} (1)
+    (1) edge[purple] [loop below] node {} (1)
+        edge[purple]  node {} (0);
+\end{tikzpicture} \\
+За $\varPhi_3$: $ S = (\{0,0',\frac{1}{2},\frac{1}{2}',1,1'\}, p^S)$ \\
+$p^S \leftrightharpoons \{\langle0,0\rangle, \langle0',0'\rangle,...\}$\\
+\end{center}
+\end{addmargin}
+
+\vskip 0.2in
+
+
+\newpage
+\section{Задача за резолюция}
+\paragraph{}
+Нека:
+\begin{gather*}
+\varphi_{1}\leftrightharpoons\forall y \forall z(\exists x(r(x, y)\Land r(x, z)) \Rightarrow p(y, z))\\
+\varphi_{2}\leftrightharpoons\forall z \forall y(p(y, z) \Rightarrow(p(z, y) \Rightarrow \forall x(s(y, x) \Leftrightarrow s(z, x)))),
+\end{gather*} 
+\indent където $p$, $r, s,$ и $t$ са двуместни предикатни символи. \\ \indentС метода на резолюцията да  се докаже, че от $\varphi_1$ и $\varphi_2$ следва логически следва формулата:\\
+$\psi \leftrightharpoons \forall y \forall x \exists z((\exists z(r(x, z)\Land s(z, y))\Land \exists z(r(x, z)\Land t(z, y))) \Rightarrow (r(x, z)\Land s(z, y)\Land t(z, y)))$.\\
+\indentНа вариант 2 формулите са еквивалентни на тези.
+\subsection{Примерно решение}
+\begin{addmargin}[1em]{2em}
+    На $\varphi_2$ едната посока в еквиваленцията може да се изпусне, т.к. следва от другата. Съответно: \\
+    $\varphi_{2}'\leftrightharpoons\forall z \forall y(p(y, z) \Rightarrow(p(z, y) \Rightarrow \forall x(s(y, x) \Rightarrow s(z, x)))).$\\
+    Взимаме отрицанието на $\psi$ и получаваме:\\
+    $\psi' \leftrightharpoons \exists y \exists x \forall z(\exists z(r(x, z)\Land s(z, y))\Land \exists z(r(x, z)\Land t(z, y))\Land \\\indent\indent(\neg r(x, z)\lor\neg s(z, y)\lor\neg t(z, y)))$.\\
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ: \\
+\begin{gather*}
+    \varphi_1^S \leftrightharpoons \forall y \forall z \forall x (\neg r(x,y) \lor \neg r(x, z) \lor p(y,z)).  \\
+    \varphi_2^S \leftrightharpoons \forall z \forall y \forall x ((\neg p(y,z) \lor \neg p(z, y) \lor \neg s(y,x) \lor s(z,x))).  \\
+    \psi^S \leftrightharpoons \forall z (r(b,f(z)) \Land s(f(z), a) \Land r(b, g(z)) \Land t(g(z), a) \Land \\\indent\indent(\neg r(b,z) \lor \neg s(z, a) \lor \neg t(z, a))). \\
+\end{gather*}
+
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт): \\
+\begin{gather*}
+    D_1 = \{ \neg r(x_1,y_1), \neg r(x_1, z_1), p(y_1, z_1)\}; \\
+    D_2 = \{ \neg p(y_2, z_2), \neg p(z_2, y_2), \neg s(y_2, x_2), s(z_2, x_2)\}; \\
+    D_3 = \{ r(b,f(z_3))\}; \\
+    D_4 = \{ s(f(z_4),a)\}; \\        
+    D_5 = \{ r(b,g(z_5))\}; \\        
+    D_6 = \{ t(g(z_6),a)\}; \\        
+    D_7 = \{ \neg r(b, z_7), \neg s(z_7,a), \neg t(z_7, a)\}; \\
+\end{gather*}
+
+Примерен резолютивен извод на $ \blacksquare $ е: \\
+\begin{gather*}
+    D_8 = Res(D_6, D_7\{z_7/g(z_6)\}) = \{\neg r(b, g(z_6)), \neg s(g(z_6),a)\}\\
+    D_9 = Res(D_5\{z_5/z_6\},D_8)= \{\neg s(g(z_6),a)\}\\
+    D_{10} = Res(D_3, D_1\{x_1/b, y_1/f(z_3)\})= \{\neg r(b,z_1), \neg p(f(z_3),z_1)\}\\
+    D_{11} = Res(D_5, D_{10}\{z_1/g(z_5)\})= \{p(f(z_3),g(z_5))\}\\
+    D_{12} = Res(D_3, D_1\{x_1/b, z_1/f(z_3)\})= \{\neg r(b,y_1), \neg p(y_1, f(z_3))\}\\
+    D_{13} = Res(D_5, D_{12}\{y_1/g(z_5)\})= \{p(g(z_5),f(z_3))\}\\
+    D_{14} = Res(D_2\{y_2/f(z_3), z_2/g(z_5)\}, D_{11})= \{\neg p(g(z_5),f(z_3)), \neg s(f(z_3),x_2), s(g(z_5),x_2)\}\\
+    D_{15} = Res(D_{14}, D_{13}) = \{\neg s(f(z_3),x_2), s(g(z_5),x_2)\}\\
+    D_{16} = Res(D_4, D_{15}\{z_5/z_4, x_2/a\}) = \{s(g(z_4), a)\}\\
+    D_{17} = Res(D_9, D_{16}\{z_4/z_6\}) = \blacksquare
+\end{gather*}
+\end{addmargin}
+
+\end{document} % The document ends her

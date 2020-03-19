@@ -1,0 +1,54 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{append}\PYG{p}{([],} \PYG{n+nv}{L2}\PYG{p}{,} \PYG{n+nv}{L2}\PYG{p}{).}
+\PYG{n+nf}{append}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{L2}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{append}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{L2}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{append}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{X}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{],} \PYG{n+nv}{L}\PYG{p}{).}
+
+\PYG{n+nf}{length}\PYG{p}{([],} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{length}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+
+\PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{=\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{.}
+\PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{,}
+    \PYG{n+nv}{A1} \PYG{o}{is} \PYG{n+nv}{A}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A1}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{n\PYGZus{}th\PYGZus{}element}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{X}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{]).}
+\PYG{n+nf}{n\PYGZus{}th\PYGZus{}element}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{p}{[}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{n\PYGZus{}th\PYGZus{}element}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+
+\PYG{n+nf}{prettyWrite}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{prettyWriteList}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{).}
+\PYG{n+nf}{prettyWriteList}\PYG{p}{([],} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{l+s+sAtom}{nl}\PYG{p}{.}
+\PYG{n+nf}{prettyWriteList}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{N1} \PYG{o}{mod} \PYG{n+nv}{V}\PYG{l+s+sAtom}{=\PYGZbs{}=}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nf}{write}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{),}
+    \PYG{n+nf}{prettyWriteList}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{).}
+\PYG{n+nf}{prettyWriteList}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{N1} \PYG{o}{mod} \PYG{n+nv}{V}\PYG{o}{=:=}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nf}{write}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{),}
+    \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+    \PYG{n+nf}{prettyWriteList}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{).}
+
+\PYG{n+nf}{min2}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{.}
+\PYG{n+nf}{min2}\PYG{p}{(}\PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{(}\PYG{n+nv}{A}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{).}
+
+\PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{M}\PYG{p}{]).}
+\PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{),}
+    \PYG{n+nf}{min2}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+\end{Verbatim}

@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZpc{} Helper predicates: length, between.}
+\PYG{n+nf}{sum}\PYG{p}{([],} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{sum}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{sum}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{n+nv}{H}\PYG{p}{.}
+
+\PYG{n+nf}{isSquare}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{),}
+    \PYG{n+nv}{X1}\PYG{o}{*}\PYG{n+nv}{X1}\PYG{o}{=:=}\PYG{n+nv}{X}\PYG{p}{.}
+
+\PYG{n+nf}{squareList}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{sum}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nf}{isSquare}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{isSquare}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{).}
+
+\PYG{n+nf}{isCube}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{),}
+    \PYG{n+nv}{X1}\PYG{o}{*}\PYG{n+nv}{X1}\PYG{o}{*}\PYG{n+nv}{X1}\PYG{o}{=:=}\PYG{n+nv}{X}\PYG{p}{.}
+
+\PYG{n+nf}{cubeList}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{sum}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nf}{isCube}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{isCube}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{).}
+\end{Verbatim}

@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{count}\PYG{p}{([],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{count}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+\PYG{n+nf}{count}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{H}\PYG{l+s+sAtom}{\PYGZbs{}=}\PYG{n+nv}{X}\PYG{p}{,}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{merge}\PYG{p}{([],} \PYG{p}{[],} \PYG{p}{[]).}
+\PYG{n+nf}{merge}\PYG{p}{([}\PYG{n+nv}{A}\PYG{p}{|}\PYG{n+nv}{AT}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{B}\PYG{p}{|}\PYG{n+nv}{BT}\PYG{p}{],} \PYG{p}{[[}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{merge}\PYG{p}{(}\PYG{n+nv}{AT}\PYG{p}{,} \PYG{n+nv}{BT}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{).}
+
+\PYG{n+nf}{max2}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{B}\PYG{p}{.}
+\PYG{n+nf}{max2}\PYG{p}{(}\PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{(}\PYG{n+nv}{A}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{B}\PYG{p}{).}
+
+\PYG{n+nf}{min2}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{.}
+\PYG{n+nf}{min2}\PYG{p}{(}\PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{(}\PYG{n+nv}{A}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{).}
+
+\PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{M}\PYG{p}{]).}
+\PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{),}
+    \PYG{n+nf}{min2}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{max}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{M}\PYG{p}{]).}
+\PYG{n+nf}{max}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{max}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{),}
+    \PYG{n+nf}{max2}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+\end{Verbatim}

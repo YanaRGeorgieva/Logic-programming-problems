@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{isPrime}\PYG{p}{(}\PYG{n+nv}{P}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{(}\PYG{n+nv}{P}\PYG{o}{=\PYGZlt{}}\PYG{l+m+mi}{1}\PYG{p}{),}
+    \PYG{n+nv}{P1} \PYG{o}{is} \PYG{n+nv}{P} \PYG{o}{div} \PYG{l+m+mi}{2}\PYG{p}{,}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{P1}\PYG{p}{,} \PYG{n+nv}{Try}\PYG{p}{),}
+          \PYG{o}{not}\PYG{p}{(}\PYG{n+nv}{P} \PYG{o}{mod} \PYG{n+nv}{Try}\PYG{l+s+sAtom}{=\PYGZbs{}=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{=\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{.}
+\PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{C}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{A}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{B}\PYG{p}{,}
+    \PYG{n+nv}{A1} \PYG{o}{is} \PYG{n+nv}{A}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{n+nv}{A1}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{C}\PYG{p}{).}
+\end{Verbatim}

@@ -1,0 +1,361 @@
+\documentclass[a4paper,9pt]{extarticle}
+\usepackage[cp1251]{inputenc}
+
+\newcommand\examname{����� ��������� ������ �� ��������� ������������}
+\newcommand\examdate{23 ���� 2019~�.}
+
+\newcommand\varianta{
+  \warning
+
+  \begin{problem}
+    ���� $\strM$ � ��������� � ��������� ������������ ����� � � ��
+    ���� ��� ������� �� ��������� � ������������ ������� � ���������
+    ���������� ������~$\pp$, ����� � ��������� � �� ������������ ����:
+
+    \hspace*{10ex}\(\pp\inM(m,n) \iff m-n>2\)
+
+    �� �� ���������:
+
+    --- �����������: $\setof{\tup{n,m}}{n=m}$
+
+    --- ����������� $\set{0}$ � $\set{1}$.
+
+    �� �� ������, �� ����� ��������� �� ���� $\set{n}$ � ����������.
+  \end{problem}
+%  \begin{problem}
+%    ��� ����������� � ���� � �������� ������, �� � ��������� ������
+%    �����, �� �� ������, �� ����������� $\set{0}$ �� � ����������
+%  \end{problem}
+  \begin{problem}
+    �� �� ������, �� � ��������� ����������� �� �������� �������:
+
+\hspace*{10ex}$\forall\vx\forall\vy\forall\vz(\ff(\ff(\vx,\vy),\vz) = \ff(\vx,\ff(\vy,\vz))))$
+
+\hspace*{10ex}$\exists\vx \forall\vy ((\ff(\vx,\vy) =\vy)\,\land\,(\ff(\vy,\vx) =\vy))$
+    
+\hspace*{10ex}$\forall\vx(\ff(\ff(\vx,\vx),\vx) =\vx)$
+
+\hspace*{10ex}$\exists\vx\lnot(\ff(\vx,\vx)=\vx)$
+
+  \end{problem}
+
+  \wish
+}
+
+\newcommand\variantb{
+  \warning
+
+  \begin{problem}
+    ���� $\strM$ � ��������� � ��������� ������������ ����� � � ��
+    ���� ��� ������� �� ��������� � ������������ ������� � ���������
+    ���������� ������~$\pp$, ����� � ��������� � �� ������������ ����:
+
+    \hspace*{10ex}\(\pp\inM(m,n) \iff m\le3+n\)
+
+    �� �� ���������:
+
+    --- �����������: $\setof{\tup{n,m}}{n=m}$
+
+    --- ����������� $\set{0}$ � $\set{1}$.
+
+    �� �� ������, �� ����� ��������� �� ���� $\set{n}$ � ����������.
+  \end{problem}
+%  \begin{problem}
+%    ��� ����������� � ���� � �������� ������, �� � ��������� ������
+%    �����, �� �� ������, �� ����������� $\set{0}$ �� � ����������
+%  \end{problem}
+  \begin{problem}
+    �� �� ������, �� � ��������� ����������� �� �������� �������:
+
+\hspace*{10ex}$\forall\vx\forall\vy\forall\vz(\ff(\ff(\vx,\vy),\vz) = \ff(\vx,\ff(\vy,\vz))))$
+
+\hspace*{10ex}$\exists\vx \forall\vy ((\ff(\vx,\vy) =\vy)\,\land\,(\ff(\vy,\vx) =\vy))$
+    
+\hspace*{10ex}$\forall\vx(\ff(\vx,\vx) =\vx )$
+
+\hspace*{10ex}$\exists\vx\exists\vy\lnot(\vx=\vy)$
+
+  \end{problem}
+
+  \wish
+ }
+
+\newcommand\warning{\textbf{\scriptsize{}�� ���� ����, �� ����� �
+    ������ �� ������ �� ���� ������!}}
+\newcommand\wish{\textit{���������� �� ������� � ������� ������!}}
+
+\usepackage[T2A]{fontenc}
+\usepackage[bulgarian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}                
+\usepackage{enumerate}
+% \usepackage{array}
+\usepackage{multirow}
+\usepackage{alltt}
+%\usepackage[active]{srcltx}
+
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+%\renewcommand{\kappa}{\varkappa}
+\renewcommand{\le}{\leqq}
+\renewcommand{\leq}{\leqq}
+\renewcommand{\ge}{\geqq}
+\renewcommand{\geq}{\geqq}
+
+\newcommand\hide[1]{}
+\hide{
+\newenvironment{solution}{}{}
+}
+
+\newcommand\NB[1]{}
+\newcommand\bnot[1]{\overline{#1}}
+\newcommand{\word}[1]{{\mathtt{#1}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\setof}[2]{\{\,{#1}\mid{#2}\,\}}
+\newcommand{\tup}[1]{\langle{}#1{}\rangle}
+%\newcommand{\tup}[1]{(#1)}
+\newcommand{\compcent}[1]{\vcenter{\hbox{$#1\circ$}}}
+\newcommand{\after}{\mathbin{\mathchoice
+    {\compcent\scriptstyle}{\compcent\scriptstyle}
+    {\compcent\scriptscriptstyle}{\compcent\scriptscriptstyle}}}
+\renewcommand\setminus{\backslash}
+\newcommand{\fontor}[1]{{\mathpzc{#1}}}
+
+%\newcommand{\propint}{\misc{i}}
+\newcommand{\propint}{\mathbf{I}}
+%\newcommand{\propint}{I}
+
+\newcommand{\strfont}[1]{\mathbf{#1}}
+%\newcommand{\strfont}[1]{\mathrsfs{#1}}
+%\newcommand{\strfont}[1]{\mathcal{#1}}
+\newcommand\strA{\strfont{A}}
+\newcommand\strB{\strfont{B}}
+\newcommand\strM{\strfont{M}}
+\newcommand\strN{\strfont{N}}
+\newcommand\strK{\strfont{K}}
+\newcommand\strH{\strfont{H}}
+\newcommand\strR{\strfont{R}}
+
+\newcommand{\inM}{^{\strM}}
+\newcommand{\inN}{^{\strN}}
+\newcommand{\inK}{^{\strK}}
+\newcommand{\inA}{^{\strA}}
+\newcommand{\inB}{^{\strB}}
+\newcommand{\inH}{^{\strH}}
+
+\newcommand{\univ}[1]{{\lvert{#1}\rvert}}
+
+\let\oldforall=\forall
+\renewcommand{\forall}[1]{\oldforall{#1}\,}
+\let\oldexists=\exists
+\renewcommand{\exists}[1]{\oldexists{#1}\,}
+
+\newcommand\NN{\mathbb{N}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ff{\word{f}}
+\newcommand\fg{\word{g}}
+\newcommand\fh{\word{h}}
+\newcommand\pp{\word{p}}
+\newcommand\pq{\word{q}}
+\newcommand\pr{\word{r}}
+\newcommand\ps{\word{s}}
+\newcommand\fp{\word{d}}
+\newcommand\vx{\word{x}}
+\newcommand\vy{\word{y}}
+\newcommand\vz{\word{z}}
+\newcommand\vt{\word{t}}
+\newcommand\vu{\word{u}}
+\newcommand\vv{\word{v}}
+\newcommand\ca{\word{a}}
+\newcommand\cb{\word{b}}
+\newcommand\cc{\word{c}}
+\newcommand\cd{\word{d}}
+\newcommand{\misc}[1]{{\mathfrak{#1}}}
+\newcommand{\miscp}{\misc{p}}
+\newcommand{\miscq}{\misc{q}}
+
+\newcommand{\fontoperatorname}[1]{\operatorname{\text{\normalfont#1}}}
+\newcommand{\TG}{T_\Gamma}
+%\newcommand\mgu[1]{\{MGU\set{#1}}}
+%\newcommand\sig{\mathrsfs{L}}
+%\newcommand\sig{\misc{S}}
+\newcommand\sig{\misc{sig}}
+%\newcommand\vgrad{\misc{B}}
+\newcommand\vgrad{\fontoperatorname{\scshape\cyrv\cyrg\cyrr\cyra\cyrd}}
+\newcommand\lfd{\fontoperatorname{\scshape\cyrl\cyrp\cyri}}
+\newcommand\lrd{\fontoperatorname{\scshape\cyrl\cyrr\cyri}}
+\newcommand\fv{\fontoperatorname{\scshape\cyrs\cyrv\cyro\cyrb}}
+\newcommand\mgu{\misc{mgu}}
+\newcommand\dr{\misc{res}}
+\newcommand\id{\operatorname{id}}
+\newcommand{\cl}[1]{\overline{#1}}
+\newcommand{\infseq}[1]{(#1_n)_{n=1}^\infty}
+\newcommand{\name}[1]{\text{\normalfont\texttt{"}}#1\text{\normalfont\texttt{"}}}
+\newcommand{\fla}[1]{\bnot{#1}}
+\newcommand{\diag}[1]{\operatorname{diag}(#1)}
+\newcommand{\res}{\operatorname{R}}
+%\newcommand{\resinf}{\res^\infty}
+\newcommand{\resinf}{\bigcup_{i=0}^\infty\res^{i}}
+\newcommand{\sres}{\misc{res}}
+\newcommand{\emptyclause}{\blacksquare}
+
+%\newcommand{\assign}{\mapsto}
+\newcommand{\assign}{\coloneqq}
+\newcommand{\alphaassignbetan}{\alpha_1,\alpha_2,\dots,\alpha_n\assign\beta_1,\beta_2,\dots,\beta_n}
+\newcommand{\xxn}{\vx_1,\vx_2,\dots,\vx_n}
+\newcommand{\mumun}{\mu_1,\mu_2,\dots,\mu_n}
+\newcommand{\vxassignmun}{\vx_1,\vx_2,\dots,\vx_n\assign\mu_1,\mu_2,\dots,\mu_n}
+\newcommand{\modfun}{\vert}
+\newcommand{\vxm}{\vx\assign\mu\modfun v}
+\newcommand{\vym}{\vy\assign\mu\modfun v}
+\newcommand{\vzm}{\vz\assign\mu\modfun v}
+\newcommand{\vxk}{\vx\assign\kappa\modfun v}
+\newcommand{\uxm}{\vx\assign\mu\modfun u}
+\newcommand{\wxm}{\vx\assign\mu\modfun w}
+\newcommand{\vxxmmn}{{\vx_1\vx_2\dots\vx_n}\assign{\mu_1\mu_2\dots\mu_n}\modfun v}
+
+\newcommand{\con}{\equiv}
+%\newcommand\Rule{\vdash}
+\newcommand\Rule{\fontoperatorname{\texttt{-:}}}
+\def\coloneq{\fontoperatorname{\texttt{:-}}}
+\newcommand\Clause{\fontoperatorname{\texttt{:-}}}
+\newcommand\Query{\fontoperatorname{\texttt{?-}}}
+\newcommand{\lpstate}[2]{\tup{{#1}\mathbin{\|}{#2}}}
+\newcommand{\emptydisjunct}{\square}
+
+\renewcommand{\models}{\vDash}
+\newcommand{\notmodels}{\nvDash}
+%\newcommand{\trueat}[3]{{#1}\models{#2}\llbracket{#3}\rrbracket}
+\newcommand{\trueat}[3]{{#1}\models{#2}[#3]}
+%\newcommand{\nottrueat}[3]{{#1}\notmodels{#2}\llbracket{#3}\rrbracket}
+\newcommand{\nottrueat}[3]{{#1}\notmodels{#2}[#3]}
+\newcommand{\focus}[1]{(#1)}
+
+\newcommand\ako{\text{ ��� }}
+\newcommand\ii{\text{ � }}
+
+\newcommand{\klas}{\textnormal{\textbf{(����)}}}
+
+\newcommand{\rev}{^{-1}}
+
+
+\newcommand{\lang}{\fontor{L}}
+
+\newcommand\prog[1]{\texttt{#1}}
+
+\newcommand{\typefont}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\inttype}{\typefont{int}}
+\newcommand{\booltype}{\typefont{bool}}
+%\newcommand{\algtype}{\typefont{�������}}
+%\newcommand{\logtype}{\typefont{��������}}
+%2017
+%\newcommand{\algtype}{\typefont{���}}
+%\newcommand{\logtype}{\typefont{���}}
+%2018
+\newcommand{\algtype}{\typefont{�����}}
+\newcommand{\logtype}{\typefont{����}}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+\tikzset{initial text={}}
+
+\newcommand\ns[4]{\node[state,#3](#1)[#4]{#2};}
+% #1: internal name,
+% #2: (visible) label,
+% #3: node properties (e.g. accepting, initial)
+% #4: relative position (e.g. right of=/left of=/above of=/below of=)
+\newcommand\nt[4]{\path[->] (#1) edge [#4] node {#3} (#2); }
+% #1: source state (internal name),
+% #2: target state (internal name)
+% #3: guard/edge label
+% #4: edge direction (loop below/above, bend right/left)
+
+\theoremstyle{definition}
+\newtheorem{problem}{���.}
+
+\setlength{\textwidth}{210mm} 
+\setlength{\textheight}{297mm} 
+\setlength{\topmargin}{0mm} 
+\setlength{\voffset}{-1in} 
+\setlength{\hoffset}{-1in}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\parindent 0.5cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Real}{\mathbb{R}}
+\renewcommand\le\leqq
+\renewcommand\ge\geqq
+\renewcommand\leq\leqq
+\renewcommand\geq\geqq
+\renewcommand{\land}{\&}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\limp}{\Longrightarrow}
+\newcommand{\lequiv}{\Longleftrightarrow}
+\newcommand{\liff}{\Longleftrightarrow}
+\renewcommand{\iff}{\longleftrightarrow}
+
+%��������� �������� �� \ExamHeader � ������� �� ��������
+\newcommand{\ExamHeader}[1]{
+  {%
+    \footnotesize%
+    \begin{tabular}{|c|c|c|c|c|c|}
+      \hline
+      ������� & �. ����� & ����� & ����� & ���� & ����������� \\
+      \hline
+      \multirow{2}{*}{\bf\large #1} & & & & & \\
+      & & & & & \\
+      \hline
+      \multirow{2}{*}{���:} & \multicolumn{5}{|c|}{}\\
+    & \multicolumn{5}{|c|}{}\\
+      \hline
+    \end{tabular}
+  }
+  \centerline{\vrule height8pt width0pt \examname}
+  \centerline{\examdate}
+}
+
+\newcommand\twominipages{
+  \noindent\hfill
+  \begin{minipage}[t]{82mm}
+    \ExamHeader{1}
+    \setcounter{problem}{0}
+
+    \varianta
+  \end{minipage}
+  \hfill\vrule\hfill
+  \begin{minipage}[t]{82mm}
+    \ExamHeader{2}
+    \setcounter{problem}{0}
+
+    \variantb
+  \end{minipage}
+  \hspace*{\fill}
+}
+
+
+\begin{document}\thispagestyle{empty} \setsize
+
+\vspace*{10mm}
+\twominipages
+
+\vspace*{10mm}\hrulefill\vfill
+\twominipages
+
+\vspace*{10mm}\hrulefill\vfill
+\twominipages
+
+\vfill
+\vspace*{10mm}
+\end{document}
+

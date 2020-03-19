@@ -1,0 +1,397 @@
+\documentclass[]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+\newtheorem{theorem}{Теорема}%[section]
+\newtheorem{problem}{Задача}%[section]
+\newtheorem{remark}{{Забележка}}%[section]
+\newtheorem{example}{Пример}%[section]
+\newtheorem{lemma}{{Лема}}%[section]
+\newtheorem{proposition}{Твърдение}%[section]
+\def\proof{\textbf {Доказателство: }}%[section]
+\newtheorem{corollary}{Следствие}%[section]
+\newtheorem{fact}{Факт}%[
+\newtheorem{definition}{Дефиниция}%[section]
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{30 юни 2019}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\tableofcontents
+\newpage % Starts a new page
+\pagenumbering{arabic} % Turns on page numbering
+\section{Първа задача на пролог}
+Нека за всяко положително число $i$ с $\xi(i)$ и с $\eta(i)$ означим съответно броя на простите числа от вида $6k+1$ и $6k+5$, които са по-малки от $i$. \\
+Да се дефинират на пролог еднометсни предикати $su(X)$ и $mu(X)$, които по дадено цяло число $X$ разпознават дали за някое положително цяло число $i$ в сила равенството $X=i + \xi(i)$ за $su(X)$ и  $X=i - \eta(i)$ за  $mu(X)$.\\
+\subsection{Общи предикати}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+isPrime(P) :-
+    not(P=<1),
+    not(( P1 is P div 2,
+            between(2, P1, Try),
+            not(P mod Try=\=0)
+        )).
+
+between(A, B, A) :-
+    A=<B.
+between(A, B, C) :- 
+    A<B,
+    A1 is A+1,
+    between(A1, B, C).
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.1} 
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+count(K, I, 0) :-
+    PK is 6*K+1,
+    PK>=I.
+count(K, I, N) :-
+    PK is 6*K+1,
+    PK<I,
+    isPrime(PK),
+    K1 is K+1,
+    count(K1, I, M),
+    N is M+1.
+count(K, I, N) :-
+    PK is 6*K+1,
+    PK<I,
+    not(isPrime(PK)),
+    K1 is K+1,
+    count(K1, I, N).
+
+
+su(X) :-
+    between(0, X, I),
+    count(2, I, XiI),
+    X=:=I+XiI.
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.2} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+count(K, I, 0) :-
+    PK is 6*K+5,
+    PK>=I.
+count(K, I, N) :-
+    PK is 6*K+5,
+    PK<I,
+    isPrime(PK),
+    K1 is K+1,
+    count(K1, I, M),
+    N is M+1.
+count(K, I, N) :-
+    PK is 6*K+5,
+    PK<I,
+    not(isPrime(PK)),
+    K1 is K+1,
+    count(K1, I, N).
+
+
+mu(X) :-
+    between(0, X, I),
+    count(2, I, EtaI),
+    X=:=I-EtaI.
+\end{minted}
+\end{longlisting}
+
+\newpage
+\section{Втора задача на пролог}
+
+\paragraph{} 
+$G$\emph{-списък} ще наричаме списък, всички елементи, на който са двуместни списъци от естествени числа. Нека $L$ е $G$\emph{-списък}. За всяко естествено число $k$ с $do(L, K)$ да означим броя на онези елементи на $L$, чийто първи елемент $k$ ,а с $di(L,k)$  да означим броя на онези елемнти от $L$, чийто втори елемент е $k$.\\
+Да се дефинират на пролог еднометсни предикати $e1g(L)$ и $e2g(L)$, които при преудовлетворяване генерират в $L$ всички $G$\emph{-списъци}, такива че за всяко естествено число $k$ е в сила неравенството:
+\begin{equation*}
+    |do(L,k) - di(L, k)| \leq j, j \in \{1 \rightarrow e1g,2 \rightarrow e2g\}
+\end{equation*}
+
+\subsection{Общи предикати}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+
+nat(0).
+nat(N) :-
+    nat(M),
+    N is M+1.
+
+do([], _, 0).
+do([[K, _]|T], K, N) :-
+    do(T, K, M),
+    N is M+1.
+do([[K1, _]|T], K, N) :-
+    K1\=K,
+    do(T, K, N).
+
+di([], _, 0).
+di([[_, K]|T], K, N) :-
+    di(T, K, M),
+    N is M+1.
+di([[_, K1]|T], K, N) :-
+    K1\=K,
+    di(T, K, N).
+
+pairs(A, B) :-
+    nat(N),
+    between(1, N, A),
+    A mod 2=:=0,
+    B is N-A.
+
+genKS(1, S, [S]).
+genKS(K, S, [XI|R]) :-
+    K>1,
+    K1 is K-1,
+    between(0, S, XI),
+    S1 is S-XI,
+    genKS(K1, S1, R). 
+
+generateList(L, S) :-
+    pairs(K, S),
+    genKS(K, S, L1),
+    packTuples(L1, L).
+
+packTuples([], []).
+packTuples([Do, Di|T], [[Do, Di]|R]) :-
+    packTuples(T, R).
+
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.1} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+e1g([]).
+e1g(L) :-
+    generateList(L, S),
+    not(( between(0, S, K),
+            not(condition(L, K))
+        )).
+
+condition(L, K) :-
+    do(L, K, N),
+    di(L, K, M),
+        abs(N-M)=<1.
+\end{minted}
+\end{longlisting}
+
+\vskip 0.2in
+
+\subsection{Примерно решение на \Romannum{1}.2} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+e2g([]).
+e2g(L) :-
+    generateList(L, S),
+    not(( between(0, S, K),
+            not(condition(L, K))
+        )).
+
+condition(L, K) :-
+    do(L, K, N),
+    di(L, K, M),
+    abs(N-M)=<2.
+\end{minted}
+\end{longlisting}
+
+\newpage
+\section{Задача за определимост}
+\paragraph{}
+\emph{Сума} на две множества от точки в равнината $A, B\subseteq \mathbb{R}^2$ наричаме:
+\begin{equation*}
+A+B = \{(a_1+b_1,a_2+b_2) \,|\, (a_1,a_2)\in A, (b_1,b_2)\in B\}.
+\end{equation*}
+Разглеждаме език ${\cal L}=\langle sum;cat\rangle$ с двуместен функционален и двуместен предикатен
+символ. $S=\langle2^{\mathbb{R}^2}; sum^S,cat^S\rangle$ е структура за ${\cal L}$ с носител множествата
+от точки в равнината и интерпретации:
+\begin{eqnarray*}
+sum^S(A,B) &=& A + B\\
+cat^S(A,B) &\iff & A\cap B\neq \emptyset\\
+cut^S(A,B) &\iff & A\cap B = \emptyset.
+\end{eqnarray*}
+$\indent *cut^S(A,B) \equiv \neg cat^S(A,B)\\$
+Да се докаже, че в $S$:
+\begin{enumerate}
+\item равенството на множества от точки е определимо.
+\item подмножество на множества от точки е определимо.
+\item $\{(0,0)\}$ и $\mathbb{R}^2$ са определими.
+\item $single \rightleftharpoons \{\{(a,b)\}|\,a,b \in \mathbb{R}^2\}$, множеството от всички едноточкови множества е определимо.
+\item $centerSymmentric \rightleftharpoons \{A\,|A \subseteq \mathbb{R}^2, A = \{(-a, -b)\,|\,(a,b)\in A\}\}$ множеството от централно симетрични множества е определимо.
+\item Определими ли са множествата $\{(0,1),(0,-1)\}$ или $\{(1,0),(-1,0)\}$? Защо? 
+\item Кои са автоморфизмите на $S$? Защо?
+\end{enumerate}
+\newpage
+\subsection{Примерно решение}
+\begin{addmargin}[1em]{2em}
+    \begin{aligned*}
+\varphi_{\emptyset}(A) \rightleftharpoons \neg \exists C cat(A,C)\\
+\varphi_{=}(A, B) \rightleftharpoons \forall C (cat(A,C) \iff cat(B,C))\\
+\varphi_{\subseteq}(A, B) \rightleftharpoons \forall C (cat(A,C) \Longrightarrow cat(B,C))\\
+\varphi_{(0,0)}(A) \rightleftharpoons \forall C (\varphi_{=}(A, C), C))\\
+\varphi_{\mathbb{R}^2}(A) \rightleftharpoons \forall C (\varphi_{=}(A, C), A))\\
+\varphi_{single}(A) \rightleftharpoons \forall C (\varphi_{\subseteq}(C, A) \Longrightarrow (\varphi_{\emptyset}(C) \lor \varphi_{=}(C, A)))\\
+\varphi_{centerSymmentric}(A) \rightleftharpoons \exists B\forall C \exists D(\varphi_{(0,0)}(B)\,\&\,\varphi_{\subseteq}(C, A)\,\&\,\varphi_{single}(C) \,\&\,\varphi_{\subseteq}(D, A)\,\&\,\varphi_{single}(D)\,\&\,\varphi_{=}(sum(D,C),B) )\\ \\
+    \end{aligned*}
+
+Нека $h:\mathbb{R}^2 \rightarrow \mathbb{R}^2$ и 
+$h((a,b)) = (b,a),\, (b,a) \in \mathbb{R}^2$.\\
+Лесно се показва, че е биекция и $h=h^{-1}$.\\
+Нека $H:\mathcal{P}(\mathbb{R}^2)\rightarrow \mathcal{P}(\mathbb{R}^2)$ като $H(A) = \{h((a,b))\,|\,(a,b) \in A\},\,A \in \mathcal{P}(\mathbb{R}^2),\, H = H^{-1}$.\\
+Сега дали е изпълнено,че $H(sum^S(A,B)) = sum^S(H(A),H(B))$ и $(A,B) \in cat^S \iff (H(A), H(B)) \in cat^S$?\\
+\begin{eqnarray*}
+    H(sum^S(A,B)) =\{h((a,b))\,|\,(a,b)\in A+B\}=
+\end{eqnarray*}
+
+\end{addmargin}
+
+\vskip 0.2in
+
+\newpage
+\section{Задача за изпълнимост}
+\paragraph{}
+
+Нека ${\cal L}$ е език с едноместен функционален
+символ $h$ ($f$), двуместен предикатен символ $p$ и формално равенство. 
+Изпълнимо ли е множеството от формули над езика ${\cal L}$:
+\begin{eqnarray*}
+\forall x \exists y\exists z (y\neq z \& q(x,z)& \& &q(x,y))\\
+\forall x \forall z ([q(x,z)\Rightarrow p(x,z)] &\&& p(x,z) \Rightarrow \neg p(z,x))\\
+\forall x \forall y \forall z (p(x,y) \& p(y,z) &\Rightarrow &p(x,z)) \\
+\forall x \forall y (h(x) = h(y) &\Rightarrow &\neg q(x,y)) \\
+\forall x \exists y (h(x)=h(y) &\& & p(x,y))?
+\end{eqnarray*}
+
+\subsection{Примерно решение}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!20}]
+
+  \node[main node] (0) {0};
+  \node[main node] (1) [below left of=0] {1};
+  \node[main node] (2) [below right of=0] {2};
+  \node[main node] (3) [below left of=1] {3};
+  \node[main node] (4) [right of=3] {4};
+  \node[main node] (5) [right of=4]  {5};
+  \node[main node] (6) [below right of=2] {6};
+  \node[below=.1cm of 3] {$\dots$};
+  \node[below=.1cm of 4] {$\dots$};
+  \node[below=.1cm of 5] {$\dots$};
+  \node[below=.1cm of 6] {$\dots$};
+
+  \path
+    (0) edge[blue] [bend left] node {} (1)
+        edge[red] [bend right] node {} (1)
+        edge[blue] [bend right] node {} (2)
+        edge[red] [bend left] node {} (2)
+        edge[red] [bend right] node {} (5)
+        edge[red] [bend left] node {} (6)
+        edge[red] [bend right] node {} (3)
+        edge[red] [bend left] node {} (4)
+    (1) edge[blue] [bend left] node {} (3)
+        edge[red] [bend right] node {} (3)
+        edge[blue] [bend right] node {} (4)
+        edge[red] [bend left] node {} (4)
+    (2) edge[blue] [bend left] node {} (5)
+        edge[red] [bend right] node {} (5)
+        edge[blue] [bend right] node {} (6)
+        edge[red] [bend left] node {} (6);      
+\end{tikzpicture} \\
+$ S = (\mathbb{N}, p^S, q^S, h^S)$ \\
+$h^S(node) = node\,mod3, node\in \mathbb{N}$\\
+$\textcolor{blue}{p^S} \rightleftharpoons \cup\{(node, 2*node + i)\,|\,i \in \{1,2\}, node \in \mathbb{N}\}$ \\ребра от изходен връх node с $h^S(node)$ до върхове на следващо ниво с четности спрямо $h^S: \,\{0,1,2\}\ \setminus \{h^S(node)\}$\\
+$\textcolor{red}{q^S} \rightleftharpoons \cup\{(node, i)\,|\,node \in \mathbb{N}, i \in \mathbb{N} \setminus \{0, ... ,i\}\}$ \\ребра от изходен връх $node$ до всеки друг връх на по-ниско ниво от неговото 
+\end{center}
+\end{addmargin}
+
+\vskip 0.2in
+
+\newpage
+\section{Задача за резолюция}
+\paragraph{}
+С метода на резолюцията да се докаже, че множестсвото от следните три формули е неизпълнимо:\\
+\paragraph{\hspace{0.5em} \Romannum{2}.1} 
+\begin{addmargin}[1em]{2em}
+$\forall x \exists y (p(x,y)\ \& \ \forall z (p(z,y) \Longrightarrow r(x,z))),\\
+\forall x( \exists y p(y,x) \Longrightarrow \exists y(p(y,x)\ \& \ \neg\exists z(p(z,y)\ \& \ p(z,x)))), \\
+\forall x \forall y \forall z ((p(x,y)\ \& \ r(y,z)) \Longrightarrow p(x, z))),\\
+\neg \forall x \exists y (p(x,x) \Longrightarrow (q(y, x) \ \& \ \neg q(y,x))).$
+\end{addmargin}
+
+\indent * Тъй като $(q(y, x)\&\neg q(y, x))$ е винаги лъжа, то последната формула е еквивалентна на: \\ \indent $ \neg \forall x \exists y (\neg p(x,x))  \equiv \exists x p(x,x).$ \\
+\paragraph{\hspace{0.5em} \Romannum{2}.2} 
+\begin{addmargin}[1em]{2em}
+$\forall x \exists y (q(y,x)\ \& \ \forall z (q(y,z) \Longrightarrow r(z,x))),\\
+\forall x( \exists y q(x,y) \Longrightarrow \exists y(q(x,y)\ \& \ \neg\exists z(q(y,z)\ \& \ q(x,z)))), \\
+\forall x \forall y \forall z ((q(y,x)\ \& \ r(z,y)) \Longrightarrow q(z, x))),\\
+\neg \forall x \forall z (q(x,x) \Longrightarrow (r(x,z) \ \& \ \neg r(x,z))).$
+\end{addmargin}
+
+\indent * Тъй като $(r(x, z)\&\neg r(x, z))$ е винаги лъжа, то последната формула е еквивалентна на: \\ \indent $ \neg \forall x \forall z (\neg p(x,x))  \equiv \exists x q(x,x).$ \\
+\vskip 0.2in
+
+\subsection{Примерно решение}
+\paragraph{\hspace{0.5em} \Romannum{2}.1}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ: \\
+$\varphi_1^S \rightleftharpoons \forall x \forall z (p(x,f(x))\&(\neg p(z, f(x))\lor r(x,z))). $ \\
+$\varphi_2^S \rightleftharpoons \forall x \forall t \forall z((p(g(x),x)\lor \neg p(t,x))\&(\neg p(z, g(x)) \lor \neg p(z,x) \lor \neg p(t,x)). $ \\
+$\varphi_3^S \rightleftharpoons \forall x \forall y \forall z (\neg r(y,z) \lor \neg p(x,y) \lor p(x, z)). $ \\
+$\psi^S \rightleftharpoons p(a,a).$ \\
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт): \\
+$D_1 = \{ p(x_1,f(x_1))\};$ \\
+$D_2 = \{ \neg p(z_2, f(x_2)), r(x_2, z_2)\};$ \\
+$D_3 = \{ p(g(x_3), x_3), \neg p(t_3, x_3)\};$ \\
+$D_4 = \{ \neg p(z_4,g(x_4)), \neg p(z_4, x_4), \neg p(t_4, x_4)\};$ \\
+$D_5 = \{ \neg r(y_5,z_5), \neg p( x_5,y_5), p(x_5, z_5)\};$ \\
+$D_6 = \{ p(a,a)\}.$
+\end{addmargin}
+\paragraph{\hspace{0.5em} \Romannum{2}.2}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ: \\
+$\varphi_1^S \rightleftharpoons \forall x \forall z (q(f(x), x)\&(\neg q(f(x), z)\lor r(z, x))). $ \\
+$\varphi_2^S \rightleftharpoons \forall x \forall z \forall t((q(x,g(x))\lor \neg q(x,t))\&(\neg q(g(x),z) \lor \neg q(x, z) \lor \neg q(x, t)). $ \\
+$\varphi_3^S \rightleftharpoons \forall z \forall y \forall x (\neg r(z,y) \lor \neg q(y,x) \lor q(z, x)). $ \\
+$\psi^S \rightleftharpoons q(a,a).$ \\
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт): \\
+$D_1 = \{ q(f(x_1),x_1)\};$ \\
+$D_2 = \{ \neg q(f(x_2),z_2), r(z_2, x_2)\};$ \\
+$D_3 = \{ q(x_3, g(x_3)), \neg q(x_3, t_3)\};$ \\
+$D_4 = \{ \neg q(g(x_4),z_4), \neg q(x_4, z_4), \neg q(x_4, t_4)\};$ \\
+$D_5 = \{ \neg r(z_5, y_5), \neg q(y_5, x_5), q(z_5, x_5)\};$ \\
+$D_6 = \{ q(a,a)\}.$ 
+\vskip 0.1in
+И за двата варианта един примерен резолютивен извод на $ \blacksquare $ е: \\
+$ D_7 = Res(D_2\{x_2/y_5, z_2/z_5\}, D_5) = $\\$ \indent \indent \indent \indent \indent \indent \{ \neg q(f(y_5),z_5), \neg q(y_5, x_5), q(z_5, x_5) \}$; \\
+$ D_8 = Res(D_3\{x_3/f(y_5)\}, D_7\{ z_5/g(f(y_5)) \}) = $\\$ \indent \indent \indent \indent \indent \indent \{ \neg q(f(y_5), t_3), \neg q(y_5, x_5), q(g(f(y_5)),x_5)\}$; \\
+$ D_9 = Res(D_4\{x_4/f(y_5), z_4/x_5\}, D_8) = $\\$  \indent \indent \indent \indent \indent \indent \{ \neg q(f(y_5),t_4), \neg q(f(y_5),x_5), \neg q(f(y_5), t_3), \neg q(y_5, x_5)\}$;\\
+$ D_{10} = Collapse(D_9\{t_3/x_5, t_4/x_5\}) = $\\$  \indent \indent \indent \indent \indent \indent\{\neg q(f(y_5), x_5), \neg q(y_5, x_5)\}$;\\
+$ D_{11} = Res(D_1, D_{10}\{y_5/x_1, x_5/x_1 \}) = $\\$  \indent \indent \indent \indent \indent \indent  \{ \neg q(x_1, x_1) \}$;\\
+$ Res(D_{11}\{x_1/a\}, D_6) = \blacksquare. $ \\
+
+За вариант \Romannum{2}.1 заменете q с p.
+\end{addmargin}
+\end{document} % The document ends her

@@ -1,0 +1,392 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{scrextend}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{siunitx}
+\usepackage[T2A]{fontenc}
+\usepackage[english]{babel}
+\def\frak#1{\cal #1}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+% \usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{txfonts}
+% \usepackage{array}
+\usepackage{multirow}
+\usepackage{alltt}
+%\usepackage[active]{srcltx}
+
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+%\renewcommand{\kappa}{\varkappa}
+\renewcommand{\le}{\leqq}
+\renewcommand{\leq}{\leqq}
+\renewcommand{\ge}{\geqq}
+\renewcommand{\geq}{\geqq}
+
+\newcommand\hide[1]{}
+\hide{
+\newenvironment{solution}{}{}
+}
+
+\newcommand\NB[1]{}
+\newcommand\bnot[1]{\overline{#1}}
+\newcommand{\word}[1]{{\mathtt{#1}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\setof}[2]{\{\,{#1}\mid{#2}\,\}}
+\newcommand{\tup}[1]{\langle{}#1{}\rangle}
+%\newcommand{\tup}[1]{(#1)}
+\newcommand{\compcent}[1]{\vcenter{\hbox{$#1\circ$}}}
+\newcommand{\after}{\mathbin{\mathchoice
+    {\compcent\scriptstyle}{\compcent\scriptstyle}
+    {\compcent\scriptscriptstyle}{\compcent\scriptscriptstyle}}}
+\renewcommand\setminus{\backslash}
+\newcommand{\fontor}[1]{{\mathpzc{#1}}}
+
+%\newcommand{\propint}{\misc{i}}
+\newcommand{\propint}{\mathbf{I}}
+%\newcommand{\propint}{I}
+
+\newcommand{\strfont}[1]{\mathbf{#1}}
+%\newcommand{\strfont}[1]{\mathrsfs{#1}}
+%\newcommand{\strfont}[1]{\mathcal{#1}}
+\newcommand\strA{\strfont{A}}
+\newcommand\strB{\strfont{B}}
+\newcommand\strM{\strfont{M}}
+\newcommand\strN{\strfont{N}}
+\newcommand\strK{\strfont{K}}
+\newcommand\strH{\strfont{H}}
+\newcommand\strR{\strfont{R}}
+
+\newcommand{\inM}{^{\strM}}
+\newcommand{\inN}{^{\strN}}
+\newcommand{\inK}{^{\strK}}
+\newcommand{\inA}{^{\strA}}
+\newcommand{\inB}{^{\strB}}
+\newcommand{\inH}{^{\strH}}
+
+\newcommand{\univ}[1]{{\lvert{#1}\rvert}}
+
+% \let\oldforall=\forall
+% \renewcommand{\forall}[1]{\oldforall{#1}\,}
+% \let\oldexists=\exists
+% \renewcommand{\exists}[1]{\oldexists{#1}\,}
+
+\newcommand\NN{\mathbb{N}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ff{\word{f}}
+\newcommand\fg{\word{g}}
+\newcommand\fh{\word{h}}
+\newcommand\pp{\word{p}}
+\newcommand\pq{\word{q}}
+\newcommand\pr{\word{r}}
+\newcommand\ps{\word{s}}
+\newcommand\fp{\word{d}}
+\newcommand\vx{\word{x}}
+\newcommand\vy{\word{y}}
+\newcommand\vz{\word{z}}
+\newcommand\vt{\word{t}}
+\newcommand\vu{\word{u}}
+\newcommand\vv{\word{v}}
+\newcommand\ca{\word{a}}
+\newcommand\cb{\word{b}}
+\newcommand\cc{\word{c}}
+\newcommand\cd{\word{d}}
+\newcommand{\misc}[1]{{\mathfrak{#1}}}
+\newcommand{\miscp}{\misc{p}}
+\newcommand{\miscq}{\misc{q}}
+
+\newcommand{\fontoperatorname}[1]{\operatorname{\text{\normalfont#1}}}
+\newcommand{\TG}{T_\Gamma}
+%\newcommand\mgu[1]{\{MGU\set{#1}}}
+%\newcommand\sig{\mathrsfs{L}}
+%\newcommand\sig{\misc{S}}
+\newcommand\sig{\misc{sig}}
+%\newcommand\vgrad{\misc{B}}
+\newcommand\vgrad{\fontoperatorname{\scshape\cyrv\cyrg\cyrr\cyra\cyrd}}
+\newcommand\lfd{\fontoperatorname{\scshape\cyrl\cyrp\cyri}}
+\newcommand\lrd{\fontoperatorname{\scshape\cyrl\cyrr\cyri}}
+\newcommand\fv{\fontoperatorname{\scshape\cyrs\cyrv\cyro\cyrb}}
+\newcommand\mgu{\misc{mgu}}
+\newcommand\dr{\misc{res}}
+\newcommand\id{\operatorname{id}}
+\newcommand{\cl}[1]{\overline{#1}}
+\newcommand{\infseq}[1]{(#1_n)_{n=1}^\infty}
+\newcommand{\name}[1]{\text{\normalfont\texttt{"}}#1\text{\normalfont\texttt{"}}}
+\newcommand{\fla}[1]{\bnot{#1}}
+\newcommand{\diag}[1]{\operatorname{diag}(#1)}
+\newcommand{\res}{\operatorname{R}}
+%\newcommand{\resinf}{\res^\infty}
+\newcommand{\resinf}{\bigcup_{i=0}^\infty\res^{i}}
+\newcommand{\sres}{\misc{res}}
+\newcommand{\emptyclause}{\blacksquare}
+
+%\newcommand{\assign}{\mapsto}
+\newcommand{\assign}{\coloneqq}
+\newcommand{\alphaassignbetan}{\alpha_1,\alpha_2,\dots,\alpha_n\assign\beta_1,\beta_2,\dots,\beta_n}
+\newcommand{\xxn}{\vx_1,\vx_2,\dots,\vx_n}
+\newcommand{\mumun}{\mu_1,\mu_2,\dots,\mu_n}
+\newcommand{\vxassignmun}{\vx_1,\vx_2,\dots,\vx_n\assign\mu_1,\mu_2,\dots,\mu_n}
+\newcommand{\modfun}{\vert}
+\newcommand{\vxm}{\vx\assign\mu\modfun v}
+\newcommand{\vym}{\vy\assign\mu\modfun v}
+\newcommand{\vzm}{\vz\assign\mu\modfun v}
+\newcommand{\vxk}{\vx\assign\kappa\modfun v}
+\newcommand{\uxm}{\vx\assign\mu\modfun u}
+\newcommand{\wxm}{\vx\assign\mu\modfun w}
+\newcommand{\vxxmmn}{{\vx_1\vx_2\dots\vx_n}\assign{\mu_1\mu_2\dots\mu_n}\modfun v}
+
+\newcommand{\con}{\equiv}
+%\newcommand\Rule{\vdash}
+\newcommand\Rule{\fontoperatorname{\texttt{-:}}}
+\def\coloneq{\fontoperatorname{\texttt{:-}}}
+\newcommand\Clause{\fontoperatorname{\texttt{:-}}}
+\newcommand\Query{\fontoperatorname{\texttt{?-}}}
+\newcommand{\lpstate}[2]{\tup{{#1}\mathbin{\|}{#2}}}
+\newcommand{\emptydisjunct}{\square}
+
+\renewcommand{\models}{\vDash}
+\newcommand{\notmodels}{\nvDash}
+%\newcommand{\trueat}[3]{{#1}\models{#2}\llbracket{#3}\rrbracket}
+\newcommand{\trueat}[3]{{#1}\models{#2}[#3]}
+%\newcommand{\nottrueat}[3]{{#1}\notmodels{#2}\llbracket{#3}\rrbracket}
+\newcommand{\nottrueat}[3]{{#1}\notmodels{#2}[#3]}
+\newcommand{\focus}[1]{(#1)}
+
+\newcommand\ako{\text{ ако }}
+\newcommand\ii{\text{ и }}
+
+\newcommand{\klas}{\textnormal{\textbf{(клас)}}}
+
+\newcommand{\rev}{^{-1}}
+
+
+\newcommand{\lang}{\fontor{L}}
+
+\newcommand\prog[1]{\texttt{#1}}
+
+\newcommand{\typefont}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\inttype}{\typefont{int}}
+\newcommand{\booltype}{\typefont{bool}}
+%\newcommand{\algtype}{\typefont{индивид}}
+%\newcommand{\logtype}{\typefont{съждение}}
+%2017
+%\newcommand{\algtype}{\typefont{алг}}
+%\newcommand{\logtype}{\typefont{лог}}
+%2018
+\newcommand{\algtype}{\typefont{индив}}
+\newcommand{\logtype}{\typefont{съжд}}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+\tikzset{initial text={}}
+
+\newcommand\ns[4]{\node[state,#3](#1)[#4]{#2};}
+% #1: internal name,
+% #2: (visible) label,
+% #3: node properties (e.g. accepting, initial)
+% #4: relative position (e.g. right of=/left of=/above of=/below of=)
+\newcommand\nt[4]{\path[->] (#1) edge [#4] node {#3} (#2); }
+% #1: source state (internal name),
+% #2: target state (internal name)
+% #3: guard/edge label
+% #4: edge direction (loop below/above, bend right/left)
+
+\theoremstyle{definition}
+\newtheorem{problem}{Зад.}
+
+\setlength{\textwidth}{170mm} 
+\setlength{\textheight}{250mm} 
+\setlength{\topmargin}{10mm} 
+\setlength{\voffset}{-1in} 
+\setlength{\hoffset}{-1in}
+\setlength{\headheight}{10mm}
+\setlength{\headsep}{10mm}
+\parindent 0.5cm
+\oddsidemargin 2cm
+\evensidemargin 2cm
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Real}{\mathbb{R}}
+\renewcommand\le\leqq
+\renewcommand\ge\geqq
+\renewcommand\leq\leqq
+\renewcommand\geq\geqq
+\renewcommand{\land}{\&}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\limp}{\Longrightarrow}
+\newcommand{\lequiv}{\Longleftrightarrow}
+\newcommand{\liff}{\Longleftrightarrow}
+% \renewcommand{\iff}{\longleftrightarrow}
+
+
+\setcounter{secnumdepth}{1}
+\title{Решения на задачите от контролно 1 по Логическо програмиране}
+\date{08 ноември 2019}
+
+\begin{document}
+\maketitle
+
+\section{Определелимост}
+\subsection{Вариант 1}
+  \def\bot{\Perp}
+  Структурата ${\cal S}$ е с носител
+  множеството~$\mathbb{E}_2$ от всички точки в евклидовата равнина и
+  е за език без равенство и с единствен нелогически символ ---
+  триместния предикатен символ~$\bot$, който се интерпретира така:
+  \begin{equation*}
+    \bot^{\cal S}(A,B,C)\overset{def}{\iff} A\neq B\ii A\neq
+    C\ii \angle BAC=90^{\circ}
+  \end{equation*}
+  Да се докаже, че в структурата ${\cal S}$ са определими:
+  \begin{enumerate}
+  \item $\text{Eq}=\{\langle A,A\rangle \,|\, A\in \mathbb{E}_2\}$.
+  \item $\text{Col}=\{\langle A,B,C\rangle \,|\, A,B,C\in \mathbb{E}_2 \text{ лежат на една права}\}$.
+  \item $\text{Circ}=\{\langle A,B,C\rangle \,|\, C \text{ лежи на окръжност с диаметър } AB\}$.
+  \end{enumerate}
+  Вярно ли е, че в $\cal S$ са определими множествата и защо:
+  \begin{eqnarray*}
+    \text{Mid} &=& \{\langle A,B,C\rangle \,|\, C \text{ е среда на
+      отсечката } AB\} \ii \\
+    \text{Seg} &=& \{\langle A,B,C\rangle \,|\, C \text{ лежи на отсечката } BC\}?
+  \end{eqnarray*}
+  Намерете два различни автоморфизъма в~${\cal S}$.
+\subsection{Вариант 2}
+  \def\bot{\Perp}
+  Структурата ${\cal S}$ е с носител
+  множеството~$\mathbb{E}_2$ от всички точки в евклидовата равнина и
+  е за език без равенство и с единствен нелогически символ ---
+  триместния предикатен символ~$\bot$, който се интерпретира така:
+  \begin{equation*}
+    \bot^{\cal S}(A,B,C)\overset{def}{\iff} A\neq C\ii B\neq
+    C\ii \angle ACB=90^{\circ}
+  \end{equation*}
+  Да се докаже, че в структурата ${\cal S}$ са определими:
+  \begin{enumerate}
+  \item $\text{Eq}=\{\langle A,A\rangle \,|\, A\in \mathbb{E}_2\}$.
+  \item $\text{Col}=\{\langle A,B,C\rangle \,|\, A,B,C\in
+    \mathbb{E}_2 \text{ не лежат на една права}\}$.
+  \item $\text{Circ}=\{\langle A,B,C\rangle \,|\, A \text{ лежи на окръжност с диаметър } BC\}$.
+  \end{enumerate}
+  Вярно ли е, че в $\cal S$ са определими множествата и защо:
+  \begin{eqnarray*}
+    \text{Mid} &=& \{\langle A,B,C\rangle \,|\, A \text{ е среда на отсечката } BC\}  \text{ и }\\
+    \text{Seg} &=& \{\langle A,B,C\rangle \,|\, A \text{ лежи на отсечката } BC\}
+  \end{eqnarray*}
+  Намерете два различни автоморфизъма в~${\cal S}$.
+
+\newpage
+
+\subsection{Примерно решение на вариант 1}
+\text{На вариант 2 решението е аналогично.}\\
+\def\bot{\Perp}
+$ \text{Eq}(A,B) \rightleftharpoons \forall C \forall D(\bot(C,A,D)\iff \bot(C,B,D)). $\\
+$ \text{Eq'}(A,B) \rightleftharpoons \neg \exists C (\bot(C,A,B)). $\\
+$ \text{Col}(A,B,C) \rightleftharpoons \exists D (\bot(A,B,D) \,\&\, \bot(A,C,D) ).$\\
+\begin{center}
+  \begin{tikzpicture}[scale=.8]
+    \draw[thick] (0,0)  -- (2,0)node[anchor=north west] {$D$} ;
+    \draw[thick] (0,0) node[anchor=north west] {$A$} -- (0,2) node[anchor=north west]{$B$};
+    \draw[thick] (0,0) -- (0,-2) node[anchor=north west]{$C$};
+  \end{tikzpicture}
+ \end{center}
+$ \text{Circ}(A,B,C) \rightleftharpoons \bot(C,A,B) \lor \text{Eq}(A,B) \lor \text{Eq}(B,C). $\\
+\begin{center}
+  \begin{tikzpicture}[scale=.8]
+    \draw[thick] (0,2) node[anchor=north west] {$A$}  -- (4,2)node[anchor=north west] {$B$} ;
+    \draw[thick] (2,2) circle (2cm);
+  \end{tikzpicture}
+ \end{center}
+$ \text{Mid}(A,B,C) \rightleftharpoons (\text{Eq}(A,B) \,\&\, \text{Eq}(A,C) )\lor (\exists  \exists E(\bot(A,E,D) \,\&\, \bot(B,D,E) \,\&\, \text{Col}(A,C,B) \,\&\, \text{Col}(E,C,D))). $\\
+$ \text{Seg}(A,B,C) \rightleftharpoons  (\text{Col}(A,B,C) \,\&\,\exists A_1 \exists A_2(\text{Circ}(A_1,B,C) \,\&\, \text{Circ}(A_2,B,C) \,\&\, \text{Col}(A, A_1, A_2) \,\&\, \bot(A,A_1, C) \,\&\, \bot(A,A_2,B))). $\\
+
+Един примерен автоморфизъм на $\cal S$ е $Id_{\mathbb{E}_2}$.\\
+Други автоморфизми са подобия (пазещи ъглите като при подобие на триъгълници) като транслация, хомотетия, ротация и тн.
+
+\newpage
+\section{Изпълнимост}
+Да се докаже, че е изпълнимо множеството, съставено от следните формули:
+
+\subsection{Вариант 1}
+  Да се докаже, че са изпълними множествата от формули
+  $\{\phi_1,\phi_2,\phi_3\}$ и $\{\phi_1,\phi_2,\phi_3,\phi_4\}$, където
+  \begin{align*}
+  \phi_1 &\rightleftharpoons \exists x \exists y (g(x) = y \land
+  f(x) = y),
+  \\
+  \phi_2 &\rightleftharpoons \forall x \forall y \forall z
+  (f(x) = y \land f(y) = z \Longrightarrow g(z) = x),
+  \\
+  \phi_3 &\rightleftharpoons \exists x \exists y \exists z (\neg
+  x = y \land \neg y = z \land \neg z = x),
+  \\
+  \phi_4 &\rightleftharpoons \forall x\neg f(x)=x.
+  \end{align*}
+
+\subsection{Вариант 2}
+  Да се докаже, че са изпълними множествата от формули
+  $\{\phi_1,\phi_2,\phi_3\}$ и $\{\phi_1,\phi_2,\phi_3,\phi_4\}$, където
+  \begin{align*}
+  \phi_1 &\rightleftharpoons \exists x \exists y (h(x) = y \land
+  g(x) = y),
+  \\
+  \phi_2 &\rightleftharpoons \exists x \exists y \exists z (\neg
+  x = y \land \neg y = z \land \neg z = x),
+  \\
+  \phi_3 &\rightleftharpoons \forall x \forall y \forall z
+  (g(x) = y \land g(y) = z \Longrightarrow h(z) = x),
+  \\
+  \phi_4 &\rightleftharpoons \neg\exists x g(x)=x.
+  \end{align*}
+\subsection{Примерни решения на $\{\phi_1,\phi_2,\phi_3\}$ }
+*Всички модели за $\{\phi_1,\phi_2,\phi_3,\phi_4\}$ са модели и за $\{\phi_1,\phi_2,\phi_3\}$.\\
+\begin{addmargin}[1em]{2em}
+\begin{center}
+$ S = ( \{0, 1, 2\}, f^S, g^S)$ \\
+$f^S(x)\rightleftharpoons x$\\
+$g^S(x)\rightleftharpoons x$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{addmargin}[1em]{2em}
+\begin{center}
+  $ S = ( \mathbb{{N}}, f^S, g^S)$ \\
+  $f^S(x)\rightleftharpoons x+1$\\
+  $g^S(x)\rightleftharpoons 
+  \begin{cases}
+    x, & \text{if}\ x<2 \\
+    x-2, & \text{иначе}
+  \end{cases}$
+\end{center}
+\end{addmargin}
+
+\subsection{Примерни решения на $\{\phi_1,\phi_2,\phi_3,\phi_4\}$}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+  $ S = ( \{0, 1, 2\}, f^S, g^S)$ \\
+  $f^S(x)\rightleftharpoons x\,\%\,3$\\
+  $g^S(x)\rightleftharpoons x\,\%\,3$
+\end{center}
+\end{addmargin}
+\vskip 0.2in
+\begin{center}
+$ S = ( \mathbb{{N}}, f^S, g^S)$ \\
+$f^S(x)\rightleftharpoons x+1$\\
+$g^S(x)\rightleftharpoons 
+\begin{cases}
+  x+1, & \text{if}\ x<2 \\
+  x-2, & \text{иначе}
+\end{cases}$
+\end{center}
+
+
+
+
+\end{document}

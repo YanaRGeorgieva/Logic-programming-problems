@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZpc{} Helper predicates: length, member.}
+\PYG{n+nf}{subsequence}\PYG{p}{([],} \PYG{p}{[]).}
+\PYG{n+nf}{subsequence}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+\PYG{n+nf}{subsequence}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{R}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{condition1}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{APX}\PYG{p}{,} \PYG{n+nv}{BPX}\PYG{p}{,} \PYG{n+nv}{AQX}\PYG{p}{,} \PYG{n+nv}{BQX}\PYG{p}{],} \PYG{n+nv}{M}\PYG{p}{),}
+            \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{APY}\PYG{p}{,} \PYG{n+nv}{BPY}\PYG{p}{,} \PYG{n+nv}{AQY}\PYG{p}{,} \PYG{n+nv}{BQY}\PYG{p}{],} \PYG{n+nv}{M}\PYG{p}{),}
+            \PYG{p}{(}\PYG{n+nv}{APX}\PYG{o}{/}\PYG{n+nv}{BPX}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{APY}\PYG{o}{/}\PYG{n+nv}{BPY}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{l+s+sAtom}{+}\PYG{p}{(}\PYG{n+nv}{AQX}\PYG{o}{/}\PYG{n+nv}{BQX}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{AQY}\PYG{o}{/}\PYG{n+nv}{BQY}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{o}{=\PYGZlt{}}\PYG{l+m+mi}{2}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{max\PYGZus{}independent}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nf}{condition1}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{M1}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+            \PYG{n+nf}{condition1}\PYG{p}{(}\PYG{n+nv}{M1}\PYG{p}{),}
+            \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{M1}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{),}
+            \PYG{n+nv}{N1}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{N}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{condition2}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{APX}\PYG{p}{,} \PYG{n+nv}{BPX}\PYG{p}{,} \PYG{n+nv}{AQX}\PYG{p}{,} \PYG{n+nv}{BQX}\PYG{p}{],} \PYG{n+nv}{S}\PYG{p}{),}
+            \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{APY}\PYG{p}{,} \PYG{n+nv}{BPY}\PYG{p}{,} \PYG{n+nv}{AQY}\PYG{p}{,} \PYG{n+nv}{BQY}\PYG{p}{],} \PYG{n+nv}{M}\PYG{p}{),}
+            \PYG{p}{(}\PYG{n+nv}{APX}\PYG{o}{/}\PYG{n+nv}{BPX}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{APY}\PYG{o}{/}\PYG{n+nv}{BPY}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{l+s+sAtom}{+}\PYG{p}{(}\PYG{n+nv}{AQX}\PYG{o}{/}\PYG{n+nv}{BQX}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{AQY}\PYG{o}{/}\PYG{n+nv}{BQY}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{1}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{min\PYGZus{}cover}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nf}{condition2}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{M1}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+            \PYG{n+nf}{condition2}\PYG{p}{(}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{M1}\PYG{p}{),}
+            \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{M1}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{),}
+            \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{N1}
+        \PYG{p}{)).}
+\end{Verbatim}

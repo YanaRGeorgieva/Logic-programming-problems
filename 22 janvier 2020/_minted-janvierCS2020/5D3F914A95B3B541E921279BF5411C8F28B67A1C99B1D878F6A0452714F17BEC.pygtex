@@ -1,0 +1,83 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZpc{} Helpers: append, member, between, flatten, length, reverse.}
+\PYG{n+nf}{elementAt}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{X}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{]).}
+\PYG{n+nf}{elementAt}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{p}{[}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{elementAt}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+
+\PYG{n+nf}{last}\PYG{p}{([}\PYG{n+nv}{Last}\PYG{p}{],} \PYG{n+nv}{Last}\PYG{p}{).}
+\PYG{n+nf}{last}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{R}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{last}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{selectElement}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{AML}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{Search} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{*}\PYG{n+nv}{N}\PYG{o}{+}\PYG{n+nv}{L}\PYG{p}{,}
+    \PYG{n+nf}{elementAt}\PYG{p}{(}\PYG{n+nv}{AML}\PYG{p}{,} \PYG{n+nv}{Search}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{).}
+
+\PYG{n+nf}{select}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{append}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{B}\PYG{p}{],} \PYG{n+nv}{L}\PYG{p}{),}
+    \PYG{n+nf}{append}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{permute}\PYG{p}{([],} \PYG{p}{[]).}
+\PYG{n+nf}{permute}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{select}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{Q}\PYG{p}{),}
+    \PYG{n+nf}{permute}\PYG{p}{(}\PYG{n+nv}{Q}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{prefix}\PYG{p}{(}\PYG{n+nv}{P}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{append}\PYG{p}{(}\PYG{n+nv}{P}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{).}
+
+\PYG{n+nf}{permutatedSubsequence}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{PSL}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{permute}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{PL}\PYG{p}{),}
+    \PYG{n+nf}{prefix}\PYG{p}{(}\PYG{n+nv}{PSL}\PYG{p}{,} \PYG{n+nv}{PL}\PYG{p}{).}
+
+\PYG{n+nf}{conditionByGroup}\PYG{p}{(}\PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{Matrix}\PYG{o}{=}\PYG{p}{[}\PYG{n+nv}{K}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{].}
+\PYG{n+nf}{conditionByGroup}\PYG{p}{(}\PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{last}\PYG{p}{(}\PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{).}
+
+
+\PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+          \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+          \PYG{n+nv}{M1} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+          \PYG{n+nf}{selectElement}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{AML}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{),}
+          \PYG{n+nf}{selectElement}\PYG{p}{(}\PYG{n+nv}{M1}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{AM1L}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{),}
+          \PYG{n+nf}{selectElement}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{ALM}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{),}
+          \PYG{n+nf}{selectElement}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{M1}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{ALM1}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{),}
+          \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{AML}\PYG{p}{,} \PYG{n+nv}{AM1L}\PYG{p}{],} \PYG{n+nv}{H}\PYG{p}{),}
+                \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{ALM}\PYG{p}{,} \PYG{n+nv}{ALM1}\PYG{p}{],} \PYG{n+nv}{V}\PYG{p}{)}
+              \PYG{p}{))}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{tryCover}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{Group}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{flatten}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{FH}\PYG{p}{),}
+    \PYG{n+nf}{flatten}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{FV}\PYG{p}{),}
+    \PYG{n+nf}{append}\PYG{p}{(}\PYG{n+nv}{FH}\PYG{p}{,} \PYG{n+nv}{FV}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nf}{permutatedSubsequence}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{),}
+    \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{NxN} \PYG{o}{is} \PYG{n+nv}{N1}\PYG{o}{*}\PYG{n+nv}{N1}\PYG{p}{,}
+    \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{NxN}\PYG{p}{),}
+    \PYG{n+nf}{conditionByGroup}\PYG{p}{(}\PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{Group}\PYG{p}{),}
+    \PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{prettyWriteMatrix}\PYG{p}{(}\PYG{n+nv}{Matrix}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{cover}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{Group}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{tryCover}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{Group}\PYG{p}{).}
+
+\PYG{n+nf}{prettyWriteMatrix}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{reverse}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{),}
+    \PYG{n+nf}{prettyWrite}\PYG{p}{(}\PYG{n+nv}{R}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{prettyWrite}\PYG{p}{([],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{l+s+sAtom}{nl}\PYG{p}{.}
+\PYG{n+nf}{prettyWrite}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{write}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{),}
+    \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+    \PYG{n+nf}{prettyWrite}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+\PYG{n+nf}{prettyWrite}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{M}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nv}{M1} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nf}{write}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{),}
+    \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{),}
+    \PYG{n+nf}{prettyWrite}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{M1}\PYG{p}{).}
+\end{Verbatim}

@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{prepareForDuplication}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{):\PYGZhy{}}
+    \PYG{n+nf}{sum}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nf}{prepareForDuplication}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{prepareForDuplication}\PYG{p}{([],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[]).}
+\PYG{n+nf}{prepareForDuplication}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{S}\PYG{p}{,} \PYG{p}{[[}\PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{H}\PYG{p}{]|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{prepareForDuplication}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{sum}\PYG{p}{([],} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{sum}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{):\PYGZhy{}}
+    \PYG{n+nf}{sum}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M} \PYG{o}{+} \PYG{n+nv}{H}\PYG{p}{.}
+
+\PYG{n+nf}{p}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{packPermutations}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[],} \PYG{n+nv}{P}\PYG{p}{),}
+    \PYG{n+nf}{toSet}\PYG{p}{(}\PYG{n+nv}{P}\PYG{p}{,} \PYG{n+nv}{SP}\PYG{p}{),}
+    \PYG{n+nf}{prepareForDuplicationB}\PYG{p}{(}\PYG{n+nv}{SP}\PYG{p}{,} \PYG{n+nv}{PP}\PYG{p}{),}
+    \PYG{n+nf}{duplicate}\PYG{p}{(}\PYG{n+nv}{PP}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+\end{Verbatim}

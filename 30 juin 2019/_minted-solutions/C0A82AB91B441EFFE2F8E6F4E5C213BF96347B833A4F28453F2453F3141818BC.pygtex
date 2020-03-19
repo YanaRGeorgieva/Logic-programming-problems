@@ -1,0 +1,45 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{nat}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{nat}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{nat}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+
+\PYG{n+nf}{do}\PYG{p}{([],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{do}\PYG{p}{([[}\PYG{n+nv}{K}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{do}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+\PYG{n+nf}{do}\PYG{p}{([[}\PYG{n+nv}{K1}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{K1}\PYG{l+s+sAtom}{\PYGZbs{}=}\PYG{n+nv}{K}\PYG{p}{,}
+    \PYG{n+nf}{do}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{di}\PYG{p}{([],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{n+nf}{di}\PYG{p}{([[}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{di}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+    \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M}\PYG{o}{+}\PYG{l+m+mf}{1.}
+\PYG{n+nf}{di}\PYG{p}{([[}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{K1}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{K1}\PYG{l+s+sAtom}{\PYGZbs{}=}\PYG{n+nv}{K}\PYG{p}{,}
+    \PYG{n+nf}{di}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{).}
+
+\PYG{n+nf}{pairs}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{nat}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{),}
+    \PYG{n+nv}{B} \PYG{o}{is} \PYG{n+nv}{N}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{A}\PYG{p}{.}
+
+\PYG{n+nf}{genKS}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{S}\PYG{p}{]).}
+\PYG{n+nf}{genKS}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{XI}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{K}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nv}{K1} \PYG{o}{is} \PYG{n+nv}{K}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{XI}\PYG{p}{),}
+    \PYG{n+nv}{S1} \PYG{o}{is} \PYG{n+nv}{S}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{XI}\PYG{p}{,}
+    \PYG{n+nf}{genKS}\PYG{p}{(}\PYG{n+nv}{K1}\PYG{p}{,} \PYG{n+nv}{S1}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+\PYG{n+nf}{generateList}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{pairs}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{),}
+    \PYG{n+nv}{K} \PYG{o}{mod} \PYG{l+m+mi}{2}\PYG{o}{=:=}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nf}{genKS}\PYG{p}{(}\PYG{n+nv}{K}\PYG{p}{,} \PYG{n+nv}{S}\PYG{p}{,} \PYG{n+nv}{L1}\PYG{p}{),}
+    \PYG{n+nf}{packTuples}\PYG{p}{(}\PYG{n+nv}{L1}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{).}
+
+\PYG{n+nf}{packTuples}\PYG{p}{([],} \PYG{p}{[]).}
+\PYG{n+nf}{packTuples}\PYG{p}{([}\PYG{n+nv}{Do}\PYG{p}{,} \PYG{n+nv}{Di}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{p}{[[}\PYG{n+nv}{Do}\PYG{p}{,} \PYG{n+nv}{Di}\PYG{p}{]|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{packTuples}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+\end{Verbatim}

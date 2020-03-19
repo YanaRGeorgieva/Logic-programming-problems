@@ -1,0 +1,34 @@
+\babel@toc {bulgarian}{}
+\contentsline {section}{\numberline {1}Първа задача на пролог}{1}% 
+\contentsline {subsection}{\numberline {1.1}Общи предикати}{1}% 
+\contentsline {subsection}{\numberline {1.2}Примерно решение на \Romannum {1}.1}{1}% 
+\contentsline {subsection}{\numberline {1.3}Примерно решение на \Romannum {1}.2}{1}% 
+\contentsline {section}{\numberline {2}Втора задача на пролог}{3}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {1}.1}{3}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {1}.2}{3}% 
+\contentsline {paragraph}{\hspace {0.5em} * Бонус задача:}{3}% 
+\contentsline {subsection}{\numberline {2.1}Общи предикати}{3}% 
+\contentsline {subsection}{\numberline {2.2}Примерно решение на \Romannum {1}.1}{3}% 
+\contentsline {subsection}{\numberline {2.3}Примерно решение на \Romannum {1}.2}{4}% 
+\contentsline {section}{\numberline {3}Задача за определимост}{5}% 
+\contentsline {paragraph}{}{5}% 
+\contentsline {subsection}{\numberline {3.1}Общи формули и за двата подхода на разглеждане на задачата}{5}% 
+\contentsline {subsection}{\numberline {3.2}Примерно решение за случая, когато го разглеждаме като некореново дърво (нямат посоки ребрата)}{5}% 
+\contentsline {subsection}{\numberline {3.3}Примерно решение за случая, когато го разглеждаме като кореново дърво (имат посоки ребрата)}{6}% 
+\contentsline {section}{\numberline {4}Задача за изпълнимост}{7}% 
+\contentsline {paragraph}{}{7}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.1}{7}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.2}{7}% 
+\contentsline {subsection}{\numberline {4.1}Примерно решение 1}{7}% 
+\contentsline {subsection}{\numberline {4.2}Примерно решение 2}{7}% 
+\contentsline {subsection}{\numberline {4.3}Примерно решение 3}{8}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.1}{8}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.2}{8}% 
+\contentsline {section}{\numberline {5}Задача за резолюция}{9}% 
+\contentsline {paragraph}{}{9}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.1}{9}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.2}{9}% 
+\contentsline {paragraph}{}{9}% 
+\contentsline {subsection}{\numberline {5.1}Примерно решение}{9}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.1}{9}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.2}{9}% 

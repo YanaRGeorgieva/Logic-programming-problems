@@ -1,0 +1,23 @@
+\babel@toc {bulgarian}{}
+\contentsline {section}{\numberline {1}\IeC {\CYRP }\IeC {\cyrhrdsn }\IeC {\cyrr }\IeC {\cyrv }\IeC {\cyra } \IeC {\cyrz }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\cyrn }\IeC {\cyra } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrl }\IeC {\cyro }\IeC {\cyrg }}{1}% 
+\contentsline {subsection}{\numberline {1.1}\IeC {\CYRO }\IeC {\cyrb }\IeC {\cyrshch }\IeC {\cyri } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyre }\IeC {\cyrd }\IeC {\cyri }\IeC {\cyrk }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyri }}{1}% 
+\contentsline {subsection}{\numberline {1.2}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrn }\IeC {\cyra } \Romannum {1}.1}{1}% 
+\contentsline {subsection}{\numberline {1.3}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrn }\IeC {\cyra } \Romannum {1}.2}{2}% 
+\contentsline {section}{\numberline {2}\IeC {\CYRV }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrr }\IeC {\cyra } \IeC {\cyrz }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\cyrn }\IeC {\cyra } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrl }\IeC {\cyro }\IeC {\cyrg }}{3}% 
+\contentsline {paragraph}{}{3}% 
+\contentsline {subsection}{\numberline {2.1}\IeC {\CYRO }\IeC {\cyrb }\IeC {\cyrshch }\IeC {\cyri } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyre }\IeC {\cyrd }\IeC {\cyri }\IeC {\cyrk }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyri }}{3}% 
+\contentsline {subsection}{\numberline {2.2}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrn }\IeC {\cyra } \Romannum {1}.1}{4}% 
+\contentsline {subsection}{\numberline {2.3}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrn }\IeC {\cyra } \Romannum {1}.2}{5}% 
+\contentsline {section}{\numberline {3}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\cyrz }\IeC {\cyra } \IeC {\cyro }\IeC {\cyrp }\IeC {\cyrr }\IeC {\cyre }\IeC {\cyrd }\IeC {\cyre }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyrt }}{6}% 
+\contentsline {paragraph}{}{6}% 
+\contentsline {subsection}{\numberline {3.1}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre }}{7}% 
+\contentsline {section}{\numberline {4}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\cyrz }\IeC {\cyra } \IeC {\cyri }\IeC {\cyrz }\IeC {\cyrp }\IeC {\cyrhrdsn }\IeC {\cyrl }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyrt }}{9}% 
+\contentsline {paragraph}{}{9}% 
+\contentsline {subsection}{\numberline {4.1}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre }}{9}% 
+\contentsline {section}{\numberline {5}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\cyrz }\IeC {\cyra } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrz }\IeC {\cyro }\IeC {\cyrl }\IeC {\cyryu }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{10}% 
+\contentsline {paragraph}{}{10}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.1}{10}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.2}{10}% 
+\contentsline {subsection}{\numberline {5.1}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrsh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre }}{10}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.1}{10}% 
+\contentsline {paragraph}{\hspace {0.5em} \Romannum {2}.2}{11}% 

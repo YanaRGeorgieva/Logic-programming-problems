@@ -1,0 +1,78 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{d}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{ProblemNumber}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{d}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{ProblemNumber}\PYG{p}{).}
+
+\PYG{n+nf}{d}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{k}{\PYGZus{}}\PYG{p}{).}
+\PYG{n+nf}{d}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{ProblemNumber}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{d}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{W1}\PYG{p}{,} \PYG{n+nv}{ProblemNumber}\PYG{p}{),}
+    \PYG{n+nf}{move}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{W1}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{),}
+    \PYG{n+nf}{setWaiting}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{W1}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{ProblemNumber}\PYG{p}{).}
+
+\PYG{n+nf}{move}\PYG{p}{([],} \PYG{p}{[],} \PYG{p}{[],} \PYG{p}{[]).}
+\PYG{n+nf}{move}\PYG{p}{([}\PYG{n+nv}{V}\PYG{p}{|}\PYG{n+nv}{VT}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{W}\PYG{p}{|}\PYG{n+nv}{WT}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{P}\PYG{p}{|}\PYG{n+nv}{PT}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{N}\PYG{p}{|}\PYG{n+nv}{NT}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{incrementIfNotWaiting}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{P}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nf}{move}\PYG{p}{(}\PYG{n+nv}{VT}\PYG{p}{,} \PYG{n+nv}{WT}\PYG{p}{,} \PYG{n+nv}{PT}\PYG{p}{,} \PYG{n+nv}{NT}\PYG{p}{).}
+
+\PYG{n+nf}{incrementIfNotWaiting}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{).}
+\PYG{n+nf}{incrementIfNotWaiting}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{X} \PYG{o}{is} \PYG{n+nv}{V}\PYG{o}{+}\PYG{n+nv}{Y}\PYG{p}{.}
+
+\PYG{n+nf}{setWaiting}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{NW}\PYG{p}{,} \PYG{n+nv}{ProblemNumber}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{min}\PYG{p}{(}\PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{),}
+    \PYG{n+nf}{max}\PYG{p}{(}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{),}
+    \PYG{n+nf}{merge}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{),}
+    \PYG{n+nf}{setWaiting}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}
+               \PYG{n+nv}{W}\PYG{p}{,}
+               \PYG{n+nv}{NW}\PYG{p}{,}
+               \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,}
+               \PYG{n+nv}{Min}\PYG{p}{,}
+               \PYG{n+nv}{Max}\PYG{p}{,}
+               \PYG{n+nv}{ProblemNumber}\PYG{p}{).}
+
+\PYG{n+nf}{setWaiting}\PYG{p}{([],} \PYG{p}{[],} \PYG{p}{[],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{).}
+\PYG{n+nf}{setWaiting}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{XT}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{OldWait}\PYG{p}{|}\PYG{n+nv}{RestOWait}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{NewWait}\PYG{p}{|}\PYG{n+nv}{RestNWait}\PYG{p}{],} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{OldWait}\PYG{p}{,} \PYG{n+nv}{NewWait}\PYG{p}{,} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{),}
+    \PYG{n+nf}{setWaiting}\PYG{p}{(}\PYG{n+nv}{XT}\PYG{p}{,} \PYG{n+nv}{RestOWait}\PYG{p}{,} \PYG{n+nv}{RestNWait}\PYG{p}{,} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{).}
+\PYG{n+nf}{setWaiting}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{XT}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{OldWait}\PYG{p}{|}\PYG{n+nv}{RestOWait}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{NewWait}\PYG{p}{|}\PYG{n+nv}{RestNWait}\PYG{p}{],} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{wait2}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{OldWait}\PYG{p}{,} \PYG{n+nv}{NewWait}\PYG{p}{,} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{),}
+    \PYG{n+nf}{setWaiting}\PYG{p}{(}\PYG{n+nv}{XT}\PYG{p}{,} \PYG{n+nv}{RestOWait}\PYG{p}{,} \PYG{n+nv}{RestNWait}\PYG{p}{,} \PYG{n+nv}{MergedDearNStatus}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{).}
+
+\PYG{c+c1}{\PYGZpc{} Group 1}
+\PYG{c+c1}{\PYGZpc{} If I\PYGZsq{}m not Max and can move, I continue to move.}
+\PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{X}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{Max}\PYG{p}{.}
+\PYG{c+c1}{\PYGZpc{} I am not the first one to reach this position.}
+\PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0.}
+\PYG{c+c1}{\PYGZpc{} I am the first one to reach this position.}
+\PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{c+c1}{\PYGZpc{} All are strictly ahead me and I can move.}
+\PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{Min}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Min}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{c+c1}{\PYGZpc{} There is still someone who is last with me.}
+\PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{Min}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Min}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0.}
+\PYG{c+c1}{\PYGZpc{} All must be ahead of me so I can move.}
+\PYG{n+nf}{wait1}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{X}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{Min}\PYG{p}{.}
+
+\PYG{c+c1}{\PYGZpc{} Group 2}
+\PYG{c+c1}{\PYGZpc{} If I\PYGZsq{}m not Max and can move, I continue to move.}
+\PYG{n+nf}{wait2}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{X}\PYG{o}{\PYGZlt{}}\PYG{n+nv}{Max}\PYG{p}{.}
+\PYG{c+c1}{\PYGZpc{} I am not the first one to reach this position.}
+\PYG{n+nf}{wait2}\PYG{p}{(}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n+nv}{N}\PYG{p}{),}
+    \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{l+m+mf}{0.}
+\PYG{c+c1}{\PYGZpc{} I am the first one to reach this position.}
+\PYG{n+nf}{wait2}\PYG{p}{(}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Max}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{count}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Max}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{l+m+mi}{0}\PYG{p}{).}
+\PYG{c+c1}{\PYGZpc{} All are ahead me and maybe there are some last with me and I can move.}
+\PYG{n+nf}{wait2}\PYG{p}{(}\PYG{n+nv}{Min}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{).}
+\PYG{c+c1}{\PYGZpc{} All must be ahead of me or at least last with me so I can move.}
+\PYG{n+nf}{wait2}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{Min}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{X}\PYG{o}{\PYGZgt{}}\PYG{n+nv}{Min}\PYG{p}{.}
+\end{Verbatim}

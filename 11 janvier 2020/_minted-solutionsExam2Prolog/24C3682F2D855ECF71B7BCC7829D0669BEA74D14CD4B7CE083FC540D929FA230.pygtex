@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZpc{} Helper predicates: nth0 (a.k.a. nthElement)}
+\PYG{n+nf}{condition11}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{nth0}\PYG{p}{(}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{AU}\PYG{p}{),}
+          \PYG{n+nf}{nth0}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{AV}\PYG{p}{),}
+          \PYG{n+nv}{V}\PYG{o}{=:=}\PYG{n+nv}{U} \PYG{o}{div} \PYG{l+m+mi}{8}\PYG{p}{,}
+          \PYG{n+nv}{AU} \PYG{o}{mod} \PYG{l+m+mi}{7}\PYG{l+s+sAtom}{=\PYGZbs{}=}\PYG{l+m+mi}{0}\PYG{p}{,}
+          \PYG{p}{(}\PYG{n+nv}{AU}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{AV}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{mod} \PYG{l+m+mi}{6}\PYG{l+s+sAtom}{=\PYGZbs{}=}\PYG{l+m+mi}{0}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{condition12}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{nth0}\PYG{p}{(}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{AU}\PYG{p}{),}
+          \PYG{n+nf}{nth0}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{AV}\PYG{p}{),}
+          \PYG{n+nv}{V}\PYG{o}{=:=}\PYG{n+nv}{U} \PYG{o}{div} \PYG{l+m+mi}{8}\PYG{p}{,}
+          \PYG{n+nv}{AU} \PYG{o}{mod} \PYG{l+m+mi}{6}\PYG{l+s+sAtom}{=\PYGZbs{}=}\PYG{l+m+mi}{0}\PYG{p}{,}
+          \PYG{p}{(}\PYG{n+nv}{AV}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{AU}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{mod} \PYG{l+m+mi}{7}\PYG{l+s+sAtom}{=\PYGZbs{}=}\PYG{l+m+mi}{0}
+        \PYG{p}{)).}
+
+\PYG{n+nf}{genList}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{p}{[]).}
+\PYG{n+nf}{genList}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Last}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{])} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nv}{N}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{n+nv}{Last} \PYG{o}{is} \PYG{n+nv}{N} \PYG{o}{mod} \PYG{l+m+mi}{8}\PYG{p}{,}
+    \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N} \PYG{o}{div} \PYG{l+m+mi}{8}\PYG{p}{,}
+    \PYG{n+nf}{genList}\PYG{p}{(}\PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{).}
+
+\PYG{n+nf}{byteTreeNum}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}
+    \PYG{n+nf}{genList}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+    \PYG{n+nf}{condition11}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{).}
+\end{Verbatim}
