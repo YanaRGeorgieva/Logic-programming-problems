@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{a}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{).}
+\PYG{n+nf}{a}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{A} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{M}\PYG{p}{,} \PYG{n+nv}{Curr} \PYG{o}{is} \PYG{l+m+mi}{5} \PYG{o}{*} \PYG{n+nv}{B} \PYG{o}{*} \PYG{n+nv}{B} \PYG{o}{+} \PYG{l+m+mi}{3} \PYG{o}{*} \PYG{n+nv}{A} \PYG{o}{*} \PYG{n+nv}{A} \PYG{o}{*} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nf}{a}\PYG{p}{(}\PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{C}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{).}
+
+\PYG{n+nf}{p}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{):\PYGZhy{}} \PYG{o}{not}\PYG{p}{(} \PYG{n+nf}{a}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n+nv}{A}\PYG{p}{)} \PYG{p}{).}
+\end{Verbatim}

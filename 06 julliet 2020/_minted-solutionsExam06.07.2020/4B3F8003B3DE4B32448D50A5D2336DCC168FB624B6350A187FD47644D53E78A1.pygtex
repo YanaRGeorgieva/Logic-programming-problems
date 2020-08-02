@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZpc{} Helper predicates: between.}
+
+\PYG{n+nf}{a}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{).}
+\PYG{n+nf}{a}\PYG{p}{(}\PYG{n+nv}{Prev}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{Curr}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{N1} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{N2} \PYG{o}{is} \PYG{n+nv}{N1} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{N1} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+            \PYG{n+nf}{a}\PYG{p}{(}\PYG{n+nv}{PrevPrev}\PYG{p}{,} \PYG{n+nv}{N2}\PYG{p}{,} \PYG{n+nv}{Prev}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{),}
+	    \PYG{n+nv}{Curr} \PYG{o}{is} \PYG{l+m+mi}{5} \PYG{o}{*} \PYG{n+nv}{Prev} \PYG{o}{*} \PYG{n+nv}{Prev} \PYG{o}{+} \PYG{l+m+mi}{3} \PYG{o}{*} \PYG{n+nv}{PrevPrev} \PYG{o}{*} \PYG{n+nv}{PrevPrev} \PYG{o}{*} \PYG{n+nv}{PrevPrev}\PYG{p}{.}
+
+\PYG{n+nf}{p}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{):\PYGZhy{}} \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{between}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),} \PYG{n+nf}{a}\PYG{p}{(}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{)} \PYG{p}{)).}
+\end{Verbatim}

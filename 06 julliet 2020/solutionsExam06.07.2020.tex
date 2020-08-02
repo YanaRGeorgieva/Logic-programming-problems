@@ -1,0 +1,292 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\def\Land{\,\&\,}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\usepackage[margin=1.3in]{geometry}
+\DeclareRobustCommand
+  \sledommodels{\Relbar\joinrel\mathrel{\|}\joinrel\Relbar}
+
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{06 юли 2020}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\vfill \centering{Ако намерите някакъв проблем с решенията, драскайте ми :)}
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\pagenumbering{arabic} % Turns on page numbering
+\newpage % Starts a new page
+\section{Първа задача на пролог}
+\paragraph{}
+Редицата $\{a_n\}_{n=0}^{\infty}$ се дефинира рекурентно:
+\begin{enumerate}
+    \item \emph{вариант 1:} $a_n=5a_{n−1}^2+ 3a_{n−2}^3,a_0= 0,a_1= 1$
+    \item \emph{вариант 2:} $a_n=3a_{n−1}^3+ 2a_{n−2}^2,a_0= 0,a_1= 1$
+\end{enumerate}
+
+Да се дефинира на пролог предикат $p(A)$, 
+който при дадено естествено число $A$ успява точно тогава, 
+когато то не е елемент на редицата $\{a_n\}_{n=0}^{\infty}$.
+\subsection{Примерно решение 1}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+% Helper predicates: between.
+
+a(0, 0, 1, 1).
+a(Prev, N1, Curr, N):- N1 > 0, N2 is N1 - 1, N is N1 + 1,
+            a(PrevPrev, N2, Prev, N1), 
+	    Curr is 5 * Prev * Prev + 3 * PrevPrev * PrevPrev * PrevPrev.
+
+p(A):- not(( between(0, A, N), a(A, N, _, _) )).
+    \end{minted}
+\end{longlisting}
+
+\subsection{Примерно решение 2}
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+
+a(A, B, A).
+a(A, B, M):- A < M, Curr is 5 * B * B + 3 * A * A * A, a(B, C, M).
+
+p(A):- not( a(0,1,A) ).
+    \end{minted}
+\end{longlisting}
+
+
+
+\newpage
+\section{Втора задача на пролог}
+\paragraph{}
+Казваме, че списъкът $X$ от естествени числа e:
+\begin{enumerate}
+    \item \emph{вариант 1:} \emph{контракуляр} за списъка от списъци от естествени числа $Y$, ако всеки елемент на $Y$ съдържа елемент, който се дели без остатък от всички елементи на $X$, а всеки елемент на $X$ се дели без остатък от някой елемент на елемент на $Y$.
+        \\ $(\forall A \in Y)(\exists E_A \in A)(\forall E_X \in X)[E_A \equiv 0 (mod E_X)] \sledommodels $
+        \\ $\neg(\exists A \in Y)\neg(\exists E_A \in A)\neg(\exists E_X \in X)\neg[E_A \equiv 0 (mod E_X)] $ 
+        \\и
+        \\ $(\forall E_X \in X)(\exists A \in Y)(\exists E_A \in A)[E_X \equiv 0 (mod E_A)] \sledommodels $
+        \\ $\neg(\forall E_X \in X)\neg(\exists A \in Y)(\exists E_A \in A)[E_X \equiv 0 (mod E_A)] $ 
+    \item \emph{вариант 2:} \emph{кентракуляр} за списъка от списъци от естествени числа $Y$, ако всеки елемент на $Y$ съдържа елемент, който дели без остатък някой елемент на $X$, а всеки елемент на $X$ дели без остатък някой елемент на елемент на $Y$.
+        \\ $(\forall A \in Y)(\exists E_A \in A)(\exists E_X \in X)[E_X \equiv 0 (mod E_A)] \sledommodels $
+        \\ $\neg(\exists A \in Y)\neg(\exists E_A \in A)(\exists E_X \in X)[E_X \equiv 0 (mod E_A)] $ 
+        \\и
+        \\ $(\forall E_X \in X)(\exists A \in Y)(\exists E_A \in A)[E_A \equiv 0 (mod E_X)] \sledommodels $
+        \\ $\neg(\forall E_X \in X)\neg(\exists A \in Y)(\exists E_A \in A)[E_A \equiv 0 (mod E_X)] $ 
+\end{enumerate}
+Да се дефинира предикат $p(X, Y)$, който по даден списък от списъци 
+от естествени числа $Y$ намира контракуляр $X$ с възможно най-много различни елементи. 
+
+\subsection{Примерно решение} 
+\begin{longlisting}
+\begin{minted}[breaklines, breakbefore=A]{prolog}
+% Helper predicates: range, member, subsequence, flatten, length.
+
+range(B, B, [B]).
+range(A, B, [A|R]):- A < B, A1 is A + 1, range(A1, B, R).
+
+maxTwoElements(A, B, B):- less(A, B).
+maxTwoElements(A, B, A):- not( less(A, B) ).
+
+maxElement([M], M).
+maxElement([H|T], M):- maxElement(T, N), maxTwoElements(N, H, M).
+
+
+
+
+p(X, Y):- flatten(Y, FY), maxElement(FY, Max), 
+            range(0, Max, AllNums), subsequence(AllNums, X), 
+            kontracular(X, Y), length(X, LX),
+            not(( subsequence(AllNums, Z), kontracular(Z, Y), 
+                    length(Z, LZ), LZ > LX )).
+
+kontracular(X, Y):- not(( member(A, Y), 
+                        not(( member(E_a, A), 
+                            not(( member(E_x, X), 
+                                    not( E_a mod E_x =:= 0) 
+                            )) 
+                        )) 
+                    )), 
+                    not(( member(E_x, X),
+                        not(( member(A, Y),
+                                member(E_a, A),
+                                    E_x mod E_a =:= 0
+                        ))
+                    )).
+
+kentracular(X, Y):- not(( member(A, Y), 
+                        not(( member(E_a, A),
+                                member(E_x, X), 
+                                    E_x mod E_a =:= 0 
+                        )) 
+                    )), 
+                    not(( member(E_x, X),
+                        not(( member(A, Y),
+                            member(E_a, A), 
+                                    E_a mod E_x =:= 0
+                        ))
+                    )).
+
+
+\end{minted}
+\end{longlisting}
+
+\newpage
+\section{Задача за определимост}
+\paragraph{}
+${\cal L}=\langle p\rangle$ е език с единствен триместен предикатен символ.\\
+${\cal{A}}=\langle \mathbb{N}; p^{\cal{A}}\rangle$ е структура за ${\cal L}$, в която:
+
+\begin{equation*}
+    p^{\cal{A}}(k, n, m) \iff k+n=m+2
+\end{equation*}
+
+\begin{enumerate}
+    \item Да се докаже, че всеки синглетон е определим.
+    \item Да се определият равенство и строго по-малко.
+\end{enumerate}
+
+\subsection{Примерно решение}
+
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_2(x) \leftrightharpoons p(x,x,x). \quad x + x = x + 2 \iff x = 2 \\ 
+        \varphi_{ = }(x,y)\leftrightharpoons \exists z (\varphi_2(z)\Land p(x,z,y)). \quad x + 2 = y + 2 \iff x = y\\
+        \varphi_0(x) \leftrightharpoons \neg \exists y (p(x,x,y)). \quad \forall y [x + x \neq y + 2] \iff x = 0\\
+        \varphi_1(x) \leftrightharpoons \exists y (\varphi_0(y) \Land p(x,x,y)). \quad x + x = 0 + 2 \iff x = 1\\
+        \varphi_3(x) \leftrightharpoons \exists y \exists z (\varphi_0(y) \Land \varphi_1(z) \Land p(x, y, z)). \quad x + 0 = 1 + 2 \iff x = 3\\
+        \varphi_{\leq}(x,y) \leftrightharpoons \exists z( \neg \varphi_0(z) \Land \neg \varphi_1(z) \Land \neg \varphi_2(z) \Land p(x, z, y)).\\ \quad x + z = y + 2 \Land z \geq 2 \iff x + (z - 2) = y \Land z \geq 2 \iff x \leq y\\\\
+        \varphi_{<}(x,y) \leftrightharpoons \varphi_{\leq}(x,y) \Land \neg \varphi_=(x,y). \quad x \leq y \Land x \neq y\\
+        \varphi_{+1}(x,y) \leftrightharpoons \exists z (\varphi_3(z) \Land p(x,z,y)). \quad x + 3 = y + 2 \iff y = x + 1
+    \end{gather*}
+\end{addmargin}
+\indent Оттам нататък с индукция по $n$ доказваме, че всеки синглетон на универсиума е определим като в базата са ни: $\varphi_0, \varphi_1, \varphi_2, \varphi_3$, индукционната хипотеза е за $\varphi_n$ и $\varphi_{n+1}(x) \leftrightharpoons \exists y (\varphi_n(y) \Land \varphi_{+1}(y,x))$.
+
+
+\newpage
+\section{Задача за изпълнимост}
+\paragraph{}
+Да се докаже, че е изпълнимо множеството от следните формули:\\
+\subsection{Вариант 1}
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \exists x(p(x, x) \Land  q(x, x)).\\
+        \varphi_2 \leftrightharpoons \forall x(p(x, x) \Rightarrow p(a, x)).\\
+        \varphi_3 \leftrightharpoons \forall x \exists y(q(x, y) \Land  q(y, b)).\\
+        \varphi_4 \leftrightharpoons \exists x(p(b, x) \Land  q(c, x)).\\
+        \varphi_5 \leftrightharpoons q(b, b) \Land  \neg p(c, c) \Land  \neg q(c, c).
+    \end{gather*}
+\end{addmargin}
+
+\subsection{Вариант 2}
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \exists x(p(x, x) \Rightarrow q(x, x)).\\
+        \varphi_2 \leftrightharpoons \forall y \exists x(q(x, b) \Land  q(y, x)).\\
+        \varphi_3 \leftrightharpoons \exists x(p(b, x) \Land  q(c, x)).\\
+        \varphi_4 \leftrightharpoons \forall x \forall y(p(y, x) \Leftrightarrow p(x, y)).\\
+        \varphi_5 \leftrightharpoons p(a, a) \Land  q(b, b) \Land \neg p(c, c) \Land \neg q(c, c).
+    \end{gather*}
+\end{addmargin}
+($a$, $b$ и $c$ са индивидни константи.)
+
+\subsection{Примерно решение и за двата варианта}
+\begin{addmargin}[1em]{2em}
+\begin{center}
+\begin{tikzpicture}[->,,auto,node distance=1.75cm,
+    thick,main node/.style={draw, circle, fill=green!30}]
+    \node[main node] (0) {0};
+    \node[main node] (1) [right of=0] {1};
+    \path
+    (0) edge[blue] [loop left] node {} (0)
+        edge[red] [loop right] node {} (0)
+    (1) edge[red] [bend right] node {} (0);
+\end{tikzpicture} \\
+$ S = (\{0,1\}; p^S, q^S; a^S, b^S, c^S)$ \\
+$\textcolor{blue}{p^S} \leftrightharpoons \{\langle0,0\rangle\}$\\
+$\textcolor{red}{q^S}\leftrightharpoons \{\langle0,0\rangle, \langle1,0\rangle\}$\\
+$a^S \leftrightharpoons 0, b^S \leftrightharpoons 0, c^S \leftrightharpoons 1$\\
+
+\end{center}
+\end{addmargin}
+
+\newpage
+\section{Задача за резолюция}
+\paragraph{}
+\subsection{Вариант 1}
+
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y((q(x, y) \Rightarrow p(x, y)) \Land \forall z(p(z, y) \Rightarrow r(x, z))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y p(y, x) \Rightarrow \exists y(p(y, x) \Land \neg \exists z(p(z, y) \Land p(z, x)))).\\
+        \varphi_3 \leftrightharpoons \forall z\left(\exists x \exists y(\neg q(x, y) \Land \neg p(x, y)) \Rightarrow \forall z_{1} q\left(z_{1}, z\right)\right).\\
+        \varphi_4 \leftrightharpoons \forall x \forall y \forall z((p(x, y) \Land r(y, z)) \Rightarrow p(x, z)).\\
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че: $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4}\models\forall x \neg p(x, x)$.
+
+\subsection{Вариант 2}
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y(q(y, x) \Land \forall z(q(y, z) \Rightarrow(r(z, x) \lor p(y, z)))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y q(x, y) \Rightarrow \exists y(q(x, y) \Land \neg \exists z(q(y, z) \Land q(x, z)))).\\
+        \varphi_3 \leftrightharpoons \forall z_{1}\left(\exists z \exists x \exists y(p(x, y) \Land q(x, z)) \Rightarrow \forall z_{2}\neg p\left(z_{1}, z_{2}\right)\right).\\
+        \varphi_4 \leftrightharpoons \forall x \forall y \forall z((q(y, x) \Land r(z, y)) \Rightarrow q(z, x)).\\
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че: $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \models \forall x \neg q(x, x)$.
+
+\subsection{Примерно решение за вариант 1 (вариант 2 е аналогичен)}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ:
+\begin{gather*}
+    \varphi_1^{final} \rightleftharpoons \forall x \forall z ((p(x,f(x)) \lor \neg q(x, f(x)))
+        \Land (\neg p(z, f(x)) \lor r(x,z))).\\
+    \varphi_2^{final} \rightleftharpoons \forall x \forall t \forall z((p(g(x),x)\lor \neg p(t,x))
+        \Land (\neg p(z, g(x)) \lor \neg p(z,x) \lor \neg p(t,x)).\\
+    \varphi_3^{final} \rightleftharpoons \forall z \forall x \forall y \forall z_1(q(x, y) \lor p(a, y), \lor q(z_1, z)).\\
+    \varphi_4^{final} \rightleftharpoons \forall x \forall y \forall z (\neg r(y,z) \lor \neg p(x,y) \lor p(x, z)).\\
+    \psi^{final} \rightleftharpoons p(a,a).
+\end{gather*}
+
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт): \\
+\begin{gather*}
+    D_1 = \{ \neg q(x_1, f(x_1)), p(x_1,f(x_1))\}; \\
+    D_2 = \{ \neg p(z_2, f(x_2)), r(x_2, z_2)\}; \\
+    D_3 = \{ p(g(x_3), x_3), \neg p(t_3, x_3)\}; \\
+    D_4 = \{ \neg p(z_4,g(x_4)), \neg p(z_4, x_4), \neg p(t_4, x_4)\}; \\
+    D_5 = \{q(x_5, y_5), p(x_5,y_5), q(z_1, z_5)\};\\
+    D_6 = \{ \neg r(y_6,z_6), \neg p( x_6,y_6), p(x_6, z_6)\}; \\
+    D_7 = \{ p(a,a)\}. 
+\end{gather*}
+
+Примерен резолютивен извод на $ \blacksquare $ е:
+\begin{gather*}
+    D_8 = Collapse(D_5\{z_1/x_5, z_5, y_5\}) = \{q(x_5, y_5), p(x_5, y_5) \};\\\\
+    D_9 = Res(D_1, D_8\{x_5/x_1,y_5/f(x_1)\})= \{p(x_1, f(x_1))\};\\\\
+    D_{10} = Res(D_2\{x_2,y_6,z_2/z_6\}, D_6) = \{\neg p(z_6, f(y_6)), \neg p(x_6, y_6), p(x_6, z_6)\};\\\\
+    D_{11} = Res(D_{10}\{z_6/g(f(y_6))\}, D3\{x_3/f(y_6)\}) = \{\neg p(t_3, f(y_6)), \neg p(x_6, y_6), p(x_6, g(f(y_6)))\};\\\\ 
+    D_{12} = Res(D_{11}, D_4\{x_4/f(y_6),z_4/x_6\}) = \{\neg p(t_3,f(y_6)), \neg p(x_6, y_6), \neg p(t_4, f(y_6)), \neg p(x_6, f(y_6))\};\\\\
+    D_{13} = Collapse(D_{12}\{t_3/a, y_6/a, t_4/a, x_6/a\}) = \{\neg p(a, f(a)), \neg p(a,a)\}.;\\\\
+    D_{14} = Res(D_{13}, D_9\{x_1/a\}) = \{\neg p(a,a)\};\\\\
+    \blacksquare = Res(D_{14}, D_7).
+\end{gather*}
+\end{addmargin}
+
+\end{document} % The document ends here
