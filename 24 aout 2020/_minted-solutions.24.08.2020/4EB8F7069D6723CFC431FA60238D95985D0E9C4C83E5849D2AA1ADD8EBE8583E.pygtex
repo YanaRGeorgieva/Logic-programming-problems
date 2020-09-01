@@ -1,0 +1,52 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{\PYGZpc{} Helper predicates: member, append, length, permutation.}
+
+    \PYG{n+nf}{generateIntersection}\PYG{p}{([],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[]).}
+    \PYG{n+nf}{generateIntersection}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{B}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{]):\PYGZhy{}} \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{),} \PYG{n+nf}{generateIntersection}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+    \PYG{n+nf}{generateIntersection}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{):\PYGZhy{}} \PYG{o}{not}\PYG{p}{(}\PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{)),} \PYG{n+nf}{generateIntersection}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+    \PYG{n+nf}{subsequence}\PYG{p}{([],} \PYG{p}{[]).}
+    \PYG{n+nf}{subsequence}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{]):\PYGZhy{}} \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+    \PYG{n+nf}{subsequence}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{R}\PYG{p}{):\PYGZhy{}} \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{).}
+
+    \PYG{n+nf}{conditionExterzala}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+        \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+        \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+        \PYG{n+nf}{isOdd}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{).}
+
+    \PYG{n+nf}{conditionExtervala}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+        \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+        \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+        \PYG{n+nf}{isEven}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{).}
+
+    \PYG{n+nf}{isOdd}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{M} \PYG{o}{mod} \PYG{l+m+mi}{2} \PYG{o}{=:=} \PYG{l+m+mf}{1.}
+
+    \PYG{n+nf}{isEven}\PYG{p}{(}\PYG{n+nv}{M}\PYG{p}{):\PYGZhy{}} \PYG{n+nv}{M} \PYG{o}{mod} \PYG{l+m+mi}{2} \PYG{o}{=:=} \PYG{l+m+mf}{0.}
+
+    \PYG{n+nf}{isLowerBoundOkey}\PYG{p}{(}\PYG{n+nv}{Int}\PYG{p}{,} \PYG{n+nv}{LowerBound}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{):\PYGZhy{}} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{Int}\PYG{p}{,} \PYG{n+nv}{LenInt}\PYG{p}{),} \PYG{n+nv}{LenInt} \PYG{o}{\PYGZgt{}=} \PYG{n+nv}{LowerBound}\PYG{p}{.}
+    \PYG{n+nf}{isLowerBoundOkey}\PYG{p}{(}\PYG{n+nv}{Int}\PYG{p}{,} \PYG{n+nv}{LowerBound}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{):\PYGZhy{}} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{Int}\PYG{p}{,} \PYG{n+nv}{LenInt}\PYG{p}{),} \PYG{n+nv}{LenInt} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{LowerBound}\PYG{p}{.}
+
+    \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[],} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{).}
+    \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{LowerBound}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{haveCommonAtLeastNCommonElements}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{LowerBound}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+        \PYG{n+nf}{generateIntersection}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{Int}\PYG{p}{),}
+        \PYG{n+nf}{isLowerBoundOkey}\PYG{p}{(}\PYG{n+nv}{Int}\PYG{p}{,} \PYG{n+nv}{LowerBound}\PYG{p}{,} \PYG{n+nv}{Bit}\PYG{p}{),}
+        \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M} \PYG{o}{+} \PYG{n+nv}{Bit}\PYG{p}{.}
+
+
+    \PYG{n+nf}{generateCandidateX}\PYG{p}{([],} \PYG{p}{[]).}
+    \PYG{n+nf}{generateCandidateX}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{n+nv}{ResultX}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{generateCandidateX}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{CurrentX}\PYG{p}{),}
+        \PYG{n+nf}{subsequence}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{H1}\PYG{p}{),}
+        \PYG{n+nf}{append}\PYG{p}{(}\PYG{n+nv}{H1}\PYG{p}{,} \PYG{n+nv}{CurrentX}\PYG{p}{,} \PYG{n+nv}{ResultX}\PYG{p}{).}
+
+    \PYG{n+nf}{exterzala}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{generateCandidateX}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{),} \PYG{n+nf}{permutation}\PYG{p}{(}\PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{),} \PYG{n+nf}{conditionExterzala}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{),} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+        \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{generateCandidateX}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{),} \PYG{n+nf}{conditionExterzala}\PYG{p}{(}\PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{),} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),} \PYG{n+nv}{M} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{N} \PYG{p}{)).}
+
+    \PYG{n+nf}{extervala}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{generateCandidateX}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{),} \PYG{n+nf}{permutation}\PYG{p}{(}\PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{X}\PYG{p}{),} \PYG{n+nf}{conditionExtervala}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{),} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),}
+        \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{generateCandidateX}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,} \PYG{n+nv}{X1}\PYG{p}{),} \PYG{n+nf}{conditionExtervala}\PYG{p}{(}\PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{Y}\PYG{p}{),} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{X1}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),} \PYG{n+nv}{M} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{N} \PYG{p}{)).}
+\end{Verbatim}

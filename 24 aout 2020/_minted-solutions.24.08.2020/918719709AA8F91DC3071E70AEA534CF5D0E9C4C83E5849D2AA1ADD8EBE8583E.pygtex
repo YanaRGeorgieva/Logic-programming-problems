@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{\PYGZpc{} G has no simple cycles and has n − 1 edges.}
+    \PYG{n+nf}{art\PYGZus{}tree3}\PYG{p}{([}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{]):\PYGZhy{}}
+        \PYG{n+nf}{clearRepeatedEdges}\PYG{p}{(}\PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{NewE}\PYG{p}{),}
+        \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{),} \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{),}
+        \PYG{n+nf}{addEdgeIfNeeded}\PYG{p}{([}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{],} \PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{CandidateE}\PYG{p}{),}
+        \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{),} \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+        \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{CandidateE}\PYG{p}{,} \PYG{n+nv}{N1}\PYG{p}{),}
+        \PYG{n+nf}{isAcyclic}\PYG{p}{([}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{CandidateE}\PYG{p}{]).}
+\end{Verbatim}

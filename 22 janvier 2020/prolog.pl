@@ -27,7 +27,7 @@ cubeList(L) :-
 
 % Helpers: length, member.
 subsequence([], []).
-subsequence([H|T], [H|R]) :-
+subsequence([H|T], [H|R])   :-
     subsequence(T, R).
 subsequence([_|T], R) :-
     subsequence(T, R).

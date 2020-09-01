@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\def\Land{\,\&\,}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate, enumitem}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\usepackage[margin=1.3in]{geometry}
+\DeclareRobustCommand
+  \sledommodels{\Relbar\joinrel\mathrel{\|}\joinrel\Relbar}
+
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{24 август 2020}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\vfill {\centering Ако намерите някакъв проблем с решенията, драскайте ми :)\par}
+\
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\pagenumbering{arabic} % Turns on page numbering
+\newpage % Starts a new page
+
+
+
+\section{Определимост}
+Heкa $\mathcal{L}$ e езикът на предикатното смятане с формално равенство, имащ само един нелогически символ - двуместен функционален символ $f$. Нека $\mathbb{A}$ е крайна азбука. Да означим с $\mathcal{S}$ cтруктурата за $\mathcal{L}$ с универсиум множеството $W$ на всички думи над $\mathbb{A}$ и $f^{S}$ конкатенацията на думи над $\mathbb{A}$, т.е.
+$$
+f^{S}(u, v)=w \longleftrightarrow u \circ v=w
+$$
+за произволни думи $u, v$ и $w$ над $\mathbb{A}$.\\
+\begin{enumerate}[]
+    \item Да се докаже, че в $\mathcal{S}$ са определими:
+    \begin{enumerate}[labelindent=0pt, labelwidth=*, leftmargin=0pt, itemindent=!, itemsep=0pt, parsep=0pt, listparindent=\parindent]
+        \item  множеството Pref $=\left\{\langle u, v\rangle \in W^{2} \mid u\right.$ e префикс на $\left.v\right\}$;
+        \item  множеството Suff $=\left\{\langle u, v\rangle \in W^{2} \mid u\right.$ e суфикс на $\left.v\right\}$;
+        \item  множеството $W_{1}$ на еднобуквените думи от $W$;
+        \item  множеството $T_{1}$ на думите от $W$ с дължина, ненадминаваща 1;
+        \item за всяко $n \in \mathbb{N}, n>1,$ множеството $W_{n}$ на $n$-буквените думи от $W$;
+        \item за всяко $n \in \mathbb{N}, n>1,$ множеството $T_{n}$ на думите с дължина, ненадминаваща $n$;
+        \item множеството $O\ = \ \{\langle u,v,w\rangle \in W^3 |$ най-дългият общ префикс на $u$ и $v$ е суфикс на $w\}$.
+        \item  множеството $P=\left\{\langle u, v, w\rangle \in W^{3}\right.$ | най-дългият общ суфикс на $u$ и на $v$ е префикс на $w\} .$
+    \end{enumerate}
+    \item Да се изрази броят на автоморфизмите в $\mathcal{S}$ чрез броя на буквите от $\mathbb{A}$.
+\end{enumerate}
+
+
+
+\newpage
+
+
+
+\section{Изпълнимост} 
+Нека $a$ и $b$ са различни индивидни константи, $f$ е триместен функционален символ, а $x, y$ и $z$ са различни индивидни променливи. Да означим с $\Gamma_1$ Множеството от следните три формyли:
+\subsection{Вариант 1}
+$f(f(x, y, a), z, a) \doteq f(x, f(y, z, a), a)$,\\
+$f(f(x, y, b), z, b) \doteq f(a, f(y, z, b), b)$,\\
+$f(f(x, y, a), z, b) \doteq f(f(x, z, b), f(y, z, b), a)$.\\
+\subsection{Вариант 2}
+\begin{gather}
+    $f(a, f(a, x, y), z) \doteq f(a, x, f(a, y, z))$,
+$f(b, f(b, x, y), z) \doteq f(b, x, f(b, y, z))$,
+$f(a, x, f(b, y, z)) \doteq f(b, f(a, x, y), f(a, x, z))$.
+\end{gather}
+
+
+Нека:
+\begin{enumerate}[labelindent=0pt, labelwidth=*, leftmargin=0pt, itemindent=!, itemsep=0pt, parsep=0pt, listparindent=\parindent]
+\item $\Gamma_{2}=\Gamma_{1} \cup\{(a \doteq b)\}$;
+\item $\Gamma_{3}=\Gamma_{1} \cup\{\neg(a \doteq b)\}$;
+\item $\Gamma_{4}=\Gamma_{2} \cup \{\forall x \forall y \exists z \neg(f(x, y, z) \doteq y)\}$.
+\end{enumerate}
+
+Да се докаже кои от множествата $\Gamma_{1}, \Gamma_{2}, \Gamma_{3}$ и $\Gamma_{4}$ са изпълними.
+
+
+
+\newpage
+
+
+
+\section{Резолюция}
+\paragraph{}
+\subsection{Вариант 1}
+
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y((q(x, y) \Rightarrow p(x, y)) \Land \forall z(p(z, y) \Rightarrow r(x, z))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y p(y, x) \Rightarrow \exists y(p(y, x) \Land \neg \exists z(p(z, y) \Land p(z, x)))).\\
+        \varphi_3 \leftrightharpoons \forall z\left(\exists x \exists y(\neg q(x, y) \Land \neg p(x, y)) \Rightarrow \forall z_{1} q\left(z_{1}, z\right)\right).\\
+        \varphi_4 \leftrightharpoons \neg \exists x \exists y \exists z((p(x, y) \Land r(y, z)) \Land \neg p(x, z)).\\
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че:\\
+\indent $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \models \exists y \forall x \exists z((p(x, x) \vee r(y, z)) \Rightarrow(\neg p(x, x) \& r(y, z)))$.
+
+\subsection{Вариант 2}
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y(q(y, x) \Land \forall z(q(y, z) \Rightarrow(r(z, x) \lor p(y, z)))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y q(x, y) \Rightarrow \exists y(q(x, y) \Land \neg \exists z(q(y, z) \Land q(x, z)))).\\
+        \varphi_3 \leftrightharpoons \forall z_{1}\left(\exists z \exists x \exists y(p(x, y) \Land q(x, z)) \Rightarrow \forall z_{2}\neg p\left(z_{1}, z_{2}\right)\right).\\
+        \varphi_4 \leftrightharpoons \neg \exists x \exists y \exists z((q(y, x) \Land r(z, y)) \Land \neg q(z, x)).\\
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че:\\
+\indent $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \mid=\exists z \forall x \exists y((q(x, x) \vee r(y, z)) \Rightarrow(\neg q(x, x) \& r(y, z)))$.
+
+\subsection{Примерно решение за вариант 1 (вариант 2 е аналогичен)}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ:
+\begin{gather*}
+    \varphi_1^{final} \rightleftharpoons \forall x \forall z ((p(x,f(x)) \lor \neg q(x, f(x)))
+        \Land (\neg p(z, f(x)) \lor r(x,z))).\\
+    \varphi_2^{final} \rightleftharpoons \forall x \forall t \forall z((p(g(x),x)\lor \neg p(t,x))
+        \Land (\neg p(z, g(x)) \lor \neg p(z,x) \lor \neg p(t,x)).\\
+    \varphi_3^{final} \rightleftharpoons \forall z \forall x \forall y \forall z_1(q(x, y) \lor p(a, y), \lor q(z_1, z)).\\
+    \varphi_4^{final} \rightleftharpoons \forall x \forall y \forall z (\neg r(y,z) \lor \neg p(x,y) \lor p(x, z)).\\
+    \psi^{final} \rightleftharpoons p(a,a).
+\end{gather*}
+
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт):
+\begin{gather*}
+    D_1 = \{ \neg q(x_1, f(x_1)), p(x_1,f(x_1))\}; \\
+    D_2 = \{ \neg p(z_2, f(x_2)), r(x_2, z_2)\}; \\
+    D_3 = \{ p(g(x_3), x_3), \neg p(t_3, x_3)\}; \\
+    D_4 = \{ \neg p(z_4,g(x_4)), \neg p(z_4, x_4), \neg p(t_4, x_4)\}; \\
+    D_5 = \{q(x_5, y_5), p(x_5,y_5), q(z_1, z_5)\};\\
+    D_6 = \{ \neg r(y_6,z_6), \neg p( x_6,y_6), p(x_6, z_6)\}; \\
+    D_7 = \{ p(a,a)\}. 
+\end{gather*}
+
+Примерен резолютивен извод на $ \blacksquare $ е:
+\begin{gather*}
+    D_8 = Collapse(D_5\{z_1/x_5, z_5, y_5\}) = \{q(x_5, y_5), p(x_5, y_5) \};\\\\
+    D_9 = Res(D_1, D_8\{x_5/x_1,y_5/f(x_1)\})= \{p(x_1, f(x_1))\};\\\\
+    D_{10} = Res(D_2\{x_2,y_6,z_2/z_6\}, D_6) = \{\neg p(z_6, f(y_6)), \neg p(x_6, y_6), p(x_6, z_6)\};\\\\
+    D_{11} = Res(D_{10}\{z_6/g(f(y_6))\}, D3\{x_3/f(y_6)\}) = \{\neg p(t_3, f(y_6)), \neg p(x_6, y_6), p(x_6, g(f(y_6)))\};\\\\ 
+    D_{12} = Res(D_{11}, D_4\{x_4/f(y_6),z_4/x_6\}) = \{\neg p(t_3,f(y_6)), \neg p(x_6, y_6), \neg p(t_4, f(y_6)), \neg p(x_6, f(y_6))\};\\\\
+    D_{13} = Collapse(D_{12}\{t_3/a, y_6/a, t_4/a, x_6/a\}) = \{\neg p(a, f(a)), \neg p(a,a)\}.;\\\\
+    D_{14} = Res(D_{13}, D_9\{x_1/a\}) = \{\neg p(a,a)\};\\\\
+    \blacksquare = Res(D_{14}, D_7).
+\end{gather*}
+\end{addmargin}
+
+
+
+
+\newpage
+
+
+
+\section{Пролог: задача за дървета}
+Дърво се нарича краен неориентиран свързан и ацикличен граф. За един списък от списъци $[V, E]$ ще казваме, че представя неориентирания граф $G$, ако $V$ е списък от всички върхове на $G$ и $\{v, w\}$ е ребро в $G$ тогава и само тогава, когато $[v, w]$ или $[w, v]$ e eлeмeнт на $E$.\\
+Да се дефинира на пролог предикат \textcolor{green}{$art\_tree(V, E)$/$arc\_tree(V, E)$}, който по дадено представяне $[V, E]$ на краен неориентиран граф разпознава дали има такава двойка върхове $v$ и $w$, че \textcolor{green}{$[V, E+[v, w]]$/$[V, E-[v, w]]$} да е представяне на дърво, където \textcolor{green}{$E+[v, w]$/$E-[v, w]$} е списъкът, получен от $E$ с \textcolor{green}{премахването на всички срещания на елемента $[v, w]$/добавянето на нов елемент $[v, w]$}.
+
+
+
+\newpage
+
+
+
+\section{Пролог: задача за списъци}
+Kaзваме, че списъкът $X$ e \textcolor{green}{екстерзала/екстерзана} за списъка от списъци $Y$, ако $X$ има поне един общ елемент с всички елементи на $Y$ и поне два общи елемента с \textcolor{green}{нечетен/четен} брой елементи на $Y$ Да се дефинира на пролог двуместен предикат екстерзала (X, Y ), който по даден списък от списъци $Y$ при презадоволяване генерира всички \textcolor{green}{екстерзали/екстервали} $X$ за $Y$ с възможно най-малка дължина и спира.
+
+
+\end{document} % The document ends here

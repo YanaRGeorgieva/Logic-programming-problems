@@ -1,0 +1,512 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\def\Land{\,\&\,}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate, enumitem}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{multicol}
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\usepackage[margin=1.3in]{geometry}
+\DeclareRobustCommand
+  \sledommodels{\mathrel{\|}\joinrel\Relbar\joinrel\mathrel{\|}}
+
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{24 август 2020}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\vfill {\centering Ако намерите някакъв проблем с решенията, драскайте ми :)\par}
+\
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\pagenumbering{arabic} % Turns on page numbering
+\newpage % Starts a new page
+
+
+
+\section{Определимост}
+
+Heкa $\mathcal{L}$ e езикът на предикатното смятане с формално равенство, 
+имащ само един нелогически символ - двуместен функционален символ $f$. Нека $\mathbb{A}$ е крайна азбука. 
+Да означим с $\mathcal{S}$ cтруктурата за $\mathcal{L}$ с универсиум множеството $W$ на всички думи над $\mathbb{A}$ и $f^{S}$ конкатенацията на думи над $\mathbb{A}$, т.е.
+$
+f^{S}(u, v)=w \longleftrightarrow u \circ v=w
+$
+за произволни думи $u, v$ и $w$ над $\mathbb{A}$.\\
+\begin{enumerate}[]
+    \item Да се докаже, че в $\mathcal{S}$ са определими:
+    \begin{enumerate}[labelindent=0pt, labelwidth=*, leftmargin=0pt, itemindent=!, itemsep=0pt, parsep=0pt, listparindent=\parindent]
+        \item  множеството Pref $=\left\{\langle u, v\rangle \in W^{2} \mid u\right.$ e префикс на $\left.v\right\}$;
+        \item  множеството Suff $=\left\{\langle u, v\rangle \in W^{2} \mid u\right.$ e суфикс на $\left.v\right\}$;
+        \item  множеството $W_{1}$ на еднобуквените думи от $W$;
+        \item  множеството $T_{1}$ на думите от $W$ с дължина, ненадминаваща 1;
+        \item за всяко $n \in \mathbb{N}, n>1,$ множеството $W_{n}$ на $n$-буквените думи от $W$;
+        \item за всяко $n \in \mathbb{N}, n>1,$ множеството $T_{n}$ на думите с дължина, ненадминаваща $n$;
+        \item множеството $O\ = \ \{\langle u,v,w\rangle \in W^3 |$ най-дългият общ префикс на $u$ и $v$ е суфикс на $w\}$.
+        \item  множеството $P=\left\{\langle u, v, w\rangle \in W^{3}\right.$ | най-дългият общ суфикс на $u$ и на $v$ е префикс на $w\} .$
+    \end{enumerate}
+    \item Да се изрази броят на автоморфизмите в $\mathcal{S}$ чрез броя на буквите от $\mathbb{A}$.
+\end{enumerate}
+
+\subsection{Примерно решение}
+
+
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        Pref(u,v) \leftrightharpoons \exists w (f(u, w)\doteq v).  \\ 
+        Suff(u,v) \leftrightharpoons \exists w (f(w, u)\doteq v).  \\ 
+        \varphi_{\epsilon}(u) \leftrightharpoons \forall v (f(u, v) \doteq v). \\
+        W_1(u) \leftrightharpoons \forall v (Pref(v, u) \implies \varphi_{\epsilon}(v) \lor v \doteq u) \Land \neg \varphi_{\epsilon}(u).\\
+        T_1(u) \leftrightharpoons \varphi_{\epsilon}(u) \lor W_1(u).
+    \end{gather*}
+\end{addmargin}
+\indent Оттам нататък с индукция по $n$ доказваме, че $W_n$ и $T_n$ са определими като в базата за $W$ е: $W_1$, индукционната хипотеза е за $W_1, ..., W_n$ и \\
+\indent $W_{n+1}(u) \leftrightharpoons \exists v \exists w (W_1(v) \Land W_n(w) \Land f(v, w) \doteq u)$.\\
+Базата за $T$ е: $Т_1$, индукционната хипотеза е за $T_n$ и 
+ $T_{n+1}(u) \leftrightharpoons T_n(u) \lor W_{n+1}(u).$\\
+Може още: $T_{n+1}(u) \leftrightharpoons \forall v (Pref(v, u) \implies \varphi_{\epsilon}(v) \lor W_1(v) \lor ... \lor W_n(v) \lor v \doteq u).$
+
+
+\newpage
+
+
+Сега за $O$ и $P$ ще имаме помощни ф-ли $\varphi_{*}(u, v, z)$ и $\phi_{*}(u, v, z)$, чиито семантики са:
+\begin{itemize}
+    \item $\varphi_{*}(u, v, z)$ is true $\iff$ $z$ е най-дълъг общ префикс на $u$ и $v$.
+    \item $\psi_{*}(u, v, z)$ is true $\iff$ $z$ е най-дълъг общ суфикс на $u$ и $v$.
+\end{itemize}
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_{*}(u, v, z) \leftrightharpoons Pref(z, u) \Land Pref(z, v) \Land \forall (Pref(y, u) \Land Pref(y, v) \implies Pref(y, z)).\\
+        \psi_{*}(u, v, z) \leftrightharpoons Suff(z, u) \Land Suff(z, v) \Land \forall (Suff(y, u) \Land Suff(y, v) \implies Suff(y, z)).\\
+        O(u, v, w) \leftrightharpoons \exists z (\varphi_{*}(u, v, z) \Land Suff(z, w)). \\
+        P(u, v, w) \leftrightharpoons \exists z (\psi_{*}(u, v, z) \Land Pref(z, w)). \\
+    \end{gather*}
+\end{addmargin}
+
+Сега нека $|\mathbb{A}| = n$ за някое естествено число $n$. Тогава $|\cal{A}$ut$(\cal{S})|$ = $n!$, тъй като това е броя на всички пермутации над тази азбука (не са повече, т.к изискаваме да се имаме биективност и фунционалност на релацията). Сега нека вземем една пермутация над $\mathbb{A}$ примерно $h$ и да покажем, можем да я надградим тази биекция, така че да действа върху всички думи над азбуката $\mathbb{A}$ ( бележим го това множество с $\mathbb{A}^*$) и да е автоморфизъм от $\mathbb{A}^*$ в $\mathbb{A}^*$.\\
+\indent Нека $w \in \mathbb{A}^*$. Тогава $w$ е крайна редичка от букви от $\mathbb{A}$: 
+\begin{gather*}
+    (\exists n \in \mathbb{N})[w = a_1 \circ a_2 \circ ... \circ a_n \Land a_1 \in \mathbb{A} \Land a_2 \in \mathbb{A} \Land ... \Land a_n \in \mathbb{A}].
+\end{gather*} 
+ Нека дефинираме $H:\mathbb{A}^* \rightarrow \mathbb{A}^*$ така: 
+ \begin{gather*}
+    H(w)= H(a_1 \circ a_2 \circ ... \circ a_n) = h(a_1) \circ h(a_2) \circ ... \circ h(a_n).
+ \end{gather*}
+Искаме $H$ да е биекция и хомоморфизъм.
+Това че $H$ е биекция се вижда лесно т.к. $H(H(w)) = Id_{\mathbb{A}^*}$. Сега тук нелогическите символи са само $f$ и за него ще се погрижим да проверим, че $H(f^S(u, v)) = f^S(H(u), H(v))$ за $u, v \in \mathbb{A}^*$. Т.к. $u, v \in \mathbb{A}^*$, то значи 
+\begin{gather*}
+    (\exists n \in \mathbb{N})[u = a_1 \circ a_2 \circ ... \circ a_n \Land a_1 \in \mathbb{A} \Land a_2 \in \mathbb{A} \Land ... \Land a_n \in \mathbb{A}]
+\end{gather*} 
+ и 
+ \begin{gather*} (\exists m \in \mathbb{N})[v = b_1 \circ b_2 \circ ... \circ b_m \Land b_1 \in \mathbb{A} \Land b_2 \in \mathbb{A} \Land ... \Land b_m \in \mathbb{A}].
+\end{gather*}
+     Ще използваме дефинициите на $H$, $f^S$ и асоциативност на $\circ$: 
+\begin{gather*}
+    H(f^S(u, v)) = H(f^S(a_1 \circ a_2 \circ ... \circ a_n, b_1 \circ b_2 \circ ... \circ b_m)) = \\
+    H(a_1 \circ a_2 \circ ... \circ a_n \circ b_1 \circ b_2 \circ ... \circ b_m) = \\
+    h(a_1) \circ h(a_2) \circ ... \circ h(a_n) \circ h(b_1) \circ h(b_2) \circ ... \circ h(b_m) = \\
+    (h(a_1) \circ h(a_2) \circ ... \circ h(a_n)) \circ (h(b_1) \circ h(b_2) \circ ... \circ h(b_m)) = \\
+    f^S(h(a_1) \circ h(a_2) \circ ... \circ h(a_n), (b_1) \circ h(b_2) \circ ... \circ h(b_m)) = \\
+    f^S(H(u), H(v)).
+\end{gather*}
+
+\newpage
+
+
+
+\section{Изпълнимост} 
+Нека $a$ и $b$ са различни индивидни константи, $f$ е триместен функционален символ, а $x, y$ и $z$ са различни индивидни променливи. Да означим с $\Gamma_1$ Множеството от следните три формyли:
+\subsection{Вариант 1}
+\begin{gather*}
+    f(f(x, y, a), z, a) \doteq f(x, f(y, z, a), a),\\
+    f(f(x, y, b), z, b) \doteq f(a, f(y, z, b), b),\\
+    f(f(x, y, a), z, b) \doteq f(f(x, z, b), f(y, z, b), a).
+\end{gather*}
+
+
+\subsection{Вариант 2}
+\begin{gather*}
+    f(a, f(a, x, y), z) \doteq f(a, x, f(a, y, z)),\\
+    f(b, f(b, x, y), z) \doteq f(b, x, f(b, y, z)),\\
+    f(a, x, f(b, y, z)) \doteq f(b, f(a, x, y), f(a, x, z)).
+\end{gather*}
+
+
+Нека:
+\begin{enumerate}[labelindent=0pt, labelwidth=*, leftmargin=0pt, itemindent=!, itemsep=0pt, parsep=0pt, listparindent=\parindent]
+\item $\Gamma_{2}=\Gamma_{1} \cup\{(a \doteq b)\}$;
+\item $\Gamma_{3}=\Gamma_{1} \cup\{\neg(a \doteq b)\}$;
+\item $\Gamma_{4}=\Gamma_{2} \cup \{\forall x \forall y \exists z \neg(f(x, y, z) \doteq y)\}$.
+\end{enumerate}
+
+Да се докаже кои от множествата $\Gamma_{1}, \Gamma_{2}, \Gamma_{3}$ и $\Gamma_{4}$ са изпълними.
+
+\subsection{Примерни решения вариант 1}
+\begin{multicols}{2}
+\paragraph{}
+\textbf{За $\Gamma_{1}, \Gamma_{2}$:}
+
+\begin{addmargin}[1em]{2em}
+   
+        $ S_1 = (\{0,1\}; f^{S_1}; a^{S_1}, b^{S_1})$ 
+
+        $f^{S_1}(x,y,z) \leftrightharpoons y$
+
+        $a^{S_1} \leftrightharpoons 0, b^{S_1} \leftrightharpoons 0$
+
+\end{addmargin}
+
+\textbf{За $\Gamma_{3}$}:
+
+\begin{addmargin}[1em]{2em}
+   
+        $ S_2 = (\{0,1\}; f^{S_2}; a^{S_2}, b^{S_2})$ 
+
+        $f^{S_2}(x,y,z) \leftrightharpoons y$
+
+        $a^{S_2} \leftrightharpoons 0, b^{S_2} \leftrightharpoons 1$
+
+\end{addmargin}
+
+\textbf{За $\Gamma_{1}, \Gamma_{2}, \Gamma_{4}$}:
+
+\begin{addmargin}[1em]{2em}
+   
+        $ S_3 = (\{0,1\}; f^{S_3}; a^{S_3}, b^{S_3})$ 
+
+        $f^{S_3}(x,y,z) \leftrightharpoons z$
+
+        $a^{S_3} \leftrightharpoons 0, b^{S_3} \leftrightharpoons 0$
+
+\end{addmargin}
+
+\textbf{За $\Gamma_{1}, \Gamma_{2}, \Gamma_{4}$}:
+
+\begin{addmargin}[1em]{2em}
+   
+        $ S_4 = (\mathbb{N}; f^{S_4}; a^{S_4}, b^{S_4})$ 
+
+        $f^{S_4}(x,y,z) \leftrightharpoons max\{x,y,z\}$
+
+        $a^{S_4} \leftrightharpoons 0, b^{S_4} \leftrightharpoons 0$
+
+\end{addmargin}
+
+\textbf{За $\Gamma_{1}, \Gamma_{2}, \Gamma_{4}$}:
+
+\begin{addmargin}[1em]{2em}
+   
+        $ S_5 = (\mathbb{Z^{-}}\cup \{ 0 \} ; f^{S_5}; a^{S_5}, b^{S_5})$ 
+
+        $f^{S_5}(x,y,z) \leftrightharpoons min\{x,y,z\}$
+
+        $a^{S_5} \leftrightharpoons 0, b^{S_5} \leftrightharpoons 0$
+
+\end{addmargin}
+\end{multicols}
+Помислете какво трябва да промените в структурите, за да получите модели за вариант 2.
+
+
+
+\newpage
+
+
+
+\section{Резолюция}
+\subsection{Вариант 1}
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y((q(x, y) \Rightarrow p(x, y)) \Land \forall z(p(z, y) \Rightarrow r(x, z))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y p(y, x) \Rightarrow \exists y(p(y, x) \Land \neg \exists z(p(z, y) \Land p(z, x)))).\\
+        \varphi_3 \leftrightharpoons \forall z\left(\exists x \exists y(\neg q(x, y) \Land \neg p(x, y)) \Rightarrow \forall z_{1} q\left(z_{1}, z\right)\right).\\
+        \varphi_4 \leftrightharpoons \neg \exists x \exists y \exists z((p(x, y) \Land r(y, z)) \Land \neg p(x, z)).
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че:\\
+\indent $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \models \exists y \forall x \exists z((p(x, x) \vee r(y, z)) \Rightarrow(\neg p(x, x) \Land r(y, z)))$.
+
+\subsection{Вариант 2}
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y(q(y, x) \Land \forall z(q(y, z) \Rightarrow(r(z, x) \lor p(y, z)))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y q(x, y) \Rightarrow \exists y(q(x, y) \Land \neg \exists z(q(y, z) \Land q(x, z)))).\\
+        \varphi_3 \leftrightharpoons \forall z_{1}\left(\exists z \exists x \exists y(p(x, y) \Land q(x, z)) \Rightarrow \forall z_{2}\neg p\left(z_{1}, z_{2}\right)\right).\\
+        \varphi_4 \leftrightharpoons \neg \exists x \exists y \exists z((q(y, x) \Land r(z, y)) \Land \neg q(z, x)).
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че:\\
+\indent $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \mid=\exists z \forall x \exists y((q(x, x) \vee r(y, z)) \Rightarrow(\neg q(x, x) \Land r(y, z)))$.
+
+\subsection{Обработка на някои от формулите (задачата е същата като тази на 6 юли 2020)}
+
+Нека:\\
+$\chi' \rightleftharpoons \exists y \forall x \exists z((p(x, x) \vee r(y, z)) \Rightarrow(\neg p(x, x) \Land r(y, z)))$;\\
+$\chi'' \rightleftharpoons \exists z \forall x \exists y((q(x, x) \vee r(y, z)) \Rightarrow(\neg q(x, x) \Land r(y, z)))$.\\
+Сега:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+    \chi' \sledommodels \exists y \forall x \exists z((\neg p(x, x) \Land \neg r(y, z)) \lor (\neg p(x, x) \Land r(y, z))) \\ 
+    \sledommodels \exists y \forall x \exists z(\neg p(x, x) \Land (\neg r(y, z)  \lor r(y, z))) \\
+    \sledommodels \exists y \forall x \exists z(\neg p(x, x)) \\
+    \sledommodels \forall x \neg p(x,x). 
+    \end{gather*}
+\end{addmargin}
+Аналогично $ \chi'' \sledommodels\forall x \neg q(x,x)$. Остава само $\varphi_{4}$ да преобразуваме и получаваме задачата от 6ти юли:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+    \varphi_{4} \sledommodels \forall x \forall y \forall z((p(x, y) \Land r(y, z)) \Rightarrow p(x, z)) 
+    \end{gather*}
+\end{addmargin}
+Същото и за другия вариант.
+
+\subsection{Примерно решение за вариант 1 (вариант 2 е аналогичен)}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ:
+\begin{gather*}
+    \varphi_1^{final} \rightleftharpoons \forall x \forall z ((p(x,f(x)) \lor \neg q(x, f(x)))
+        \Land (\neg p(z, f(x)) \lor r(x,z))).\\
+    \varphi_2^{final} \rightleftharpoons \forall x \forall t \forall z((p(g(x),x)\lor \neg p(t,x))
+        \Land (\neg p(z, g(x)) \lor \neg p(z,x) \lor \neg p(t,x)).\\
+    \varphi_3^{final} \rightleftharpoons \forall z \forall x \forall y \forall z_1(q(x, y) \lor p(a, y), \lor q(z_1, z)).\\
+    \varphi_4^{final} \rightleftharpoons \forall x \forall y \forall z (\neg r(y,z) \lor \neg p(x,y) \lor p(x, z)).\\
+    \psi^{final} \rightleftharpoons p(a,a). \ \textbf{(Ползваме $\chi'$ за база.)}
+\end{gather*}
+
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт):
+\begin{gather*}
+    D_1 = \{ \neg q(x_1, f(x_1)), p(x_1,f(x_1))\}; \\
+    D_2 = \{ \neg p(z_2, f(x_2)), r(x_2, z_2)\}; \\
+    D_3 = \{ p(g(x_3), x_3), \neg p(t_3, x_3)\}; \\
+    D_4 = \{ \neg p(z_4,g(x_4)), \neg p(z_4, x_4), \neg p(t_4, x_4)\}; \\
+    D_5 = \{q(x_5, y_5), p(x_5,y_5), q(z_1, z_5)\};\\
+    D_6 = \{ \neg r(y_6,z_6), \neg p( x_6,y_6), p(x_6, z_6)\}; \\
+    D_7 = \{ p(a,a)\}. 
+\end{gather*}
+
+Примерен резолютивен извод на $ \blacksquare $ е:
+\begin{gather*}
+    D_8 = Collapse(D_5\{z_1/x_5, z_5, y_5\}) = \{q(x_5, y_5), p(x_5, y_5) \};\\\\
+    D_9 = Res(D_1, D_8\{x_5/x_1,y_5/f(x_1)\})= \{p(x_1, f(x_1))\};\\\\
+    D_{10} = Res(D_2\{x_2,y_6,z_2/z_6\}, D_6) = \{\neg p(z_6, f(y_6)), \neg p(x_6, y_6), p(x_6, z_6)\};\\\\
+    D_{11} = Res(D_{10}\{z_6/g(f(y_6))\}, D3\{x_3/f(y_6)\}) = \{\neg p(t_3, f(y_6)), \neg p(x_6, y_6), p(x_6, g(f(y_6)))\};\\\\ 
+    D_{12} = Res(D_{11}, D_4\{x_4/f(y_6),z_4/x_6\}) = \{\neg p(t_3,f(y_6)), \neg p(x_6, y_6), \neg p(t_4, f(y_6)), \neg p(x_6, f(y_6))\};\\\\
+    D_{13} = Collapse(D_{12}\{t_3/a, y_6/a, t_4/a, x_6/a\}) = \{\neg p(a, f(a)), \neg p(a,a)\}.;\\\\
+    D_{14} = Res(D_{13}, D_9\{x_1/a\}) = \{\neg p(a,a)\};\\\\
+    \blacksquare = Res(D_{14}, D_7).
+\end{gather*}
+\end{addmargin}
+
+
+
+
+\newpage
+
+
+
+\section{Пролог: задача за дървета}
+Дърво се нарича краен неориентиран свързан и ацикличен граф. За един списък от списъци $[V, E]$ ще казваме, че представя неориентирания граф $G$, ако $V$ е списък от всички върхове на $G$ и $\{v, w\}$ е ребро в $G$ тогава и само тогава, когато $[v, w]$ или $[w, v]$ e eлeмeнт на $E$.\\
+Да се дефинира на пролог предикат \textcolor{red}{$art\_tree(V, E)$/$arc\_tree(V, E)$}, който по дадено представяне $[V, E]$ на краен неориентиран граф разпознава дали има такава двойка върхове $v$ и $w$, че \textcolor{red}{$[V, E+[v, w]]$/$[V, E-[v, w]]$} да е представяне на дърво, където \textcolor{red}{$E+[v, w]$/$E-[v, w]$} е списъкът, получен от $E$ с \textcolor{red}{премахването на всички срещания на елемента $[v, w]$/добавянето на нов елемент $[v, w]$}.
+
+\subsection{Общи предикати}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+    % Helper predicates: member, append, length.
+
+    takeNeighbourVertex(E, U, W):- 
+        member([U, W], E); member([W, U], E).
+
+    removeAll([], _, []).
+    removeAll([H|T], H, R):- removeAll(T, H, R).
+    removeAll([H|T], X, [H|R]):- H \= X, removeAll(T, H, R).
+
+    % acyclicPath(Egdes, Start, [End], Path).
+    acyclicPath(_, U, [U|P], [U|P]).
+    acyclicPath(E, U, [W|P], Result):- 
+        U \= W, 
+        takeNeighbourVertex(E, Prev, W), 
+        not(member(Prev, [W|P])), 
+        acyclicPath(E, U, [Prev, W|P], Result).
+    
+    isConnected([V, E]):- not(( member(U, V), member(W, V), 
+                not(acyclicPath(E, U, [W], _)) )).
+    
+    isAcyclic([V, E]):- 
+        not(( member(U, V), acyclicPath(E, U, [U], P), P \= [_] )).
+        clearRepeatedEdges([], []).
+
+    % clearRepeatedEdges(Edges, EdgesWithNoDuplicates).
+    clearRepeatedEdges([[U, W]|Rest], [[U, W]|Result]):- 
+        clearRepeatedEdges(Rest, Result), not(member([W, U], Result)).
+    clearRepeatedEdges([[U, W]|Rest], Result):- 
+        clearRepeatedEdges(Rest, Result), member([W, U], Result).
+    \end{minted}
+\end{longlisting}
+
+\subsection{Примерно решение 1}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+    % G is connected and acyclic (contains no cycles).
+    addEdgeIfNeeded([U, W], E, [[U, W]|E]):- not(member([U, W], E)).
+    addEdgeIfNeeded([U, W], E, E):- member([U, W], E).
+    
+    removeEdgeIfNeeded([U, W], E, NewE):- removeAll(E, [U, W], NewE). 
+    
+    isTree([V, E]):- isConnected([V, E]), isAcyclic([V, E]).
+    
+    art_tree([V, E], [U, W]):- 
+        member(U, V), member(W, V), 
+        addEdgeIfNeeded([U, W], E, CandidateE), 
+        isTree([V, CandidateE]).
+    
+    arc_tree([V, E], [U, W]):- 
+        member(U, V), member(W, V), 
+        removeEdgeIfNeeded([U, W], E, CandidateE), 
+        isTree([V, CandidateE]).
+    \end{minted}
+\end{longlisting}
+
+\subsection{Примерно решение 2}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+    % Идея с покриващо дърво.
+
+    % stree(V, E, Vis, NotVis, Result).
+    stree(_, _, [], []).
+    stree(E, Vis, NotVis, [[X,Y]|R]):- 
+        member(X, Vis), member(Y, NotVis),
+        takeNeighbourVertex(X, Y, E), 
+        removeAll(Y, NotVis, NotVisNew),
+        stree(E, [Y|Vis], NotVisNew, R).
+    
+    % spanTree(Graph, Tree).
+    spanTree([[], []], [[], []]).
+    spanTree([[X|V], E], [[X|V], T]):- stree(E, [X], V, T).
+    
+    acyclic([V, E]):- 
+        spanTree([V, E], [V, T]), 
+        not(( member([X, Y], E), 
+            not(takeNeighbourVertex(X, Y, T)) )).
+    
+    arc_tree1([V, E]):-
+        member([X, Y], E), 
+        removeAll(E, [X, Y], E1),
+        acyclic([V, E1]).
+    \end{minted}
+\end{longlisting}
+
+
+\subsection{Примерно решение 3}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog} 
+    % G is connected and has n − 1 edges.
+    art_tree2([V, E], [U, W]):- 
+        clearRepeatedEdges(E, NewE), 
+        member(U, V), member(W, V), 
+        addEdgeIfNeeded([U, W], E, CandidateE),
+        length(V, N), N1 is N - 1,
+        length(CandidateE, N1),
+        isConnected([V, CandidateE]).
+    \end{minted}
+\end{longlisting}
+
+
+\subsection{Примерно решение 4}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+    % G has no simple cycles and has n − 1 edges.
+    art_tree3([V, E], [U, W]):- 
+        clearRepeatedEdges(E, NewE), 
+        member(U, V), member(W, V), 
+        addEdgeIfNeeded([U, W], E, CandidateE),
+        length(V, N), N1 is N - 1,
+        length(CandidateE, N1),
+        isAcyclic([V, CandidateE]).
+    \end{minted}
+\end{longlisting}
+
+\newpage
+
+
+
+\section{Пролог: задача за списъци}
+Kaзваме, че списъкът $X$ e \textcolor{red}{екстерзала/екстерзана} за списъка от списъци $Y$, ако $X$ има поне един общ елемент с всички елементи на $Y$ и поне два общи елемента с \textcolor{red}{нечетен/четен} брой елементи на $Y$ Да се дефинира на пролог двуместен предикат екстерзала (X, Y ), който по даден списък от списъци $Y$ при презадоволяване генерира всички \textcolor{red}{екстерзали/екстервали} $X$ за $Y$ с възможно най-малка дължина и спира.
+
+\subsection{Превод на условията за екстерзала/ексервала}
+Условие 1: $ (\forall A \in Y)(\exists B \in X)[B \in A] $.\\
+Условие 2: \\ 
+ $ |\{A|A \in Y , [append(\_, [B|L], X), member(C, L) [B \in A \Land C \in A]]\}_M| \equiv \textcolor{red}{1/0} \mod 2$,\\
+\indent където долен индекс $M$ значи мултимножество.
+
+\subsection{Примерно решение}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+    % Helper predicates: member, append, length, permutation.
+
+    generateIntersection([], _, []).
+    generateIntersection([H|T], B, [H|R]):- member(H, B), generateIntersection(T, B, R).
+    generateIntersection([H|T], B, R):- not(member(H, B)), generateIntersection(T, B, R).
+    
+    subsequence([], []).
+    subsequence([H|T], [H|R]):- subsequence(T, R).
+    subsequence([_|T], R):- subsequence(T, R).
+    
+    conditionExterzala(X, Y):- 
+        haveCommonAtLeastNCommonElements(X, Y, 1, N),
+        length(Y, N),
+        haveCommonAtLeastNCommonElements(X, Y, 2, M),
+        isOdd(M).
+    
+    conditionExtervala(X, Y):-
+        haveCommonAtLeastNCommonElements(X, Y, 1, N),
+        length(Y, N),
+        haveCommonAtLeastNCommonElements(X, Y, 2, M),
+        isEven(M).
+    
+    isOdd(M):- M mod 2 =:= 1.
+    
+    isEven(M):- M mod 2 =:= 0.
+    
+    isLowerBoundOkey(Int, LowerBound, 1):- length(Int, LenInt), LenInt >= LowerBound.
+    isLowerBoundOkey(Int, LowerBound, 0):- length(Int, LenInt), LenInt < LowerBound.
+    
+    haveCommonAtLeastNCommonElements(_, [], _, 0).
+    haveCommonAtLeastNCommonElements(X, [H|T], LowerBound, N):- 
+        haveCommonAtLeastNCommonElements(X, T, LowerBound, M),
+        generateIntersection(X, H, Int),
+        isLowerBoundOkey(Int, LowerBound, Bit),
+        N is M + Bit.
+    
+    
+    generateCandidateX([], []).
+    generateCandidateX([H|T], ResultX):- 
+        generateCandidateX(T, CurrentX), 
+        subsequence(H, H1), 
+        append(H1, CurrentX, ResultX).
+    
+    exterzala(X, Y):- 
+        generateCandidateX(Y, X1), permutation(X1, X), conditionExterzala(X, Y), length(X, N), 
+        not(( generateCandidateX(Y, X1), conditionExterzala(X1, Y), length(X1, M), M < N )).
+    
+    extervala(X, Y):-
+        generateCandidateX(Y, X1), permutation(X1, X), conditionExtervala(X, Y), length(X, N), 
+        not(( generateCandidateX(Y, X1), conditionExtervala(X1, Y), length(X1, M), M < N )).
+    \end{minted}
+\end{longlisting}
+
+\end{document} % The document ends here
