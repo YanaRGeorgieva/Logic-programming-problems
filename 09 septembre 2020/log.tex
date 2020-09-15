@@ -1,0 +1,386 @@
+\documentclass[a4paper,9pt]{extarticle}
+\usepackage[cp1251]{inputenc}
+
+\newcommand\examname{Предложения за задачи по Логическо програмиране}
+\newcommand\examdate{2019/2020}
+\newcommand\setsize{\footnotesize}%\normalsize,\small,\footnotesize
+
+\newcommand\varianta{
+%  \warning
+
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $p(x,x)$
+
+    $\forall x\exists y r(x,y)$
+
+    $\exists x\forall y \lnot r(y,x)$
+
+    $\forall x\forall y\forall z\forall t(p(x,y)\land r(z,x)\land r(t,y)\limp p(z,t)$
+  \end{problem}
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $p(a,a,a)\land \lnot p(a,b,x)\land \lnot p(b,c,x)\land \lnot p(c,d,x)\land r(a,b)\land r(b,c)\land r(c,d)$
+
+    $f(f(f(f(x))))=a$
+
+    $p(f(x),f(y),u)\land r(u,v)\limp p(x,y,v)$
+  \end{problem}
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $p(x)\lequiv\lnot p(f(x))$
+
+    $\forall x\exists y(r(x,y)\land r(f(f(f(f(x)))),f(x)))$
+
+    $r(x,x)$
+
+    $r(x,y)\land r(y,z)\limp r(z,x)$
+
+    $r(x,y)\limp (p(x)\lequiv p(y))$
+
+  \end{problem}
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $f(f(x,y,a),z,a)=f(x,f(y,z,a),a)$
+
+    $f(f(x,y,b),z,b)=f(x,f(y,z,b),b)$
+
+    $f(f(x,y,a),z,b)=f(f(x,z,b),f(y,z,b),a)$
+
+  \end{problem}
+  \begin{problem}
+    Универсумът на структурата $M$ се състои от всички думи над
+    азбуката $\{a,b\}$ и е за език, в който има триместен предикатен
+    символ $p$ и двуместен предикатен символ~$r$, които се
+    интерпретират така:
+
+    $p$~е истина за думитe $u,v,w$, ако $w$~е конкатенация на $u$
+    и~$v$;
+
+    $r$~е истина за думите $u,v$, ако $u$~и~$v$ имат еднаква дължина.
+
+    Да се определят: множеството, което съдържа всички думи от
+    универсума, множеството, което съдържа само празната дума,
+    множеството от думите с четна дължина, множеството, което съдържа
+    еднобуквените думи, множеството, което съдържа двубуквените думи,
+    множеството от думите, които започват и завършват с една и съща
+    буква.
+  \end{problem}
+  \begin{problem}
+    Структурата $K$ е като~$M$ от предната задача, но няма предикатен
+    символ~$p$.  Да се докаже, че конкатенацията не е определима.
+  \end{problem}
+  \begin{problem}
+    Структурата $M$ е с универсум реалните числа и е за език без
+    функционални символи и единствен триместен предикатен символ~$p$,
+    който се интерпретира така: 
+
+    $p^M(x,y,z)\iff x^3y=z$
+
+    Да се докаже, че в структурата~$M$ са определими: $\{0\}$,
+    $\{1\}$, $\{-1\}$, $\{\langle x,x\rangle\colon x\in\Real\}$,
+    $\{\langle x,y\rangle\colon xy=1\}$,
+    $\{\langle x,y,z\rangle\colon xy=z\}$.
+    Да се докаже, че не е определимо $\{2\}$.
+  \end{problem}
+  \begin{problem}
+    Структурата $M$ е с универсум множеството от думите над
+    азбука~$A$, $A\neq\emptyset$ и е за език без функционални символи
+    и единствен триместен предикатен символ~$p$, който се интерпретира
+    така:
+
+    $p^M(u,v,w) \iff \text{думата u е конкатенация на думите $v$ и
+      $w$}$
+
+    Да се определят: $\{\epsilon\}$, $|w|=1$, $|w|=2$,
+    $\{\langle u,v\rangle\colon u=v\}$,
+
+    $\{\langle u,v\rangle\colon \text{$u$ е префикс на $v$}\}$,
+    $\{\langle u,v\rangle\colon \text{$u$ е поддума на $v$}\}$.  Да се
+    напише формула, която е вярна тогава и само тогава, когато
+    азбуката~$A$ е еднобуквена.
+    Да се докаже, че когато $A=\{0,1\}$, не е определимо~$\{11\}$.
+
+  \end{problem}
+  \begin{problem}
+    Структурата $A$ е с универсум множеството от всички отсечки в
+    равнината и е за език без функционални символи и единствен
+    предикатен символ~$p$, който е двуместен и се интерпретира така:
+
+    $p^A(t,s)\iff \text{ отсечките $t$ и $s$ се пресичат}$
+
+    Да се докаже, че са определими:
+
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ са равни}\}$,
+
+    $\{\langle t,s\rangle\colon \text{ отсечката $t$ се съдържа в $s$}\}$,
+
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ са успоредни}\}$,
+    
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ имат общ край}\}$,
+    
+    $\{\langle t,s\rangle\colon \text{ един от краищата на отсечката
+      $t$ е лежи върху $s$}\}$.
+
+    Да се докаже, че не е определимо
+    
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ са с равна
+      дължина}\}$.
+
+    \textit{Забележка}\/: Отсечките са с ненулева дължина и съдържат
+    краищата си.
+  \end{problem}
+
+%  \wish
+}
+
+\newcommand\variantb{
+%  \warning
+
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $\exists x\forall y \lnot q(x,y)$
+
+    $\forall y\exists x q(x,y)$
+
+    $r(x,x)$
+
+    $\forall x\forall y\forall z\forall t(r(x,y)\land q(x,z)\land q(y,t)\limp r(z,t)$
+  \end{problem}
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $p(a,b)\land p(b,c)\land p(c,d)\land \lnot r(a,a,a)\land r(a,b,x)\land r(b,c,x)\land r(c,d,x)$
+
+    $f(f(f(f(x))))=a$
+
+    $r(x,y,v)\land p(u,v)\limp r(f(x),f(y),u)$
+  \end{problem}
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $r(x)\lequiv\lnot r(f(x))$
+
+    $\forall x\exists y(q(f(x),f(f(f(f(x)))))\land q(y,x))$
+
+    $q(x,x)$
+
+    $q(x,y)\land q(y,z)\limp q(z,x)$
+
+    $q(x,y)\limp (r(x)\lequiv r(y))$
+
+  \end{problem}
+  \begin{problem}
+    Да се докаже, че е изпълнимо множеството от следните формули:
+
+    $f(a,f(a,x,y),z)=f(a,x,f(a,y,z))$
+
+    $f(b,f(b,x,y),z)=f(b,x,f(b,y,z))$
+
+    $f(a,x,f(b,y,z))=f(b,f(a,x,y),f(a,x,z))$
+
+  \end{problem}
+  \begin{problem}
+    Универсумът на структурата $M$ се състои от всички думи над
+    азбуката $\{a,b\}$ и е за език с равенство, в който има двуместен
+    функционален символ~$f$ и едноместен функционален символ~$h$,
+    които се интерпретират така:
+
+    $f^M(u,v)$~е конкатенацията на думите $u$ и~$v$;
+
+    $h^M(u)$~е дума, съдържаща само букви~$b$, с дължина като на~$u$.
+
+    Да се определят: множеството, което съдържа всички думи от
+    универсума, множеството, което съдържа само празната дума,
+    множеството от думите с четна дължина, множеството, което съдържа
+    еднобуквените думи, множеството, което съдържа двубуквените думи,
+    множеството от думите, които започват и завършват с една и съща буква.
+  \end{problem}
+  \begin{problem}
+    Структурата $K$ е като~$M$ от предната задача, но няма
+    функционален символ~$f$.  Да се докаже, че конкатенацията не е
+    определима.
+  \end{problem}
+  \begin{problem}
+    Структурата $M$ е с универсум реалните числа и е за език без
+    функционални символи и единствен триместен предикатен символ~$p$,
+    който се интерпретира така: 
+
+    $p^M(x,y,z)\iff x=y^3z$
+
+    Да се докаже, че в структурата~$M$ са определими: $\{0\}$,
+    $\{1\}$, $\{-1\}$, $\{\langle x,x\rangle\colon x\in\Real\}$,
+    $\{\langle x,y\rangle\colon xy=1\}$,
+    $\{\langle x,y,z\rangle\colon x=yz\}$.
+    Да се докаже, че не е определимо $\{2\}$.
+  \end{problem}
+  \begin{problem}
+    Структурата $M$ е с универсум множеството от думите над
+    азбука~$A$, $A\neq\emptyset$ и е за език без функционални символи
+    и единствен триместен предикатен символ~$p$, който се интерпретира
+    така:
+
+    $p^M(u,v,w) \iff \text{думата w е конкатенация на думите $u$ и
+      $v$}$
+
+    Да се определят: $\{\epsilon\}$, $|w|=1$, $|w|=2$,
+    $\{\langle u,v\rangle\colon u=v\}$,
+
+    $\{\langle u,v\rangle\colon \text{$u$ е суфикс на $v$}\}$,
+    $\{\langle u,v\rangle\colon \text{$u$ е поддума на $v$}\}$.  Да се
+    напише формула, която е вярна тогава и само тогава, когато
+    азбуката~$A$ е еднобуквена.
+    Да се докаже, че когато $A=\{0,1\}$, не е определимо~$\{00\}$.
+
+  \end{problem}
+  \begin{problem}
+    Структурата $A$ е с универсум множеството от всички отсечки в
+    равнината и е за език без функционални символи и единствен
+    предикатен символ~$p$, който е двуместен и се интерпретира така:
+
+    $p^A(t,s)\iff \text{ отсечките $t$ и $s$ не се пресичат}$
+
+    Да се докаже, че са определими:
+
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ са равни}\}$,
+
+    $\{\langle t,s\rangle\colon \text{ отсечката $t$ се съдържа в $s$}\}$,
+
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ са успоредни}\}$,
+    
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ имат общ край}\}$,
+    
+    $\{\langle t,s\rangle\colon \text{ един от краищата на отсечката
+      $t$ е лежи върху $s$}\}$.
+
+    Да се докаже, че не е определимо
+    
+    $\{\langle t,s\rangle\colon \text{ отсечките $t$ и $s$ са с равна
+      дължина}\}$.
+
+    \textit{Забележка}\/: Отсечките са с ненулева дължина и съдържат
+    краищата си.
+  \end{problem}
+
+%  \wish
+ }
+
+\newcommand\warning{\textbf{\scriptsize{}Да няма лист, на който е
+    писано по повече от една задача!}}
+\newcommand\wish{\textit{Пожелаваме ви приятна и успешна работа!}}
+
+\usepackage[T2A]{fontenc}
+\usepackage[bulgarian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}                
+\usepackage{enumerate}
+% \usepackage{array}
+\usepackage{multirow}
+\usepackage{alltt}
+%\usepackage[active]{srcltx}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+\tikzset{initial text={}}
+
+\newcommand\ns[4]{\node[state,#3](#1)[#4]{#2};}
+% #1: internal name,
+% #2: (visible) label,
+% #3: node properties (e.g. accepting, initial)
+% #4: relative position (e.g. right of=/left of=/above of=/below of=)
+\newcommand\nt[4]{\path[->] (#1) edge [#4] node {#3} (#2); }
+% #1: source state (internal name),
+% #2: target state (internal name)
+% #3: guard/edge label
+% #4: edge direction (loop below/above, bend right/left)
+
+\theoremstyle{definition}
+\newtheorem{problem}{Зад.}
+
+\setlength{\textwidth}{210mm} 
+\setlength{\textheight}{297mm} 
+\setlength{\topmargin}{0mm} 
+\setlength{\voffset}{-1in} 
+\setlength{\hoffset}{-1in}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\parindent 0.5cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Real}{\mathbb{R}}
+\renewcommand\le\leqq
+\renewcommand\ge\geqq
+\renewcommand\leq\leqq
+\renewcommand\geq\geqq
+\newcommand{\limp}{\Longrightarrow}
+\newcommand{\lequiv}{\Longleftrightarrow}
+\newcommand{\liff}{\Longleftrightarrow}
+\renewcommand{\iff}{\longleftrightarrow}
+\renewcommand\land{\&}
+\renewcommand\emptyset{\varnothing}
+\renewcommand\epsilon{\varepsilon}
+
+%Единствен аргумент на \ExamHeader е номерът на варианта
+\newcommand{\ExamHeader}[1]{
+  {%
+    \footnotesize%
+    \begin{tabular}{|c|c|c|c|c|c|}
+      \hline
+      вариант & ф. номер & група & поток & курс & специалност \\
+      \hline
+      \multirow{2}{*}{\bf\large #1} & & & & & \\
+      & & & & & \\
+      \hline
+      \multirow{2}{*}{Име:} & \multicolumn{5}{|c|}{}\\
+    & \multicolumn{5}{|c|}{}\\
+      \hline
+    \end{tabular}
+  }
+  \centerline{\vrule height8pt width0pt \examname}
+  \centerline{\examdate}
+}
+
+\newcommand\twominipages{
+  \noindent\hfill
+  \begin{minipage}[t]{82mm}
+    \ExamHeader{1}
+    \setcounter{problem}{0}
+
+    \varianta
+  \end{minipage}
+  \hfill\vrule\hfill
+  \begin{minipage}[t]{82mm}
+    \ExamHeader{2}
+    \setcounter{problem}{0}
+
+    \variantb
+  \end{minipage}
+  \hspace*{\fill}
+}
+
+
+\begin{document}\thispagestyle{empty} \setsize
+
+\vspace*{10mm}
+\twominipages
+
+% \vspace*{10mm}\hrulefill\vfill
+% \twominipages
+
+% \vspace*{10mm}\hrulefill\vfill
+% \twominipages
+
+% \vfill
+% \vspace*{10mm}
+\end{document}
+

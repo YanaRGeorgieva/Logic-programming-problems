@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        \PYG{c+c1}{\PYGZpc{} Helper predicates: append, permutation.}
+        \PYG{n+nf}{futureBride}\PYG{p}{(}\PYG{n+nv}{Towers}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{):\PYGZhy{}}
+            \PYG{n+nf}{permutation}\PYG{p}{(}\PYG{n+nv}{Towers}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+            \PYG{n+nf}{pillarsToNumbers}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{NumL}\PYG{p}{),}
+            \PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{NumL}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{).}
+
+        \PYG{n+nf}{runOrDie}\PYG{p}{(}\PYG{n+nv}{Towers}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{):\PYGZhy{}}
+            \PYG{n+nf}{permutation}\PYG{p}{(}\PYG{n+nv}{Towers}\PYG{p}{,} \PYG{n+nv}{L}\PYG{p}{),}
+            \PYG{n+nf}{pillarsToNumbers}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,} \PYG{n+nv}{NumL}\PYG{p}{),}
+            \PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{NumL}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{).}
+
+        \PYG{n+nf}{pillarsToNumbers}\PYG{p}{([],} \PYG{p}{[]).}
+        \PYG{n+nf}{pillarsToNumbers}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{NumH}\PYG{p}{|}\PYG{n+nv}{R}\PYG{p}{]):\PYGZhy{}}
+            \PYG{n+nf}{pillarsToNumbers}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,} \PYG{n+nv}{R}\PYG{p}{),} \PYG{n+nf}{countNestedness}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{NumH}\PYG{p}{).}
+
+        \PYG{n+nf}{countNestedness}\PYG{p}{([],} \PYG{l+m+mi}{0}\PYG{p}{).}
+        \PYG{n+nf}{countNestedness}\PYG{p}{([}\PYG{n+nv}{H}\PYG{p}{|[]],} \PYG{n+nv}{N}\PYG{p}{):\PYGZhy{}}
+            \PYG{n+nf}{countNestedness}\PYG{p}{(}\PYG{n+nv}{H}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),} \PYG{n+nv}{N} \PYG{o}{is} \PYG{n+nv}{M} \PYG{o}{+} \PYG{l+m+mf}{1.}
+
+        \PYG{n+nf}{condition}\PYG{p}{(}\PYG{n+nv}{NumL}\PYG{p}{,} \PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{Diff}\PYG{p}{):\PYGZhy{}}
+            \PYG{n+nf}{append}\PYG{p}{([}\PYG{n+nv}{First}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{Last}\PYG{p}{],} \PYG{n+nv}{NumL}\PYG{p}{),}
+            \PYG{n+nv}{R1} \PYG{o}{is} \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{N} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{First}\PYG{p}{),} \PYG{n+nv}{R1} \PYG{o}{=\PYGZlt{}} \PYG{n+nv}{Diff}\PYG{p}{,}
+            \PYG{n+nv}{R2} \PYG{o}{is} \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{N} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{Last}\PYG{p}{),} \PYG{n+nv}{R2} \PYG{o}{=\PYGZlt{}} \PYG{n+nv}{Diff}\PYG{p}{,}
+            \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{append}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{A}\PYG{p}{,} \PYG{n+nv}{B}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{],} \PYG{n+nv}{NumL}\PYG{p}{),}
+                    \PYG{n+nv}{R3} \PYG{o}{is} \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{B} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{A}\PYG{p}{),} \PYG{n+nv}{R3} \PYG{o}{\PYGZgt{}} \PYG{n+nv}{Diff} \PYG{p}{)).}
+\end{Verbatim}

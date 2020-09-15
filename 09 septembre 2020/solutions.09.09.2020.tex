@@ -1,0 +1,367 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,bulgarian]{babel}
+\def\frak#1{\cal #1}
+\def\Land{\,\&\,}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage{enumerate, enumitem}
+\usepackage{romannum}
+\usepackage{listings}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{multicol}
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\usepackage[margin=1.3in]{geometry}
+\DeclareRobustCommand
+  \sledommodels{\mathrel{\|}\joinrel\Relbar\joinrel\mathrel{\|}}
+
+
+\title{Решения на задачи от писмен изпит по Логическо програмиране}
+\date{09 септември 2020}
+
+\begin{document} % The document starts here
+\maketitle % Creates the titlepage
+\vfill {\centering Ако намерите някакъв проблем с решенията, драскайте ми :)\par}
+\
+\pagenumbering{gobble} % Turns off page numbering
+\newpage
+\pagenumbering{arabic} % Turns on page numbering
+\newpage % Starts a new page
+
+
+
+\section{Определимост}
+
+Структурата $\mathcal{M}$ е с универсиум множеството на рационалните числа и е за език без функционални символи и единствен триместен предикатен символ $p,$ който се интерпретира така: 
+\begin{itemize}
+    \item \emph{Вариант 1: }$\langle x, y, z\rangle \in p^{\mathcal{M}} \longleftrightarrow x=y^{3} z$
+    \item \emph{Вариант 2: }$\langle x, y, z\rangle \in p^{\mathcal{M}} \longleftrightarrow x^{5} y=z$
+\end{itemize}
+
+
+\noindent Да се докаже, че в структурата $\mathcal{M}$ следните множества са определими:
+\begin{itemize}
+    \item $\{0\}$
+    \item $\{1\}$
+    \item $\{-1\}$
+    \item $\{\langle x, x\rangle \mid x \in \mathbb{Q}\}$
+    \item \emph{Вариант 1: }$\{\langle x, y\rangle \mid x y=-1\}$
+    \item \emph{Вариант 2: }$\{\langle x, y\rangle \mid x y=1\}$
+    \item \emph{Вариант 1: }$\{\langle x, y, z\rangle \mid x=y z\}$
+    \item \emph{Вариант 2: }$\{\langle x, y, z\rangle \mid x y=z\}$
+\end{itemize}
+
+\noindent Да се докаже, че в $\mathcal{M}$ множеството
+\begin{itemize}
+    \item \emph{Вариант 1: } \{3\}
+    \item \emph{Вариант 2: } \{5\}
+\end{itemize}
+\indent \indent не е определимо.
+
+\subsection{Примерно решение вариант 2}
+
+
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_0(x) \leftrightharpoons \forall y p(x,y,x).  \\ 
+        \varphi_1(x) \leftrightharpoons \forall y p(p(x,y,y)).  \\ 
+        \varphi_{-1}(x) \leftrightharpoons \neg \varphi_1(x) \Land \exists y (\varphi_1(y) \Land p(x,x,y)). \\
+        \varphi_=(x,y) \leftrightharpoons \exists z (\varphi_1(z) \Land p(z, x, y) ).\\
+        \psi_=(x, y) \leftrightharpoons \forall z \forall t (p(z, t, x) \iff p(z, t, y)). \\
+        \varphi_{\uparrow 5}(x, y) \leftrightharpoons \exists z (\varphi_1(z) \Land  p(x, z, y)). \\
+        \varphi_{=1}(x, y) \leftrightharpoons \exists z (\varphi_1(z) \Land \exists t ( \varphi_{\uparrow 5}(y,t) \Land p(x, t, z))). \\
+        \varphi_{=z}(x, y, z) \leftrightharpoons \exists t \exists e( \varphi_{\uparrow 5}(y,t) \Land \varphi_{\uparrow 5}(z,e) \Land p(x, t, e)). \\
+    \end{gather*}
+\end{addmargin}
+
+
+
+
+Пример за автоморфизъм: $h(x) \leftrightharpoons 
+    \begin{cases}
+        \frac{1}{x},\ if\ x \neq 0\\
+        0,\ else
+    \end{cases}$. \\
+    За биекция се вижда лесно, че $h(h(x)) = x$. За хомоморфизъм имаме един триместен предикатен символ в структурата и трябва да докажем, че:
+    \begin{gather*}
+        \langle x, y, z\rangle \in p^{\mathcal{M}} \iff \langle h(x), h(y), h(z)\rangle \in p^{\mathcal{M}}
+    \end{gather*}
+    И с малко разсъждения стигаме до това:
+    \begin{gather*}
+        \langle x, y, z\rangle \in p^{\mathcal{M}} \iff x^{5} y=z \iff (x^{5} y)^{-1}=z^{-1} \iff (x^{-1})^{5}y^{-1}=z^{-1}\iff \\
+        h(x)^{5}h(y)=h(z) \iff \langle h(x), h(y), h(z)\rangle \in p^{\mathcal{M}}
+    \end{gather*}
+    Значи $h\in \cal{A}$ut$(\mathcal{M})$ и $5 \in \{5\}$, но $h(5) = \frac{1}{5} \notin \{5\}$.\\
+    За вариант 1 са аналогични формулите, а автоморфизма $h$ върши работа и там.
+
+\newpage
+
+
+
+\section{Изпълнимост} 
+
+
+Нека $a$ и $b$ са различни индивидни константи, $p$ и $r$ са двуместни предикатни символи, $f$ е едноместен функционален символ, а $x, y$ и $z$ са различни индивидни променливи. Да означим с $\Gamma_{1}$ множеството от следните три формули:
+\subsection{Вариант 1}
+\begin{gather*}
+    \forall x \forall y \forall z((p(x, y) \vee p(y, x)) \&((p(x, y) \& p(y, z)) \Rightarrow p(x, z)))\\
+    (\forall x \forall y(r(x, y) \Leftrightarrow(p(x, y) \& \neg p(y, x))) \& r(a, b))\\
+    \forall x \exists y(\neg(r(x, y) \vee r(y, x)) \& r(x, f(y)))
+\end{gather*}
+
+Нека $\Gamma_{2}=\Gamma_{1} \cup\{\forall x \exists y(\neg(r(x, y) \vee r(y, x)) \& \neg r(x, f(y)))\}$ и
+$\Gamma_{3}=\Gamma_{2} \cup\{\forall x p(a, x)\}$.
+
+\subsection{Вариант 2}
+\begin{gather*}
+    \forall x \forall y \forall z((p(x, y) \vee p(y, x)) \&((p(x, y) \& p(y, z)) \Rightarrow p(x, z)))\\  
+    (\forall x \forall y(r(x, y) \Leftrightarrow(p(x, y) \& p(y, x))) \& \neg r(a, b))\\  
+    \forall x \exists y(r(x, y) \&(p(x, f(y)) \& \neg r(x, f(y))))  
+\end{gather*}
+
+Нека $\Gamma_{2}=\Gamma_{1} \cup \{\forall x \exists y(r(x, y) \& r(x, f(y)))\}$ и
+$\Gamma_{3}=\Gamma_{2} \cup\{\forall x p(b, x)\}$.\\
+
+\noindent 
+Да се докаже кои от множествата $\Gamma_{1}, \Gamma_{2}$ и $\Gamma_{3}$ са изпълними.
+
+\newpage
+
+\subsection{Примерни решения вариант 2}
+\textbf{За $\Gamma_{1}$:}
+\begin{gather*}
+    \mathcal{S}_1 = (\mathbb{N} \cup \{0\}; p^{\mathcal{S}_1}, r^{\mathcal{S}_1}; a^{\mathcal{S}_1}, b^{\mathcal{S}_1}; f^{\mathcal{S}_1}) \\
+    \langle x, y\rangle \in p^{\mathcal{S}_1} \iff x \leq y\\
+    \langle x, y\rangle \in r^{\mathcal{S}_1} \iff x = y\\
+    f^{\mathcal{S}_1}(x) \leftrightharpoons x+1\\
+    a^{\mathcal{S}_1} \leftrightharpoons 1, b^{\mathcal{S}_1} \leftrightharpoons 0
+\end{gather*}
+   
+    
+\textbf{За $\Gamma_{2}, \Gamma_{3}$:}
+\begin{gather*}
+    \mathcal{S}_2 = (\mathbb{N} \cup \{0, 0',\} \cup \{n' \ | \ n\in \mathbb{N}\}; p^{\mathcal{S}_2}, r^{\mathcal{S}_2}; a^{\mathcal{S}_2}, b^{\mathcal{S}_2}; f^{\mathcal{S}_2}) \\
+    p^{\mathcal{S}_2} \leftrightharpoons 
+        \{ \langle n, m \rangle \ |\ n \leq m \} \cup
+        \{ \langle n', m' \rangle \ |\ n \leq m \} \cup
+        \{ \langle n', m \rangle \ |\ n \leq m \} \cup
+        \{ \langle n, m' \rangle \ |\ n \leq m \}\\
+    r^{\mathcal{S}_2}\leftrightharpoons 
+        \{ \langle n, n \rangle \ |\ n\in \mathbb{N}\} \cup
+        \{ \langle n', n' \rangle \ |\ n\in \mathbb{N}\} \cup
+        \{ \langle n', n \rangle \ |\ n\in \mathbb{N}\} \cup
+        \{ \langle n, n' \rangle \ |\ n\in \mathbb{N}\}\\
+    f^{\mathcal{S}_2}(x) \leftrightharpoons 
+        \begin{cases}
+        n,\ if\ x = n'\\
+        n+1,\ else\ if\ x = n
+        \end{cases}\\
+    a^{\mathcal{S}_2} \leftrightharpoons 1, b^{\mathcal{S}_2} \leftrightharpoons 0
+\end{gather*}
+
+Помислете какво трябва да промените в структурите, за да получите модели за вариант 1.
+
+
+
+\newpage
+
+
+
+\section{Резолюция}
+\subsection{Вариант 1}
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y((q(x, y) \Rightarrow p(x, y)) \Land \forall z(p(z, y) \Rightarrow r(x, z))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y p(y, x) \Rightarrow \exists y(p(y, x) \Land \neg \exists z(p(z, y) \Land p(z, x)))).\\
+        \varphi_3 \leftrightharpoons \forall z\left(\exists x \exists y(\neg q(x, y) \Land \neg p(x, y)) \Rightarrow \forall z_{1} q\left(z_{1}, z\right)\right).\\
+        \varphi_4 \leftrightharpoons \neg \exists x \exists y \exists z((p(x, y) \Land r(y, z)) \Land \neg p(x, z)).
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че:\\
+\indent $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \models \exists y \forall x \exists z((p(x, x) \vee r(y, z)) \Rightarrow(\neg p(x, x) \Land r(y, z)))$.
+
+\subsection{Вариант 2}
+Нека $\varphi_{1}, \varphi_{2}, \varphi_{3}$ и $\varphi_{4}$ са следните четири формули:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+        \varphi_1 \leftrightharpoons \forall x \exists y(q(y, x) \Land \forall z(q(y, z) \Rightarrow(r(z, x) \lor p(y, z)))).\\
+        \varphi_2 \leftrightharpoons \forall x(\exists y q(x, y) \Rightarrow \exists y(q(x, y) \Land \neg \exists z(q(y, z) \Land q(x, z)))).\\
+        \varphi_3 \leftrightharpoons \forall z_{1}\left(\exists z \exists x \exists y(p(x, y) \Land q(x, z)) \Rightarrow \forall z_{2}\neg p\left(z_{1}, z_{2}\right)\right).\\
+        \varphi_4 \leftrightharpoons \neg \exists x \exists y \exists z((q(y, x) \Land r(z, y)) \Land \neg q(z, x)).
+    \end{gather*}
+\end{addmargin}
+С метода на резолюцията докажете, че:\\
+\indent $\varphi_{1}, \varphi_{2}, \varphi_{3}, \varphi_{4} \mid=\exists z \forall x \exists y((q(x, x) \vee r(y, z)) \Rightarrow(\neg q(x, x) \Land r(y, z)))$.
+
+\subsection{Обработка на някои от формулите (задачата е същата като тази на 6 юли 2020)}
+
+Нека:\\
+$\chi' \rightleftharpoons \exists y \forall x \exists z((p(x, x) \vee r(y, z)) \Rightarrow(\neg p(x, x) \Land r(y, z)))$;\\
+$\chi'' \rightleftharpoons \exists z \forall x \exists y((q(x, x) \vee r(y, z)) \Rightarrow(\neg q(x, x) \Land r(y, z)))$.\\
+Сега:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+    \chi' \sledommodels \exists y \forall x \exists z((\neg p(x, x) \Land \neg r(y, z)) \lor (\neg p(x, x) \Land r(y, z))) \\ 
+    \sledommodels \exists y \forall x \exists z(\neg p(x, x) \Land (\neg r(y, z)  \lor r(y, z))) \\
+    \sledommodels \exists y \forall x \exists z(\neg p(x, x)) \\
+    \sledommodels \forall x \neg p(x,x). 
+    \end{gather*}
+\end{addmargin}
+Аналогично $ \chi'' \sledommodels\forall x \neg q(x,x)$. Остава само $\varphi_{4}$ да преобразуваме и получаваме задачата от 6ти юли:
+\begin{addmargin}[1em]{2em}
+    \begin{gather*}
+    \varphi_{4} \sledommodels \forall x \forall y \forall z((p(x, y) \Land r(y, z)) \Rightarrow p(x, z)) 
+    \end{gather*}
+\end{addmargin}
+Същото и за другия вариант.
+
+\subsection{Примерно решение за вариант 1 (вариант 2 е аналогичен)}
+\begin{addmargin}[1em]{2em}
+Получаваме следните формули като приведем в ПНФ, СНФ и КНФ:
+\begin{gather*}
+    \varphi_1^{final} \rightleftharpoons \forall x \forall z ((p(x,f(x)) \lor \neg q(x, f(x)))
+        \Land (\neg p(z, f(x)) \lor r(x,z))).\\
+    \varphi_2^{final} \rightleftharpoons \forall x \forall t \forall z((p(g(x),x)\lor \neg p(t,x))
+        \Land (\neg p(z, g(x)) \lor \neg p(z,x) \lor \neg p(t,x)).\\
+    \varphi_3^{final} \rightleftharpoons \forall z \forall x \forall y \forall z_1(q(x, y) \lor p(a, y), \lor q(z_1, z)).\\
+    \varphi_4^{final} \rightleftharpoons \forall x \forall y \forall z (\neg r(y,z) \lor \neg p(x,y) \lor p(x, z)).\\
+    \psi^{final} \rightleftharpoons p(a,a). \ \textbf{(Ползваме $\chi'$ за база.)}
+\end{gather*}
+
+Дизюнктите са (нека ги номерираме променливите по принадлежност към дизюнкт):
+\begin{gather*}
+    D_1 = \{ \neg q(x_1, f(x_1)), p(x_1,f(x_1))\}; \\
+    D_2 = \{ \neg p(z_2, f(x_2)), r(x_2, z_2)\}; \\
+    D_3 = \{ p(g(x_3), x_3), \neg p(t_3, x_3)\}; \\
+    D_4 = \{ \neg p(z_4,g(x_4)), \neg p(z_4, x_4), \neg p(t_4, x_4)\}; \\
+    D_5 = \{q(x_5, y_5), p(x_5,y_5), q(z_1, z_5)\};\\
+    D_6 = \{ \neg r(y_6,z_6), \neg p( x_6,y_6), p(x_6, z_6)\}; \\
+    D_7 = \{ p(a,a)\}. 
+\end{gather*}
+
+Примерен резолютивен извод на $ \blacksquare $ е:
+\begin{gather*}
+    D_8 = Collapse(D_5\{z_1/x_5, z_5, y_5\}) = \{q(x_5, y_5), p(x_5, y_5) \};\\\\
+    D_9 = Res(D_1, D_8\{x_5/x_1,y_5/f(x_1)\})= \{p(x_1, f(x_1))\};\\\\
+    D_{10} = Res(D_2\{x_2,y_6,z_2/z_6\}, D_6) = \{\neg p(z_6, f(y_6)), \neg p(x_6, y_6), p(x_6, z_6)\};\\\\
+    D_{11} = Res(D_{10}\{z_6/g(f(y_6))\}, D3\{x_3/f(y_6)\}) = \{\neg p(t_3, f(y_6)), \neg p(x_6, y_6), p(x_6, g(f(y_6)))\};\\\\ 
+    D_{12} = Res(D_{11}, D_4\{x_4/f(y_6),z_4/x_6\}) = \{\neg p(t_3,f(y_6)), \neg p(x_6, y_6), \neg p(t_4, f(y_6)), \neg p(x_6, f(y_6))\};\\\\
+    D_{13} = Collapse(D_{12}\{t_3/a, y_6/a, t_4/a, x_6/a\}) = \{\neg p(a, f(a)), \neg p(a,a)\}.;\\\\
+    D_{14} = Res(D_{13}, D_9\{x_1/a\}) = \{\neg p(a,a)\};\\\\
+    \blacksquare = Res(D_{14}, D_7).
+\end{gather*}
+\end{addmargin}
+
+
+
+
+\newpage
+
+
+
+\section{Пролог: задача за дървета}
+
+\emph{Представяне} на кореново дърво $T$ ще наричаме всяка двойка от $(V,E)$, където $V$ е списък от върховете
+на $T$, а $E$ е списък от точно онези двойки $(u,v)$, за които $u$ е баща на $v$ в $T$.
+
+За кореново дърво $T=(V,E)$ ще казваме, че \textcolor{red}{\emph{балансирано}/\emph{дълбоко}}, ако височината му не надвишава \textcolor{red}{$2\log_2|V|$/$\frac{\log_2|V|}{2}$}.
+
+Да се дефинира на пролог предикат \textcolor{red}{$balanced(T)$/$deep(T)$}, който по представяне на кореново дърво проверява дали то е \textcolor{red}{\emph{балансирано}/\emph{дълбоко}}.
+
+\subsection{Примерно решение}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+    balanced(V, E):- 
+        length(V, LV), logarithm(LV, 2, Lim), Limit is 2 * Lim, 
+        checkMaxDepthBelow(V, E, Limit).
+
+    deep(V, E):- 
+        length(V, LV), logarithm(LV, 2, Lim), Limit is Lim / 2, 
+        checkMaxDepthBelow(V, E, Limit).
+    
+    logarithm(1, _, 0).
+    logarithm(N, Base, Res):-
+        N > 1, N1 is N div Base,
+        logarithm(N1, Base, M),
+        Res is M + 1.
+    
+    acyclicPath(_, U, [U|P], [U|P]).
+    acyclicPath(E, U, [W|P], Result):- 
+        U \= W, 
+        takeNeighbourVertex(E, Prev, W), 
+        not(member(Prev, [W|P])), 
+        acyclicPath(E, U, [Prev, W|P], Result).
+    
+    takeNeighbourVertex(E, U, W):- 
+        member([U, W], E); member([W, U], E).
+    
+    getRoot(V, E, Root):- member(Root, V), not(member([_, V], E)).
+    
+    checkMaxDepthBelow(V, E, Limit):- 
+        getRoot(V, E, Root), 
+        not(( member(U, V), acyclicPath(E, Root, [U], P), 
+                length(P, LP), LP > Limit )).
+    \end{minted}
+\end{longlisting}
+
+
+
+\newpage
+
+
+
+\section{Пролог: задача за списъци}
+\subsection{Вариант 1}
+Крали Марко бяга от ламята Спаска. Бягайки на надморска височина $N$ единици, стига до ръба на огромна пропаст, в която стърчат дървени кулички с различни надморски височини подредени в редичка плътно една след друга стигаща до другия край на пропастта. До него има ръчка, която при всяко дърпане преподрежда куличките в нова редичка. Въздухът е силно разреден и трябва да се действа бързо! \\
+\indent За улеснение нека си представим редицата от куличките като списък, чиито елементи са списъци от крайни вложения на празния списък \\( \texttt{[[[[[]]]], [[]], [[[[[[]]]]]]]} $\longrightarrow$ списък с началните разположения на кулички с надморски височини с 3, 1 и 5 единици).\\
+\indent Той може да скача и пропада на височина максимум 3 единици.\\
+\indent Да се дефинира предикат $runOrDie(Towers, N, L)$, който по дадено представяне на редица от кулички $Towers$ и първоначална надморска височина $N$ генерира в $L$ чрез преудовлетворяване всички последователности на куличките, така че Крали Марко да може да стигне от единия край на пропастта до другия и да се спаси от ламята Спаска.  
+
+\subsection{Вариант 2}
+Супер Марио е подложен на поредното предизвикателство. Той се намира на надморска височина $N$ единици и пред него е зейнала огромна пропаст, в която стърчат метални кулички с различни надморски височини, подредени в редичка плътно една след друга стигаща до другия край на пропастта. До него има ръчка, която при всяко дърпане преподрежда куличките в нова редичка. \\
+\indent За улеснение нека си представим редицата от куличките като списък, чиито елементи са списъци от крайни вложения на празния списък \\( \texttt{[[[[[]]]], [[]], [[[[[[]]]]]]]} $\longrightarrow$ списък с началните разположения на кулички с надморски височини с 3, 1 и 5 единици).\\
+\indent Той може да скача и пропада на височина максимум 2 единици.\\
+\indent Да се дефинира предикат $futureBride(Towers, N, L)$, който по дадено представяне на редица от кулички $Towers$ и първоначална надморска височина $N$ генерира в $L$ чрез преудовлетворяване всички последователности на куличките, така че Супер Марио да може да стигне от единия край на пропастта до другия и да спаси принцесата от чудовището.
+
+\newpage
+
+\subsection{Примерно решение}
+\begin{longlisting}
+    \begin{minted}[breaklines, breakbefore=A]{prolog}
+        % Helper predicates: append, permutation.
+        futureBride(Towers, N, L):-
+            permutation(Towers, L), 
+            pillarsToNumbers(L, NumL), 
+            condition(NumL, N, 2).
+
+        runOrDie(Towers, N, L):- 
+            permutation(Towers, L), 
+            pillarsToNumbers(L, NumL), 
+            condition(NumL, N, 3).
+        
+        pillarsToNumbers([], []).
+        pillarsToNumbers([H|T], [NumH|R]):- 
+            pillarsToNumbers(T, R), countNestedness(H, NumH).
+        
+        countNestedness([], 0).
+        countNestedness([H|[]], N):- 
+            countNestedness(H, M), N is M + 1.
+        
+        condition(NumL, N, Diff):- 
+            append([First|_], [Last], NumL), 
+            R1 is abs(N - First), R1 =< Diff,
+            R2 is abs(N - Last), R2 =< Diff,
+            not(( append(_, [A, B|_], NumL), 
+                    R3 is abs(B - A), R3 > Diff )).
+    \end{minted}
+\end{longlisting}
+
+\end{document} % The document ends here

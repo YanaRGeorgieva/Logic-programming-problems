@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{n+nf}{balanced}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{LV}\PYG{p}{),} \PYG{n+nf}{logarithm}\PYG{p}{(}\PYG{n+nv}{LV}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{Lim}\PYG{p}{),} \PYG{n+nv}{Limit} \PYG{o}{is} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n+nv}{Lim}\PYG{p}{,}
+        \PYG{n+nf}{checkMaxDepthBelow}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Limit}\PYG{p}{).}
+
+    \PYG{n+nf}{deep}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{LV}\PYG{p}{),} \PYG{n+nf}{logarithm}\PYG{p}{(}\PYG{n+nv}{LV}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n+nv}{Lim}\PYG{p}{),} \PYG{n+nv}{Limit} \PYG{o}{is} \PYG{n+nv}{Lim} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{p}{,}
+        \PYG{n+nf}{checkMaxDepthBelow}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Limit}\PYG{p}{).}
+
+    \PYG{n+nf}{logarithm}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{).}
+    \PYG{n+nf}{logarithm}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,} \PYG{n+nv}{Base}\PYG{p}{,} \PYG{n+nv}{Res}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nv}{N} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nv}{N1} \PYG{o}{is} \PYG{n+nv}{N} \PYG{o}{div} \PYG{n+nv}{Base}\PYG{p}{,}
+        \PYG{n+nf}{logarithm}\PYG{p}{(}\PYG{n+nv}{N1}\PYG{p}{,} \PYG{n+nv}{Base}\PYG{p}{,} \PYG{n+nv}{M}\PYG{p}{),}
+        \PYG{n+nv}{Res} \PYG{o}{is} \PYG{n+nv}{M} \PYG{o}{+} \PYG{l+m+mf}{1.}
+
+    \PYG{n+nf}{acyclicPath}\PYG{p}{(}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{U}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{U}\PYG{p}{|}\PYG{n+nv}{P}\PYG{p}{],} \PYG{p}{[}\PYG{n+nv}{U}\PYG{p}{|}\PYG{n+nv}{P}\PYG{p}{]).}
+    \PYG{n+nf}{acyclicPath}\PYG{p}{(}\PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{U}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{W}\PYG{p}{|}\PYG{n+nv}{P}\PYG{p}{],} \PYG{n+nv}{Result}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nv}{U} \PYG{l+s+sAtom}{\PYGZbs{}=} \PYG{n+nv}{W}\PYG{p}{,}
+        \PYG{n+nf}{takeNeighbourVertex}\PYG{p}{(}\PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Prev}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{),}
+        \PYG{o}{not}\PYG{p}{(}\PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{Prev}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{W}\PYG{p}{|}\PYG{n+nv}{P}\PYG{p}{])),}
+        \PYG{n+nf}{acyclicPath}\PYG{p}{(}\PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{U}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{Prev}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{|}\PYG{n+nv}{P}\PYG{p}{],} \PYG{n+nv}{Result}\PYG{p}{).}
+
+    \PYG{n+nf}{takeNeighbourVertex}\PYG{p}{(}\PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{W}\PYG{p}{],} \PYG{n+nv}{E}\PYG{p}{);} \PYG{n+nf}{member}\PYG{p}{([}\PYG{n+nv}{W}\PYG{p}{,} \PYG{n+nv}{U}\PYG{p}{],} \PYG{n+nv}{E}\PYG{p}{).}
+
+    \PYG{n+nf}{getRoot}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Root}\PYG{p}{):\PYGZhy{}} \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{Root}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{),} \PYG{o}{not}\PYG{p}{(}\PYG{n+nf}{member}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{],} \PYG{n+nv}{E}\PYG{p}{)).}
+
+    \PYG{n+nf}{checkMaxDepthBelow}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Limit}\PYG{p}{):\PYGZhy{}}
+        \PYG{n+nf}{getRoot}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,} \PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Root}\PYG{p}{),}
+        \PYG{o}{not}\PYG{p}{((} \PYG{n+nf}{member}\PYG{p}{(}\PYG{n+nv}{U}\PYG{p}{,} \PYG{n+nv}{V}\PYG{p}{),} \PYG{n+nf}{acyclicPath}\PYG{p}{(}\PYG{n+nv}{E}\PYG{p}{,} \PYG{n+nv}{Root}\PYG{p}{,} \PYG{p}{[}\PYG{n+nv}{U}\PYG{p}{],} \PYG{n+nv}{P}\PYG{p}{),}
+                \PYG{n+nf}{length}\PYG{p}{(}\PYG{n+nv}{P}\PYG{p}{,} \PYG{n+nv}{LP}\PYG{p}{),} \PYG{n+nv}{LP} \PYG{o}{\PYGZgt{}} \PYG{n+nv}{Limit} \PYG{p}{)).}
+\end{Verbatim}
