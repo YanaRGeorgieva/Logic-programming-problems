@@ -1,0 +1,9 @@
+natural(0).
+natural(N) :-
+    natural(M),
+    N is M+1.
+
+pairs(A, B) :-
+    natural(N),
+    between(0, N, A),
+    B is N-A.
