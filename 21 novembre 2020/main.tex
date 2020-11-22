@@ -16,7 +16,7 @@
 Структурата ${\cal S}$ за езика ${\cal L}$ има носител $W=\{0,1,2,3,4\}^*$ -- множеството от думи
 от $0$, $1$, $2$ и $3$  -- и интерпретации на $cat$ и $p$:
 \begin{eqnarray*}
-    cat^{\cal S}(u,v)=w  &\iff & u\circ v= w, \nl
+    cat^{\cal S}(u,v)=w  &\iff& u\circ v= w, \nl
     p^{\cal S} (u,v) &\iff& \forall i\le |u| \left(v_i =\begin{cases} 1, \text{ ако } u_i> 1 \nl
             0,\text{ ако } u_i\le 1
         \end{cases}\right),
@@ -53,9 +53,9 @@
 \begin{flalign*}
     & \fancy{E}{qLen}(u, v) \definedas \exists w_1 \exists w_2 ( \varphi_{LLCV}(u, w_1) \Land \varphi_{LLCV}(v, w_2) \Land \nl
     & \start \start \indent \exists w_3 \exists w_4 ( \varphi_{LLCV}(w_1, w_3) \Land \varphi_{LLCV}(w_2, w_4) \Land w_3 \doteq w_4)).\nl
-    & \varphi_{2wordLetters}(u, a, b) \definedas \varphi_2(u) \Land \fancy{P}{ref}(a, u) \Land \varphi_1(a) \Land \fancy{S}{uff}(b, u) \Land \varphi_1(b).
+    & \varphi_{2letterWord}(u, a, b) \definedas \varphi_2(u) \Land \fancy{P}{ref}(a, u) \Land \varphi_1(a) \Land \fancy{S}{uff}(b, u) \Land \varphi_1(b).
 \end{flalign*}
-Където \me{\varphi_{2wordLetters}(u, a, b)} дефинира множеството:
+Където \me{\varphi_{2letterWord}(u, a, b)} дефинира множеството:
 \begin{gather*}
     \br{\la u, a, b \ra \st u = a \circ b \metaand a, b \in \br{0,1,2,3,4}}
 \end{gather*}
@@ -63,8 +63,8 @@
     & \fancy{N}{onEmptyPref}(u, v) \definedas \fancy{P}{ref}(u, v) \Land \neg \varphi_\epsilon (u) .\nl
     & \fancy{C}{omb}(u, v, w) \definedas \fancy{E}{qLen}(u, v) \Land \forall u_1 \forall v_1 (\fancy{N}{onEmptyPref}(u_1, u) \Land \nl
     &  \start \start \start \fancy{N}{onEmptyPref}(v_1, v) \Land \fancy{E}{qlen}(u_1, v_1) \then  \nl
-    & \start \start \start \indent \exists w_1 (\fancy{P}{ref}(w_1, w) \Land \fancy{E}{qLen}(cat(u_1, v_1), w_1) \Land \nl
-    & \start \start \indent \exists a \exists b (\varphi_{2wordLetters}(w_1, a, b) \Land  \fancy{S}{uff}(a, u_1) \Land \fancy{S}{uff}(b, v_1)))).
+    & \start \start \start \indent \exists w_1 (\fancy{P}{ref}(w_1, w) \Land \fancy{E}{qLen}(cat(u_1, v_1), w_1) \Land  \nl
+    & \exists w_2( \fancy{S}{uff}(w_2, w_1) \Land \exists a \exists b (\varphi_{2letterWord}(w_1, a, b) \Land  \fancy{S}{uff}(a, u_1) \Land \fancy{S}{uff}(b, v_1))))).
 \end{flalign*}
 
 
