@@ -1,0 +1,172 @@
+% MY DEFINITIONS
+
+\newtheorem{theorem}{Theorem}[section]
+% This is the example presented in the introduction but it has the additional parameter [section] that restarts the theorem counter at every new section.
+
+\newtheorem{lemma}[theorem]{Lemma}
+% In this case, the even though a new environment called lemma is created, it will use the same counter as the theorem environment.
+
+\newtheorem{proposition}[theorem]{Proposition}
+% In this case, the even though a new environment called proposition is created, it will use the same counter as the theorem environment.
+
+\newtheorem{corollaryT}{Corollary}[theorem]
+% A environment called corollary is created, the counter of this new environment will be reset every time a new theorem environment is used.
+
+\newtheorem{corollaryL}{Corollary}[theorem]
+% A environment called corollary is created, the counter of this new environment will be reset every time a new theorem environment is used.
+
+%The command \theoremstyle{ } sets the styling for the numbered environment defined right below it. In the example above the styles remark and definition are used. Notice that the remark is now in italics and the text in the environment uses normal (Roman) typeface, the definition on the other hand also uses Roman typeface for the text within but the word "Definition" is printed in boldface font.
+% Theorem styles
+
+% definition boldface title, romand body. Commonly used in definitions, conditions, problems and examples.
+% plain boldface title, italicized body. Commonly used in theorems, lemmas, corollaries, propositions and conjectures.
+% remark italicized title, romman body. Commonly used in remarks, notes, annotations, claims, cases, acknowledgments and conclusions.
+
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem*{remark}{Remark}
+
+\newtheorem{remarkN}{Remark}[section]
+
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\newenvironment{Proof}[1][Proof]
+{\proof[#1]\leftskip=1cm\rightskip=1cm}
+{\endproof}
+
+\def\restrict#1{\raise-.5ex\hbox{\ensuremath\restriction}_{#1}}
+
+\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
+\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{
+    <-> s*[1.05] BOONDOX-r-calo}{}
+\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{
+    <-> s*[1.05] BOONDOX-b-calo}{}
+\DeclareMathAlphabet{\mathcalboondox}{U}{BOONDOX-calo}{m}{n}
+\SetMathAlphabet{\mathcalboondox}{bold}{U}{BOONDOX-calo}{b}{n}
+\DeclareMathAlphabet{\mathbcalboondox}{U}{BOONDOX-calo}{b}{n}
+
+
+
+
+\def\bLand{ \mathlarger{\mathlarger{\&}}}
+
+\def\isomorphic{\cong}
+
+\def\cali#1{\mathcal{#1}}
+\def\Land{\,\&\,}
+\def\Lor{\vee}
+\def\instantiation#1{[\![ #1 ]\!]}
+\def\iff{\Leftrightarrow}
+\def\metaiff{\longleftrightarrow}
+\def\metathen{\longrightarrow}
+\def\definedas{\leftrightharpoons}
+\def\start{\indent\indent}
+\def\nl{\\}
+\def\la{\langle}
+\def\ra{\rangle}
+\def\exist{\exists}
+\def\then{\Rightarrow}
+\def\st{\ |\ }
+\def\br#1{\{#1\}}
+
+\definecolor{forestgreen}{RGB}{34,139,34}
+\definecolor{falured}{rgb}{0.5, 0.09, 0.09}
+\definecolor{harvestgold}{rgb}{0.8, 0.5, 0.0}
+\definecolor{phthaloblue}{rgb}{0.0, 0.06, 0.54}
+
+% short for mathematical expression
+\def\me#1{$#1$}
+
+\def\red#1{\textcolor{falured}{#1}}
+\def\green#1{\textcolor{forestgreen}{#1}}
+\def\yellow#1{\textcolor{harvestgold}{#1}}
+\def\blue#1{\textcolor{phthaloblue}{#1}}
+
+\def\redi#1{\italic{\textcolor{falured}{#1}}}
+\def\greeni#1{\italic{\textcolor{forestgreen}{#1}}}
+\def\yellowi#1{\italic{\textcolor{harvestgold}{#1}}}
+\def\bluei#1{\italic{\textcolor{phthaloblue}{#1}}}
+
+\def\fancy#1#2{\mathcal{#1}#2}
+
+
+\def\sat#1{\varPhi^{sat}_{\cali{K}_{#1}}}
+\def\val#1{\varPhi^{val}_{\cali{K}_{#1}}}
+
+\def\structure#1#2{\la #1, R_1^\cali{#2}, R_2^\cali{#2} \ra}
+
+
+\def\K#1{\cali{K}_{#1}}
+\def\Kall{\cali{K}_{all}}
+\def\Krectangle{\cali{K}_{rectangle}}
+\def\Ksquare{\cali{K}_{square}}
+
+\def\Kallfin{\cali{K}_{all}^{fin}}
+\def\Krectanglefin{\cali{K}_{rectangle}^{fin}}
+\def\Ksquarefin{\cali{K}_{square}^{fin}}
+
+\def\form#1{\cali{F}orm(#1)}
+
+\def\card#1{\mathbf{card}(#1)}
+\def\cardRel#1{\#_{#1}}
+
+\def\bold#1{\textbf{#1}}
+\def\italic#1{\textit{#1}}
+
+\def\bigO#1{\mathcal{O}(#1)}
+\def\metaSyntacticSameAs{\eqcirc}
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\DeclareRobustCommand
+\sledommodels{\mathrel{\|}\joinrel\Relbar\joinrel\mathrel{\|}}
+
+\setlength{\columnsep}{2pc}
+\setlength{\columnseprule}{.5pt}
+\def\columnseprulecolor{\color{gray}}
+
+
+
+\newcommand\keywordfont{\sffamily\bfseries}
+\algrenewcommand\algorithmicend{{\keywordfont end}}
+\algrenewcommand\algorithmicdo{{\keywordfont do}}
+\algrenewcommand\algorithmicwhile{{\keywordfont while}}
+\algrenewcommand\algorithmicfor{{\keywordfont for}}
+\algrenewcommand\algorithmicforall{{\keywordfont for all}}
+\algrenewcommand\algorithmicloop{{\keywordfont loop}}
+\algrenewcommand\algorithmicrepeat{{\keywordfont repeat}}
+\algrenewcommand\algorithmicuntil{{\keywordfont until}}
+\algrenewcommand\algorithmicprocedure{{\keywordfont procedure}}
+\algrenewcommand\algorithmicfunction{{\keywordfont function}}
+\algrenewcommand\algorithmicif{{\keywordfont if}}
+\algrenewcommand\algorithmicthen{{\keywordfont then}}
+\algrenewcommand\algorithmicelse{{\keywordfont else}}
+\algrenewcommand\algorithmicrequire{{\keywordfont Require:}}
+\algrenewcommand\algorithmicensure{{\keywordfont Ensure:}}
+\algrenewcommand\algorithmicreturn{{\keywordfont return}}
+
+
+\newcommand{\metaexists}{\ensuremath\exists\kern-.7em\exists}
+% \newcommand{\metaforall}{\kern.05em\ensuremath\forall\kern-.9em\rotatebox{110}{\ensuremath-}}
+\newcommand{\metaforall}{\ensuremath\forall\kern-.47em\forall}
+
+\newcommand{\metaor}{\ensuremath\Lor\kern-.8em\Lor}
+
+\newcommand{\metaand}{\ensuremath\Land\kern-.99em\Land}
+
+\newcommand{\metain}{\ensuremath\in\kern-.55em\in}
+
+\makeatletter
+\@ifpackageloaded{hyperref}%
+{\newcommand{\mylabel}[2]% #1=name, #2 = contents
+    {\protected@write\@auxout{}{\string\newlabel{#1}{{#2}{\thepage}%
+                    {\@currentlabelname}{\@currentHref}{}}}}}%
+{\newcommand{\mylabel}[2]% #1=name, #2 = contents
+    {\protected@write\@auxout{}{\string\newlabel{#1}{{#2}{\thepage}}}}}
+\makeatother
+
+\newcommand*{\twoheadrightarrowtail}{\mathrel{\rightarrowtail\kern-1.9ex\twoheadrightarrow}}
+% Alternative which doesn't look as good using the normal size, but might work better with smaller sizes too:
+%\newcommand*{\twoheadrightarrowtail}{\mathrel{\rlap{$\rightarrowtail$}\twoheadrightarrow}}
+
+\def\stacky#1#2{\stackrel{\mathclap{\normalfont{#2}}}{#1}}

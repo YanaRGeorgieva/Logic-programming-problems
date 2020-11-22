@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\include{mypackages}
+\include{mydefs}
+
+\setcounter{secnumdepth}{1}
+
+\title{Решения на задачи от тренировка/контролно 1 по Логическо програмиране}
+\date{21 ноември 2020}
+
+\begin{document}
+\maketitle
+
+\section{Определелимост}
+Нека ${\cal L}$ е език с формално равенство, един двуместен функционален символ $cat$ и един двуместен предикатен символ $p$.
+
+Структурата ${\cal S}$ за езика ${\cal L}$ има носител $W=\{0,1,2,3,4\}^*$ -- множеството от думи
+от $0$, $1$, $2$ и $3$  -- и интерпретации на $cat$ и $p$:
+\begin{eqnarray*}
+    cat^{\cal S}(u,v)=w  &\iff & u\circ v= w, \nl
+    p^{\cal S} (u,v) &\iff& \forall i\le |u| \left(v_i =\begin{cases} 1, \text{ ако } u_i> 1 \nl
+            0,\text{ ако } u_i\le 1
+        \end{cases}\right),
+\end{eqnarray*}
+където $u_i$ ($v_i$) означава $i$-тата буква на $u$ ($v$).
+Да се докаже, че в ${\cal S}$ са определими:
+\begin{itemize}
+    \item $Pref=\{(u,v)\in W^2 \,|\, u \text{ е префикс на } v\}$.
+    \item $\varepsilon$ и множеството от еднобуквени думи над $W$.
+    \item $EqLen=\{(u,v)\in W^2 \,|\, |u|=|v|\}$.
+\end{itemize}
+
+За думи с равна дължина $u=a_1a_2\dots a_n$ и $v=b_1b_2\dots b_n$ с $u\shuffle v$ означаваме думата:
+
+\begin{equation*}
+    u\shuffle v = a_1 b_1 a_2b_2\dots a_n b_n.
+\end{equation*}
+Вярно ли е, че множеството $$\{(u,v,w) \in W^3 \,|\, |u|=|v|\, \& \,w=u\shuffle v\}$$ е определимо в ${\cal S}$? Защо?
+
+Да се намери с доказателство броят на различните автоморфизми на структурата ${\cal S}$.
+
+\subsection{Примерно решение}
+
+
+\begin{flalign*}
+    & \fancy{P}{ref}(u, v) \definedas \exists w (cat(u, w) \doteq v).\nl
+    & \fancy{S}{uff}(u, v) \definedas \exists w (cat(w, u) \doteq v).\nl
+    & \fancy{I}{nfix}(u, v) \definedas \exists w (\fancy{P}{ref}(w, v) \Land \fancy{S}{uff}(u, w) ).\nl
+    & \varphi_\epsilon(u) \definedas \forall v (cat(u, v) \doteq u). \nl
+    & \varphi_{1}(u) \definedas \forall v (\fancy{P}{ref}(u, v) \then \varphi_\epsilon(v) \Lor v \doteq u). \nl
+    & \varphi_{2}(u) \definedas \forall v (\fancy{P}{ref}(u, v) \then \varphi_\epsilon(v) \Lor \varphi_{1}(v) \Lor v \doteq u). \nl
+    & \varphi_{LLCV}(u, v) \definedas p(u, v) \Land \forall w (p(u, w) \then \fancy{P}{ref}(v, w)).
+\end{flalign*}Където \me{ \varphi_{LLCV}(u, v)} значи, че взимаме най-късият характеристичен вектор на \me{u} генерирано от предиката \me{p^\cali{S}}.
+\begin{flalign*}
+    & \fancy{E}{qLen}(u, v) \definedas \exists w_1 \exists w_2 ( \varphi_{LLCV}(u, w_1) \Land \varphi_{LLCV}(v, w_2) \Land \nl
+    & \start \start \indent \exists w_3 \exists w_4 ( \varphi_{LLCV}(w_1, w_3) \Land \varphi_{LLCV}(w_2, w_4) \Land w_3 \doteq w_4)).\nl
+    & \varphi_{2wordLetters}(u, a, b) \definedas \varphi_2(u) \Land \fancy{P}{ref}(a, u) \Land \varphi_1(a) \Land \fancy{S}{uff}(b, u) \Land \varphi_1(b).
+\end{flalign*}
+Където \me{\varphi_{2wordLetters}(u, a, b)} дефинира множеството:
+\begin{gather*}
+    \br{\la u, a, b \ra \st u = a \circ b \metaand a, b \in \br{0,1,2,3,4}}
+\end{gather*}
+\begin{flalign*}
+    & \fancy{N}{onEmptyPref}(u, v) \definedas \fancy{P}{ref}(u, v) \Land \neg \varphi_\epsilon (u) .\nl
+    & \fancy{C}{omb}(u, v, w) \definedas \fancy{E}{qLen}(u, v) \Land \forall u_1 \forall v_1 (\fancy{N}{onEmptyPref}(u_1, u) \Land \nl
+    &  \start \start \start \fancy{N}{onEmptyPref}(v_1, v) \Land \fancy{E}{qlen}(u_1, v_1) \then  \nl
+    & \start \start \start \indent \exists w_1 (\fancy{P}{ref}(w_1, w) \Land \fancy{E}{qLen}(cat(u_1, v_1), w_1) \Land \nl
+    & \start \start \indent \exists a \exists b (\varphi_{2wordLetters}(w_1, a, b) \Land  \fancy{S}{uff}(a, u_1) \Land \fancy{S}{uff}(b, v_1)))).
+\end{flalign*}
+
+
+С индукция по \me{n \in \mathbb{N}} може да се покаже, че \me{\varphi_n} определя множеството от всички думи с дължина \me{n}.
+
+
+Сега нека с \me{\Sigma \definedas \br{0,1,2,3,4}}, \me{|\Sigma| = 5} и значи \me{\Sigma^* = W}.
+
+Тогава \me{|\cali{A}ut(\cali{S})| = \br{h \st h : \Sigma \twoheadrightarrowtail \Sigma \metaand (\metaforall x \in \br{0, 1}) [h(x) = x] } = 3!}, тъй като това е броя на всички пермутации над тази азбука, в която \me{0} и \me{1} остават на място (не са повече, т.к изискаваме да се имаме биективност и фунционалност на релацията). Трябва да остават на място \me{0} и \me{1}, за да можем да запазваме и \me{p}, което зависи от тях (ако го нямаше нелогическия символ \me{p}, то автоморфизмите си стават \me{5!}).
+
+
+Сега нека вземем една пермутация над \me{\Sigma} примерно \me{h} и да покажем, можем да я надградим тази биекция, така че да действа върху всички думи над азбуката \me{\Sigma} ( бележим го това множество с \me{\Sigma^*}) и да е автоморфизъм от \me{\Sigma^*} в \me{\Sigma^*}.\nl
+\indent Нека \me{w \in \Sigma^*}. Тогава \me{w} е крайна редичка от букви от \me{\Sigma}:
+\begin{gather*}
+    (\exists n \in \mathbb{N})[w = a_1 \circ a_2 \circ ... \circ a_n \Land a_1 \in \Sigma \Land a_2 \in \Sigma \Land ... \Land a_n \in \Sigma].
+\end{gather*}
+Нека дефинираме \me{H:\Sigma^* \rightarrow \Sigma^*} така:
+\begin{gather*}
+    H(w)= H(a_1 \circ a_2 \circ ... \circ a_n) = h(a_1) \circ h(a_2) \circ ... \circ h(a_n).
+\end{gather*}
+Искаме \me{H} да е биекция и хомоморфизъм.
+Това че \me{H} е биекция се вижда от \me{H^{HOK(\text{дължини на всички цикли в }h)}(w) = Id_{\Sigma^*}}.
+
+Tук нелогическите символи са \me{cat} и \me{p}.
+
+За \me{cat} ще се погрижим да проверим, че:
+\begin{gather*}
+    H(cat^\cali{S}(u, v)) = cat^\cali{S}(H(u), H(v))
+\end{gather*}
+за \me{u, v \in \Sigma^*}.
+
+Т.к. \me{u, v \in \Sigma^*}, то значи:
+\begin{gather*}
+    (\exists n \in \mathbb{N})[u = a_1 \circ a_2 \circ ... \circ a_n \Land a_1 \in \Sigma \Land a_2 \in \Sigma \Land ... \Land a_n \in \Sigma]
+\end{gather*}
+и
+\begin{gather*} (\exists m \in \mathbb{N})[v = b_1 \circ b_2 \circ ... \circ b_m \Land b_1 \in \Sigma \Land b_2 \in \Sigma \Land ... \Land b_m \in \Sigma].
+\end{gather*}
+Ще използваме дефинициите на \me{H}, \me{cat^\cali{S}} и асоциативност на \me{\circ}:
+\begin{gather*}
+    H(cat^\cali{S}(u, v)) = H(cat^\cali{S}(a_1 \circ a_2 \circ ... \circ a_n, b_1 \circ b_2 \circ ... \circ b_m)) = \nl
+    H(a_1 \circ a_2 \circ ... \circ a_n \circ b_1 \circ b_2 \circ ... \circ b_m) = \nl
+    h(a_1) \circ h(a_2) \circ ... \circ h(a_n) \circ h(b_1) \circ h(b_2) \circ ... \circ h(b_m) = \nl
+    (h(a_1) \circ h(a_2) \circ ... \circ h(a_n)) \circ (h(b_1) \circ h(b_2) \circ ... \circ h(b_m)) = \nl
+    cat^\cali{S}(h(a_1) \circ h(a_2) \circ ... \circ h(a_n), (b_1) \circ h(b_2) \circ ... \circ h(b_m)) = \nl
+    cat^\cali{S}(H(u), H(v)).
+\end{gather*}
+
+За \me{p} ще се погрижим да проверим, че:
+\begin{gather*}
+    \la u , v \ra \in p^\cali{S} \metaiff \la H(u) , H(v) \ra \in p^\cali{S}
+\end{gather*}
+за \me{u, v \in \Sigma^*}.
+Отново от \me{u, v \in \Sigma^*}, то значи:
+\begin{gather*}
+    (\exists n \in \mathbb{N})[u = a_1 \circ a_2 \circ ... \circ a_n \Land a_1 \in \Sigma \Land a_2 \in \Sigma \Land ... \Land a_n \in \Sigma]
+\end{gather*}
+и
+\begin{gather*} (\exists m \in \mathbb{N})[v = b_1 \circ b_2 \circ ... \circ b_m \Land b_1 \in \Sigma \Land b_2 \in \Sigma \Land ... \Land b_m \in \Sigma].
+\end{gather*}
+Ще използваме дефинициите на \me{H}, \me{p^\cali{S}} и факта, че си филтрирахме само тези пермутации, които пазят \me{0, 1}, т.е. характеристичните вектори генерирани от \me{p^\cali{S}} няма да пострадат (да го наричаме този факт \me{(\#)}):
+\begin{gather*}
+    \la u , v \ra \in p^\cali{S} \metaiff \nl
+    \forall i\le |u| \left(v_i =\begin{cases} 1, \text{ ако } u_i> 1 \nl
+            0,\text{ ако } u_i\le 1
+        \end{cases}\right)  \metaiff \nl
+    \forall i\le |H(u)|=|u| \left(h(v_i) \stacky{=}{^{(\#)}} v_i =\begin{cases} 1, \text{ ако } h(u_i)> 1,\ since\ u_i > 1\nl
+        0,\text{ ако } h(u_i)\le 1 \stacky{\metathen}{^{(\#)}} h(u_i) = u_i
+    \end{cases}\right)  \metaiff \nl
+    \la H(u) , H(v) \ra \in p^\cali{S}
+\end{gather*}
+
+
+\newpage
+\section{Изпълнимост}
+\start ${\cal L}=\langle p, q\rangle$ е език с два двуместни предикатни символа  \italic{}{p} и \italic{}{q}.
+
+Да се докаже, че е изпълнимо множеството, съставено от следните формули:
+
+\begin{gather*}
+    \varphi_1 \definedas \forall x \forall y ( \exists z (p(x, z) \iff p(z, y)) \iff \exists z (q(x, z) \iff q(z, y))). \nl
+    \varphi_2 \definedas \exists x \exists y p(x, y). \nl
+    \varphi_3 \definedas \exists x \exists y q(x, y). \nl
+    \varphi_4 \definedas \forall x \forall y (q(x, y) \then \neg q(y, x)). \nl
+    \varphi_5 \definedas \forall x \forall y (p(x, y) \then \neg p(y, x)). \nl
+    \varphi_6 \definedas \neg \forall x \forall y \forall z (p(x,y)\Land p(y, z) \then p(x, z)).
+\end{gather*}
+
+\subsection{Примерно решение}
+\begin{figure}[H]
+    \begin{center}
+        \begin{tikzpicture}[->,,auto,node distance=1.75cm,
+                thick]
+
+            \node[draw, circle, fill=green!25] (0) {a};
+            \node[draw, circle, fill=green!25] (1) [right of=0] {b};
+            \node[draw, circle, fill=green!25] (2) [below of=0] {c};
+            \path
+            (0) edge[phthaloblue, bend left]  node {} (1)
+            edge[falured, bend right]  node {} (1)
+            (2) edge[phthaloblue, bend left]  node {} (0)
+            edge[falured, bend right]  node {} (0);
+        \end{tikzpicture}
+        \nl
+        Т.е. \me{\cali{A} = \la \br{a, b}; \blue{p^\cali{A}}, \red{q^\cali{A}} \ra} и \me{\blue{p^\cali{A}} = \red{q^\cali{A}} = \br{\la a, b \ra, \la c, a \ra}}.
+    \end{center}
+\end{figure}
+
+\end{document}
+
+
