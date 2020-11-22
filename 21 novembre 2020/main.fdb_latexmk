@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1606048489 "main.aux" "main.bbl" "main" 1606050087
+["bibtex main"] 1606048489 "main.aux" "main.bbl" "main" 1606050890
   "/usr/share/texmf-dist/bibtex/bst/biblatex/biblatex.bst" 1591521742 65050 5c39e6f144c843a658dad8c93d2a6f3c ""
-  "main-blx.bib" 1606050086 340 7bdce33d370fce05909e24f547f8d889 "pdflatex"
-  "main.aux" 1606050086 1325 9119fb6068506df71aa214d60fae960a "pdflatex"
+  "main-blx.bib" 1606050845 340 7bdce33d370fce05909e24f547f8d889 "pdflatex"
+  "main.aux" 1606050845 1325 9119fb6068506df71aa214d60fae960a "pdflatex"
   (generated)
-  "main.bbl"
   "main.blg"
-["pdflatex"] 1606050085 "/home/nero/Documents/Sandbox/Prolog/Logic programming problems/21 novembre 2020/main.tex" "main.pdf" "main" 1606050087
+  "main.bbl"
+["pdflatex"] 1606050844 "/home/nero/Documents/Sandbox/Prolog/Logic programming problems/21 novembre 2020/main.tex" "main.pdf" "main" 1606050890
   "/dev/null" 1605509799 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/home/nero/.texlive/texmf-var/fonts/pk/ljfour/public/shuffle/shuffle10.720pk" 1606035265 108 03c9734f6c5680a7ce32ae6edd2d041e ""
   "/home/nero/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1551615638 3304 6a543c07045572737981351171e0505e ""
@@ -18,7 +18,7 @@
   "/home/nero/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm1728.tfm" 1551615636 3252 92d08740ce00199d6cf9ff4aaada81d1 ""
   "/home/nero/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm2074.tfm" 1562396145 3264 03c2b9e4787a40d3b9c197c38b93b558 ""
   "/home/nero/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm" 1562395900 3512 f3a56cfe95a159371df20f73d1eb107d ""
-  "/home/nero/Documents/Sandbox/Prolog/Logic programming problems/21 novembre 2020/main.tex" 1606050085 11041 f45a1473bb8941f3d738bfa1d81ec9f5 ""
+  "/home/nero/Documents/Sandbox/Prolog/Logic programming problems/21 novembre 2020/main.tex" 1606050890 11058 8937c65a942e20998b50694beccc873c ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1591545468 3141 82d5616418ed8d5de703b3951bedecb4 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1591545468 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1591545468 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -272,17 +272,17 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1591545468 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1602343881 4727216 3de2dc1e158c5077ce6dd23a07a9ad05 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1602343864 2514053 902b0acffe39fa3df0e55009cd97f183 ""
-  "main.aux" 1606050086 1325 9119fb6068506df71aa214d60fae960a "pdflatex"
+  "main.aux" 1606050845 1325 9119fb6068506df71aa214d60fae960a "pdflatex"
   "main.bbl" 1606048489 512 61b8edbafb0cff417a61773720bd5b7f "bibtex main"
-  "main.run.xml" 1606050086 2561 86f85eb32280466b2cb22b612c5e13bb "pdflatex"
-  "main.tex" 1606050085 11041 f45a1473bb8941f3d738bfa1d81ec9f5 ""
+  "main.run.xml" 1606050845 2561 86f85eb32280466b2cb22b612c5e13bb "pdflatex"
+  "main.tex" 1606050890 11058 8937c65a942e20998b50694beccc873c ""
   "mydefs.tex" 1606042874 6383 ddf0a4aa4b53508e9803b30d46bca382 ""
   "mypackages.tex" 1606035280 1131 e5ab5e29939087a4f8e4ae45c738074e ""
   (generated)
-  "main.aux"
-  "mydefs.aux"
-  "main.log"
   "main-blx.bib"
   "mypackages.aux"
+  "main.aux"
+  "mydefs.aux"
   "main.run.xml"
+  "main.log"
   "main.pdf"
