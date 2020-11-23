@@ -46,8 +46,8 @@
     & \fancy{S}{uff}(u, v) \definedas \exists w (cat(w, u) \doteq v).\nl
     & \fancy{I}{nfix}(u, v) \definedas \exists w (\fancy{P}{ref}(w, v) \Land \fancy{S}{uff}(u, w) ).\nl
     & \varphi_\epsilon(u) \definedas \forall v (cat(u, v) \doteq u). \nl
-    & \varphi_{1}(u) \definedas \forall v (\fancy{P}{ref}(u, v) \then \varphi_\epsilon(v) \Lor v \doteq u). \nl
-    & \varphi_{2}(u) \definedas \forall v (\fancy{P}{ref}(u, v) \then \varphi_\epsilon(v) \Lor \varphi_{1}(v) \Lor v \doteq u). \nl
+    & \varphi_{1}(u) \definedas \neg \varphi_\epsilon(u) \Land  \forall v (\fancy{P}{ref}(v, u) \then \varphi_\epsilon(v) \Lor v \doteq u). \nl
+    & \varphi_{2}(u) \definedas \neg \varphi_\epsilon(u)  \Land \neg \varphi_{1}(u) \Land \forall v (\fancy{P}{ref}(v, u) \then \varphi_\epsilon(v) \Lor \varphi_{1}(v) \Lor v \doteq u). \nl
     & \varphi_{LLCV}(u, v) \definedas p(u, v) \Land \forall w (p(u, w) \then \fancy{P}{ref}(v, w)).
 \end{flalign*}Където \me{ \varphi_{LLCV}(u, v)} значи, че взимаме най-късият характеристичен вектор на \me{u} генерирано от предиката \me{p^\cali{S}}.
 \begin{flalign*}
@@ -169,7 +169,7 @@ Tук нелогическите символи са \me{cat} и \me{p}.
             edge[falured, bend right]  node {} (0);
         \end{tikzpicture}
         \nl
-        Т.е. \me{\cali{A} = \la \br{a, b}; \blue{p^\cali{A}}, \red{q^\cali{A}} \ra} и \me{\blue{p^\cali{A}} = \red{q^\cali{A}} = \br{\la a, b \ra, \la c, a \ra}}.
+        Т.е. \me{\cali{A} = \la \br{a, b, c}; \blue{p^\cali{A}}, \red{q^\cali{A}} \ra} и \me{\blue{p^\cali{A}} = \red{q^\cali{A}} = \br{\la a, b \ra, \la c, a \ra}}.
     \end{center}
 \end{figure}
 
