@@ -242,51 +242,51 @@
 
 \section{Определелимост}
 \subsection{Вариант 1}
-  \def\bot{\Perp}
-  Структурата ${\cal S}$ е с носител
-  множеството~$\mathbb{E}_2$ от всички точки в евклидовата равнина и
-  е за език без равенство и с единствен нелогически символ ---
-  триместния предикатен символ~$\bot$, който се интерпретира така:
-  \begin{equation*}
-    \bot^{\cal S}(A,B,C)\overset{def}{\iff} A\neq B\ii A\neq
-    C\ii \angle BAC=90^{\circ}
-  \end{equation*}
-  Да се докаже, че в структурата ${\cal S}$ са определими:
-  \begin{enumerate}
+\def\bot{\Perp}
+Структурата ${\cal S}$ е с носител
+множеството~$\mathbb{E}_2$ от всички точки в евклидовата равнина и
+е за език без равенство и с единствен нелогически символ ---
+триместния предикатен символ~$\bot$, който се интерпретира така:
+\begin{equation*}
+  \bot^{\cal S}(A,B,C)\overset{def}{\iff} A\neq B\ii A\neq
+  C\ii \angle BAC=90^{\circ}
+\end{equation*}
+Да се докаже, че в структурата ${\cal S}$ са определими:
+\begin{enumerate}
   \item $\text{Eq}=\{\langle A,A\rangle \,|\, A\in \mathbb{E}_2\}$.
   \item $\text{Col}=\{\langle A,B,C\rangle \,|\, A,B,C\in \mathbb{E}_2 \text{ лежат на една права}\}$.
   \item $\text{Circ}=\{\langle A,B,C\rangle \,|\, C \text{ лежи на окръжност с диаметър } AB\}$.
-  \end{enumerate}
-  Вярно ли е, че в $\cal S$ са определими множествата и защо:
-  \begin{eqnarray*}
-    \text{Mid} &=& \{\langle A,B,C\rangle \,|\, C \text{ е среда на
-      отсечката } AB\} \ii \\
-    \text{Seg} &=& \{\langle A,B,C\rangle \,|\, C \text{ лежи на отсечката } AB\}?
-  \end{eqnarray*}
-  Намерете два различни автоморфизъма в~${\cal S}$.
+\end{enumerate}
+Вярно ли е, че в $\cal S$ са определими множествата и защо:
+\begin{eqnarray*}
+  \text{Mid} &=& \{\langle A,B,C\rangle \,|\, C \text{ е среда на
+    отсечката } AB\} \ii \\
+  \text{Seg} &=& \{\langle A,B,C\rangle \,|\, C \text{ лежи на отсечката } AB\}?
+\end{eqnarray*}
+Намерете два различни автоморфизъма в~${\cal S}$.
 \subsection{Вариант 2}
-  \def\bot{\Perp}
-  Структурата ${\cal S}$ е с носител
-  множеството~$\mathbb{E}_2$ от всички точки в евклидовата равнина и
-  е за език без равенство и с единствен нелогически символ ---
-  триместния предикатен символ~$\bot$, който се интерпретира така:
-  \begin{equation*}
-    \bot^{\cal S}(A,B,C)\overset{def}{\iff} A\neq C\ii B\neq
-    C\ii \angle ACB=90^{\circ}
-  \end{equation*}
-  Да се докаже, че в структурата ${\cal S}$ са определими:
-  \begin{enumerate}
+\def\bot{\Perp}
+Структурата ${\cal S}$ е с носител
+множеството~$\mathbb{E}_2$ от всички точки в евклидовата равнина и
+е за език без равенство и с единствен нелогически символ ---
+триместния предикатен символ~$\bot$, който се интерпретира така:
+\begin{equation*}
+  \bot^{\cal S}(A,B,C)\overset{def}{\iff} A\neq C\ii B\neq
+  C\ii \angle ACB=90^{\circ}
+\end{equation*}
+Да се докаже, че в структурата ${\cal S}$ са определими:
+\begin{enumerate}
   \item $\text{Eq}=\{\langle A,A\rangle \,|\, A\in \mathbb{E}_2\}$.
   \item $\text{Col}=\{\langle A,B,C\rangle \,|\, A,B,C\in
-    \mathbb{E}_2 \text{ не лежат на една права}\}$.
+          \mathbb{E}_2 \text{ не лежат на една права}\}$.
   \item $\text{Circ}=\{\langle A,B,C\rangle \,|\, A \text{ лежи на окръжност с диаметър } BC\}$.
-  \end{enumerate}
-  Вярно ли е, че в $\cal S$ са определими множествата и защо:
-  \begin{eqnarray*}
-    \text{Mid} &=& \{\langle A,B,C\rangle \,|\, A \text{ е среда на отсечката } BC\}  \text{ и }\\
-    \text{Seg} &=& \{\langle A,B,C\rangle \,|\, A \text{ лежи на отсечката } BC\}
-  \end{eqnarray*}
-  Намерете два различни автоморфизъма в~${\cal S}$.
+\end{enumerate}
+Вярно ли е, че в $\cal S$ са определими множествата и защо:
+\begin{eqnarray*}
+  \text{Mid} &=& \{\langle A,B,C\rangle \,|\, A \text{ е среда на отсечката } BC\}  \text{ и }\\
+  \text{Seg} &=& \{\langle A,B,C\rangle \,|\, A \text{ лежи на отсечката } BC\}
+\end{eqnarray*}
+Намерете два различни автоморфизъма в~${\cal S}$.
 
 \newpage
 
@@ -308,7 +308,7 @@ $ \text{Col}(A,B,C) \rightleftharpoons \exists D (\bot(A,B,D) \,\&\, \bot(A,C,D)
     \dotMarkRightAngle[size=7pt](D,A,B);
     \dotMarkRightAngle[size=7pt](C,A,D);
   \end{tikzpicture}
- \end{center}
+\end{center}
 $ \text{Circ}(A,B,C) \rightleftharpoons \bot(C,A,B) \lor \text{Eq}(C,A) \lor \text{Eq}(B,C). $\\
 \begin{center}
   \begin{tikzpicture}[scale=.8]
@@ -321,7 +321,7 @@ $ \text{Circ}(A,B,C) \rightleftharpoons \bot(C,A,B) \lor \text{Eq}(C,A) \lor \te
     \dotMarkRightAngle[size=7pt](A,C,B);
     \draw[thick] (2,2) circle (2cm);
   \end{tikzpicture}
- \end{center}
+\end{center}
 $ \text{Mid}(A,B,C) \rightleftharpoons (\text{Eq}(A,B) \,\&\, \text{Eq}(A,C) )\lor (\exists D  \exists E(\neg \text{Eq}(D,E)\,\&\,\bot(A,E,D) \,\&\, \bot(B,D,E) \,\&\, \text{Col}(A,C,B) \,\&\, \text{Col}(E,C,D))). $\\
 \begin{center}
   \begin{tikzpicture}[scale=.8]
@@ -337,7 +337,7 @@ $ \text{Mid}(A,B,C) \rightleftharpoons (\text{Eq}(A,B) \,\&\, \text{Eq}(A,C) )\l
     \dotMarkRightAngle[size=7pt](E,B,D);
     \dotMarkRightAngle[size=7pt](A,E,B);
   \end{tikzpicture}
- \end{center}
+\end{center}
 $ \text{Seg}(A,B,C) \rightleftharpoons  (\text{Col}(A,B,C) \,\&\,\exists A_1 \exists A_2(\neg \text{Eq}(A_1,A_2)\,\&\, \text{Circ}(A_1,B,C) \,\&\, \text{Circ}(A_2,B,C) \,\&\, \text{Col}(A, A_1, A_2) \,\&\, \bot(A,A_1, C))). $\\
 \begin{center}
   \begin{tikzpicture}[scale=.8]
@@ -357,7 +357,7 @@ $ \text{Seg}(A,B,C) \rightleftharpoons  (\text{Col}(A,B,C) \,\&\,\exists A_1 \ex
     \dotMarkRightAngle[size=7pt](A_1,A,B);
     \draw[thick] (2,2) circle (2cm);
   \end{tikzpicture}
- \end{center}
+\end{center}
 Един примерен автоморфизъм на $\cal S$ е $Id_{\mathbb{E}_2}$.\\
 Други автоморфизми са подобия (пазещи ъглите като при подобие на триъгълници) като транслация, хомотетия, ротация и тн.
 
@@ -366,75 +366,75 @@ $ \text{Seg}(A,B,C) \rightleftharpoons  (\text{Col}(A,B,C) \,\&\,\exists A_1 \ex
 Да се докаже, че е изпълнимо множеството, съставено от следните формули:
 
 \subsection{Вариант 1}
-  Да се докаже, че са изпълними множествата от формули
-  $\{\phi_1,\phi_2,\phi_3\}$ и $\{\phi_1,\phi_2,\phi_3,\phi_4\}$, където
-  \begin{align*}
-  \phi_1 &\rightleftharpoons \exists x \exists y (g(x) = y \land
+Да се докаже, че са изпълними множествата от формули
+$\{\phi_1,\phi_2,\phi_3\}$ и $\{\phi_1,\phi_2,\phi_3,\phi_4\}$, където
+\begin{align*}
+  \phi_1 & \rightleftharpoons \exists x \exists y (g(x) = y \land
   f(x) = y),
   \\
-  \phi_2 &\rightleftharpoons \forall x \forall y \forall z
+  \phi_2 & \rightleftharpoons \forall x \forall y \forall z
   (f(x) = y \land f(y) = z \Longrightarrow g(z) = x),
   \\
-  \phi_3 &\rightleftharpoons \exists x \exists y \exists z (\neg
+  \phi_3 & \rightleftharpoons \exists x \exists y \exists z (\neg
   x = y \land \neg y = z \land \neg z = x),
   \\
-  \phi_4 &\rightleftharpoons \forall x\neg f(x)=x.
-  \end{align*}
+  \phi_4 & \rightleftharpoons \forall x\neg f(x)=x.
+\end{align*}
 
 \subsection{Вариант 2}
-  Да се докаже, че са изпълними множествата от формули
-  $\{\phi_1,\phi_2,\phi_3\}$ и $\{\phi_1,\phi_2,\phi_3,\phi_4\}$, където
-  \begin{align*}
-  \phi_1 &\rightleftharpoons \exists x \exists y (h(x) = y \land
+Да се докаже, че са изпълними множествата от формули
+$\{\phi_1,\phi_2,\phi_3\}$ и $\{\phi_1,\phi_2,\phi_3,\phi_4\}$, където
+\begin{align*}
+  \phi_1 & \rightleftharpoons \exists x \exists y (h(x) = y \land
   g(x) = y),
   \\
-  \phi_2 &\rightleftharpoons \exists x \exists y \exists z (\neg
+  \phi_2 & \rightleftharpoons \exists x \exists y \exists z (\neg
   x = y \land \neg y = z \land \neg z = x),
   \\
-  \phi_3 &\rightleftharpoons \forall x \forall y \forall z
+  \phi_3 & \rightleftharpoons \forall x \forall y \forall z
   (g(x) = y \land g(y) = z \Longrightarrow h(z) = x),
   \\
-  \phi_4 &\rightleftharpoons \neg\exists x g(x)=x.
-  \end{align*}
+  \phi_4 & \rightleftharpoons \neg\exists x g(x)=x.
+\end{align*}
 \subsection{Примерни решения на $\{\phi_1,\phi_2,\phi_3\}$ }
 *Всички модели за $\{\phi_1,\phi_2,\phi_3,\phi_4\}$ са модели и за $\{\phi_1,\phi_2,\phi_3\}$.\\
 \begin{addmargin}[1em]{2em}
-\begin{center}
-$ S = ( \{0, 1, 2\}, f^S, g^S)$ \\
-$f^S(x)\rightleftharpoons x$\\
-$g^S(x)\rightleftharpoons x$
-\end{center}
+  \begin{center}
+    $ S = ( \{0, 1, 2\}, f^S, g^S)$ \\
+    $f^S(x)\rightleftharpoons x$\\
+    $g^S(x)\rightleftharpoons x$
+  \end{center}
 \end{addmargin}
 \vskip 0.2in
 \begin{addmargin}[1em]{2em}
-\begin{center}
-  $ S = (\Nat, f^S, g^S)$ \\
-  $f^S(x)\rightleftharpoons x+1$\\
-  $g^S(x)\rightleftharpoons 
-  \begin{cases}
-    x, & \text{if}\ x<2 \\
-    x-2, & \text{иначе}
-  \end{cases}$
-\end{center}
+  \begin{center}
+    $ S = (\Nat, f^S, g^S)$ \\
+    $f^S(x)\rightleftharpoons x+1$\\
+    $g^S(x)\rightleftharpoons
+      \begin{cases}
+        x+1, & \text{if}\ x<2 \\
+        x-2, & \text{иначе}
+      \end{cases}$
+  \end{center}
 \end{addmargin}
 
 \subsection{Примерни решения на $\{\phi_1,\phi_2,\phi_3,\phi_4\}$}
 \begin{addmargin}[1em]{2em}
-\begin{center}
-  $ S = ( \{0, 1, 2\}, f^S, g^S)$ \\
-  $f^S(x)\rightleftharpoons x\,\%\,3$\\
-  $g^S(x)\rightleftharpoons x\,\%\,3$
-\end{center}
+  \begin{center}
+    $ S = ( \{0, 1, 2\}, f^S, g^S)$ \\
+    $f^S(x)\rightleftharpoons x\,\%\,3$\\
+    $g^S(x)\rightleftharpoons x\,\%\,3$
+  \end{center}
 \end{addmargin}
 \vskip 0.2in
 \begin{center}
-$ S = (\Nat, f^S, g^S)$ \\
-$f^S(x)\rightleftharpoons x+1$\\
-$g^S(x)\rightleftharpoons 
-\begin{cases}
-  x+1, & \text{if}\ x<2 \\
-  x-2, & \text{иначе}
-\end{cases}$
+  $ S = (\Nat, f^S, g^S)$ \\
+  $f^S(x)\rightleftharpoons x+1$\\
+  $g^S(x)\rightleftharpoons
+    \begin{cases}
+      x+1, & \text{if}\ x<2 \\
+      x-2, & \text{иначе}
+    \end{cases}$
 \end{center}
 
 \end{document}
